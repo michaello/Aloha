@@ -12,6 +12,7 @@
 		9041D33C1EA24CF9007E134B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33A1EA24CF9007E134B /* Main.storyboard */; };
 		9041D33E1EA24CF9007E134B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33D1EA24CF9007E134B /* Assets.xcassets */; };
 		9041D3411EA24CF9007E134B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33F1EA24CF9007E134B /* LaunchScreen.storyboard */; };
+		9041D34B1EA25B63007E134B /* LeckerliOne-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9041D34A1EA25B63007E134B /* LeckerliOne-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9041D33D1EA24CF9007E134B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9041D3401EA24CF9007E134B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9041D3421EA24CF9007E134B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9041D34A1EA25B63007E134B /* LeckerliOne-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeckerliOne-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		9041D3351EA24CF9007E134B /* AlohaGIF */ = {
 			isa = PBXGroup;
 			children = (
+				9041D3491EA25B57007E134B /* Fonts */,
 				9041D3361EA24CF9007E134B /* AppDelegate.swift */,
 				9041D3381EA24CF9007E134B /* ViewController.swift */,
 				9041D33A1EA24CF9007E134B /* Main.storyboard */,
@@ -62,6 +65,14 @@
 				9041D3421EA24CF9007E134B /* Info.plist */,
 			);
 			path = AlohaGIF;
+			sourceTree = "<group>";
+		};
+		9041D3491EA25B57007E134B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9041D34A1EA25B63007E134B /* LeckerliOne-Regular.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +137,7 @@
 			files = (
 				9041D3411EA24CF9007E134B /* LaunchScreen.storyboard in Resources */,
 				9041D33E1EA24CF9007E134B /* Assets.xcassets in Resources */,
+				9041D34B1EA25B63007E134B /* LeckerliOne-Regular.otf in Resources */,
 				9041D33C1EA24CF9007E134B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

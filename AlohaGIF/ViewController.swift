@@ -12,6 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imageView = view.subviews.flatMap { $0 as? UIImageView }.first!
+        imageView.layer.masksToBounds = true
+//        imageView.layer.cornerRadius = 90.0
         // Do any additional setup after loading the view, typically from a nib.
     }
 
