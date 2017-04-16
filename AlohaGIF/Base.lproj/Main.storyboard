@@ -1,19 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="srQ-Fn-L0i">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
+        <scene sceneID="8la-hW-PTM">
+            <objects>
+                <viewController id="srQ-Fn-L0i" customClass="OnboardingViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vT8-Qr-sil"/>
+                        <viewControllerLayoutGuide type="bottom" id="og0-8x-XRq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="itl-YW-y1Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCi-bR-a3E">
+                                <rect key="frame" x="0.0" y="-4" width="375" height="671"/>
+                                <connections>
+                                    <segue destination="40j-9n-v9q" kind="embed" id="mPC-WD-zxp"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MaG-72-jQd" customClass="SwiftyOnboard" customModule="AlohaGIF" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atv-WI-exN">
+                                <rect key="frame" x="348.5" y="549" width="26.5" height="118"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="118" id="iee-Hl-WSb"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4a-nn-kIJ">
+                                <rect key="frame" x="0.0" y="550" width="26.5" height="118"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="118" id="7hF-tq-5J7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="og0-8x-XRq" firstAttribute="top" secondItem="Q4a-nn-kIJ" secondAttribute="bottom" constant="-1" id="By5-Jv-rS2"/>
+                            <constraint firstItem="MaG-72-jQd" firstAttribute="leading" secondItem="itl-YW-y1Q" secondAttribute="leading" id="CEP-q6-lcL"/>
+                            <constraint firstItem="MaG-72-jQd" firstAttribute="top" secondItem="vT8-Qr-sil" secondAttribute="bottom" id="EQ6-nl-Xtv"/>
+                            <constraint firstItem="og0-8x-XRq" firstAttribute="top" secondItem="XCi-bR-a3E" secondAttribute="bottom" id="GoT-pZ-huz"/>
+                            <constraint firstItem="XCi-bR-a3E" firstAttribute="top" secondItem="vT8-Qr-sil" secondAttribute="bottom" constant="-24" id="JLp-Dx-Nkw"/>
+                            <constraint firstItem="Q4a-nn-kIJ" firstAttribute="width" secondItem="itl-YW-y1Q" secondAttribute="width" multiplier="0.07" id="Jn3-L0-SKZ"/>
+                            <constraint firstItem="Q4a-nn-kIJ" firstAttribute="leading" secondItem="itl-YW-y1Q" secondAttribute="leadingMargin" constant="-16" id="K5s-oc-Q9y"/>
+                            <constraint firstItem="og0-8x-XRq" firstAttribute="top" secondItem="MaG-72-jQd" secondAttribute="bottom" id="KB0-ww-cP5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Atv-WI-exN" secondAttribute="trailing" constant="-16" id="Y5B-fb-PO6"/>
+                            <constraint firstAttribute="trailing" secondItem="MaG-72-jQd" secondAttribute="trailing" id="bm6-V3-Dwz"/>
+                            <constraint firstItem="Atv-WI-exN" firstAttribute="width" secondItem="itl-YW-y1Q" secondAttribute="width" multiplier="0.07" id="jtm-qX-eO3"/>
+                            <constraint firstItem="og0-8x-XRq" firstAttribute="top" secondItem="Atv-WI-exN" secondAttribute="bottom" id="mly-8h-edt"/>
+                            <constraint firstItem="XCi-bR-a3E" firstAttribute="leading" secondItem="itl-YW-y1Q" secondAttribute="leadingMargin" constant="-16" id="rQi-eF-7sm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XCi-bR-a3E" secondAttribute="trailing" constant="-16" id="rTs-ZW-zy4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="swiftyOnboard" destination="MaG-72-jQd" id="hn9-bW-vwZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sjk-SA-XLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-895.20000000000005" y="53.523238380809602"/>
+        </scene>
+        <!--Overlay Onboarding View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OverlayOnboardingViewController" id="BYZ-38-t0r" customClass="OverlayOnboardingViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,52 +87,106 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BackgroundLanding" translatesAutoresizingMaskIntoConstraints="NO" id="LeN-Z4-qdt">
-                                <rect key="frame" x="0.0" y="339" width="375" height="333"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create GIFs and movies easily. Just record a short video or pick one from your Photos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6d-7V-zYG">
-                                <rect key="frame" x="51" y="429" width="272" height="105"/>
+                                <rect key="frame" x="51" y="524" width="272" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IphoneSing" translatesAutoresizingMaskIntoConstraints="NO" id="acs-56-Pd4">
-                                <rect key="frame" x="115" y="28" width="145" height="295"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OnboardingScreen1" translatesAutoresizingMaskIntoConstraints="NO" id="acs-56-Pd4">
+                                <rect key="frame" x="88.5" y="28" width="198" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="acs-56-Pd4" secondAttribute="height" multiplier="199:404" id="1c8-fk-sY1"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0e-y9-gux">
-                                <rect key="frame" x="121" y="377" width="133" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Aloha!">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="33" name="LeckerliOne"/>
-                                            <font key="NSOriginalFont" size="20" name="LeckerliOne"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.98203033208847046" green="0.91293029516121771" blue="0.84404153375215973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LeN-Z4-qdt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gxj-XU-c1u"/>
-                            <constraint firstItem="LeN-Z4-qdt" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="QfT-zm-nTS"/>
-                            <constraint firstAttribute="trailing" secondItem="LeN-Z4-qdt" secondAttribute="trailing" id="Y8u-Nr-Cfh"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LeN-Z4-qdt" secondAttribute="bottom" id="agn-yg-cSp"/>
+                            <constraint firstItem="acs-56-Pd4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8I2-q6-q8T"/>
+                            <constraint firstItem="acs-56-Pd4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="ioa-mq-p9F"/>
+                            <constraint firstItem="acs-56-Pd4" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="kZN-2J-CZ8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="phoneImageView" destination="acs-56-Pd4" id="Hzv-Fk-wJ5"/>
+                        <outlet property="subtitleLabel" destination="T6d-7V-zYG" id="D5P-jI-jtC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="45.600000000000001" y="37.331334332833585"/>
         </scene>
+        <!--Card Onboarding View Controller-->
+        <scene sceneID="HaQ-EQ-lZi">
+            <objects>
+                <viewController id="40j-9n-v9q" customClass="CardOnboardingViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="dqe-Uu-i1Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="671"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-jp-Lpg" customClass="CardView" customModule="AlohaGIF" customModuleProvider="target">
+                                <rect key="frame" x="28" y="525" width="319" height="370"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
+                                        <rect key="frame" x="114.5" y="16" width="91" height="40"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Aloha">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.90980392156862744" green="0.53725490196078429" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="33" name="LeckerliOne"/>
+                                                    <font key="NSOriginalFont" size="20" name="LeckerliOne"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now, we will ask for permissions. This is a long text to simulate how it would look like on real device ayy lmao" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-Q1-ghf">
+                                        <rect key="frame" x="32" y="65" width="255" height="81.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button" translatesAutoresizingMaskIntoConstraints="NO" id="yqo-KZ-Cfp">
+                                        <rect key="frame" x="32" y="323" width="255" height="63"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="63" id="6Xy-UY-DAO"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="9pr-Q1-ghf" firstAttribute="centerX" secondItem="5Px-Kn-nmW" secondAttribute="centerX" id="FBl-nN-Id6"/>
+                                    <constraint firstItem="yqo-KZ-Cfp" firstAttribute="width" secondItem="ciZ-jp-Lpg" secondAttribute="width" multiplier="0.8" id="WOh-zL-zW6"/>
+                                    <constraint firstItem="yqo-KZ-Cfp" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="boD-2U-Yya"/>
+                                    <constraint firstAttribute="bottom" secondItem="yqo-KZ-Cfp" secondAttribute="bottom" constant="-16" id="eWT-BY-mvF"/>
+                                    <constraint firstItem="9pr-Q1-ghf" firstAttribute="width" secondItem="ciZ-jp-Lpg" secondAttribute="width" multiplier="0.8" id="fjq-xr-8LC"/>
+                                    <constraint firstItem="9pr-Q1-ghf" firstAttribute="top" secondItem="5Px-Kn-nmW" secondAttribute="bottom" constant="9" id="iZp-CR-hDd"/>
+                                    <constraint firstItem="5Px-Kn-nmW" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="nin-yD-gC0"/>
+                                    <constraint firstAttribute="height" constant="370" id="vqI-cG-tZi"/>
+                                    <constraint firstItem="5Px-Kn-nmW" firstAttribute="top" secondItem="ciZ-jp-Lpg" secondAttribute="top" constant="16" id="yNq-9z-7d8"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ciZ-jp-Lpg" firstAttribute="centerX" secondItem="dqe-Uu-i1Z" secondAttribute="centerX" id="SNS-t0-5em"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ciZ-jp-Lpg" secondAttribute="bottom" constant="-224" id="bC2-Ph-u3i"/>
+                            <constraint firstItem="ciZ-jp-Lpg" firstAttribute="width" secondItem="dqe-Uu-i1Z" secondAttribute="width" multiplier="0.85" id="lQA-4U-03o"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cardView" destination="ciZ-jp-Lpg" id="RuU-m4-fn0"/>
+                        <outlet property="permissionsLabel" destination="9pr-Q1-ghf" id="nWo-Ef-LjW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KyA-RW-t1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-895.20000000000005" y="861.3193403298352"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="BackgroundLanding" width="679" height="1029"/>
-        <image name="IphoneSing" width="992" height="2018"/>
+        <image name="Button" width="147" height="31"/>
+        <image name="OnboardingScreen1" width="992" height="2018"/>
     </resources>
 </document>

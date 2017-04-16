@@ -8,22 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3361EA24CF9007E134B /* AppDelegate.swift */; };
-		9041D3391EA24CF9007E134B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3381EA24CF9007E134B /* ViewController.swift */; };
 		9041D33C1EA24CF9007E134B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33A1EA24CF9007E134B /* Main.storyboard */; };
 		9041D33E1EA24CF9007E134B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33D1EA24CF9007E134B /* Assets.xcassets */; };
 		9041D3411EA24CF9007E134B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33F1EA24CF9007E134B /* LaunchScreen.storyboard */; };
 		9041D34B1EA25B63007E134B /* LeckerliOne-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9041D34A1EA25B63007E134B /* LeckerliOne-Regular.otf */; };
+		9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D34F1EA2720D007E134B /* SwiftyOnboard.swift */; };
+		9041D3541EA2720D007E134B /* SwiftyOnboardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3501EA2720D007E134B /* SwiftyOnboardOverlay.swift */; };
+		9041D3551EA2720D007E134B /* SwiftyOnboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3511EA2720D007E134B /* SwiftyOnboardPage.swift */; };
+		9041D3571EA27255007E134B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3561EA27255007E134B /* OnboardingViewController.swift */; };
+		9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3591EA2860F007E134B /* CHIPageControlChimayo.swift */; };
+		9041D35F1EA2864B007E134B /* CHIBasePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D35C1EA2864B007E134B /* CHIBasePageControl.swift */; };
+		9041D3601EA2864B007E134B /* CHILayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D35D1EA2864B007E134B /* CHILayer.swift */; };
+		9041D3611EA2864B007E134B /* CHIPageControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D35E1EA2864B007E134B /* CHIPageControllable.swift */; };
+		9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3621EA29F52007E134B /* CardOnboardingViewController.swift */; };
+		9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3661EA36DDA007E134B /* UIColorExtension.swift */; };
+		9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3681EA37272007E134B /* OverlayOnboardingViewController.swift */; };
+		9041D36B1EA37427007E134B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D36A1EA37427007E134B /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9041D3331EA24CF9007E134B /* AlohaGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlohaGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9041D3361EA24CF9007E134B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9041D3381EA24CF9007E134B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9041D33B1EA24CF9007E134B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9041D33D1EA24CF9007E134B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9041D3401EA24CF9007E134B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9041D3421EA24CF9007E134B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9041D34A1EA25B63007E134B /* LeckerliOne-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeckerliOne-Regular.otf"; sourceTree = "<group>"; };
+		9041D34E1EA2720D007E134B /* SwiftyOnboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyOnboard.h; sourceTree = "<group>"; };
+		9041D34F1EA2720D007E134B /* SwiftyOnboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboard.swift; sourceTree = "<group>"; };
+		9041D3501EA2720D007E134B /* SwiftyOnboardOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardOverlay.swift; sourceTree = "<group>"; };
+		9041D3511EA2720D007E134B /* SwiftyOnboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardPage.swift; sourceTree = "<group>"; };
+		9041D3561EA27255007E134B /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		9041D3591EA2860F007E134B /* CHIPageControlChimayo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHIPageControlChimayo.swift; sourceTree = "<group>"; };
+		9041D35C1EA2864B007E134B /* CHIBasePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHIBasePageControl.swift; sourceTree = "<group>"; };
+		9041D35D1EA2864B007E134B /* CHILayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHILayer.swift; sourceTree = "<group>"; };
+		9041D35E1EA2864B007E134B /* CHIPageControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHIPageControllable.swift; sourceTree = "<group>"; };
+		9041D3621EA29F52007E134B /* CardOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOnboardingViewController.swift; sourceTree = "<group>"; };
+		9041D3661EA36DDA007E134B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		9041D3681EA37272007E134B /* OverlayOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayOnboardingViewController.swift; sourceTree = "<group>"; };
+		9041D36A1EA37427007E134B /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +79,14 @@
 		9041D3351EA24CF9007E134B /* AlohaGIF */ = {
 			isa = PBXGroup;
 			children = (
+				9041D3701EA37EDB007E134B /* Storyboards */,
+				9041D36F1EA37ECF007E134B /* Extensions */,
+				9041D36E1EA37EC2007E134B /* Views */,
+				9041D36D1EA37EB3007E134B /* ViewControllers */,
+				9041D36C1EA37EA3007E134B /* Libraries */,
 				9041D3491EA25B57007E134B /* Fonts */,
 				9041D3361EA24CF9007E134B /* AppDelegate.swift */,
-				9041D3381EA24CF9007E134B /* ViewController.swift */,
-				9041D33A1EA24CF9007E134B /* Main.storyboard */,
 				9041D33D1EA24CF9007E134B /* Assets.xcassets */,
-				9041D33F1EA24CF9007E134B /* LaunchScreen.storyboard */,
 				9041D3421EA24CF9007E134B /* Info.plist */,
 			);
 			path = AlohaGIF;
@@ -73,6 +98,80 @@
 				9041D34A1EA25B63007E134B /* LeckerliOne-Regular.otf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		9041D34C1EA2720D007E134B /* SwiftyOnboard */ = {
+			isa = PBXGroup;
+			children = (
+				9041D34E1EA2720D007E134B /* SwiftyOnboard.h */,
+				9041D34F1EA2720D007E134B /* SwiftyOnboard.swift */,
+				9041D3501EA2720D007E134B /* SwiftyOnboardOverlay.swift */,
+				9041D3511EA2720D007E134B /* SwiftyOnboardPage.swift */,
+			);
+			path = SwiftyOnboard;
+			sourceTree = "<group>";
+		};
+		9041D3581EA28609007E134B /* CHIPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				9041D35B1EA2864B007E134B /* Core */,
+				9041D3591EA2860F007E134B /* CHIPageControlChimayo.swift */,
+			);
+			name = CHIPageControl;
+			sourceTree = "<group>";
+		};
+		9041D35B1EA2864B007E134B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9041D35C1EA2864B007E134B /* CHIBasePageControl.swift */,
+				9041D35D1EA2864B007E134B /* CHILayer.swift */,
+				9041D35E1EA2864B007E134B /* CHIPageControllable.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		9041D36C1EA37EA3007E134B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				9041D34C1EA2720D007E134B /* SwiftyOnboard */,
+				9041D3581EA28609007E134B /* CHIPageControl */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		9041D36D1EA37EB3007E134B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9041D3681EA37272007E134B /* OverlayOnboardingViewController.swift */,
+				9041D3621EA29F52007E134B /* CardOnboardingViewController.swift */,
+				9041D3561EA27255007E134B /* OnboardingViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9041D36E1EA37EC2007E134B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9041D36A1EA37427007E134B /* CardView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9041D36F1EA37ECF007E134B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9041D3661EA36DDA007E134B /* UIColorExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		9041D3701EA37EDB007E134B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9041D33F1EA24CF9007E134B /* LaunchScreen.storyboard */,
+				9041D33A1EA24CF9007E134B /* Main.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +248,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9041D3391EA24CF9007E134B /* ViewController.swift in Sources */,
+				9041D35F1EA2864B007E134B /* CHIBasePageControl.swift in Sources */,
+				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
+				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
+				9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */,
+				9041D3571EA27255007E134B /* OnboardingViewController.swift in Sources */,
+				9041D3601EA2864B007E134B /* CHILayer.swift in Sources */,
+				9041D3551EA2720D007E134B /* SwiftyOnboardPage.swift in Sources */,
+				9041D36B1EA37427007E134B /* CardView.swift in Sources */,
+				9041D3611EA2864B007E134B /* CHIPageControllable.swift in Sources */,
+				9041D3541EA2720D007E134B /* SwiftyOnboardOverlay.swift in Sources */,
 				9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */,
+				9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */,
+				9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
