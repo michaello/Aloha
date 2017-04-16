@@ -23,8 +23,6 @@ final class CardView: UIView {
     private func setupLayout() {
         backgroundColor = .white
         layer.cornerRadius = 8.0
-        layer.shadowOpacity = 0.4
-        layer.shadowColor = UIColor.black.cgColor
         setupShadow()
     }
     
@@ -38,5 +36,7 @@ final class CardView: UIView {
         path.addLine(to: CGPoint(x: xOffset, y: yOffset))
         path.close()
         layer.shadowPath = path.cgPath
+        layer.shadowOpacity = 0.3
+        layer.shadowColor = UIColor.black.cgColor
     }
 }

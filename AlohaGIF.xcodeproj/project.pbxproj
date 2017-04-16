@@ -24,6 +24,7 @@
 		9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3661EA36DDA007E134B /* UIColorExtension.swift */; };
 		9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3681EA37272007E134B /* OverlayOnboardingViewController.swift */; };
 		9041D36B1EA37427007E134B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D36A1EA37427007E134B /* CardView.swift */; };
+		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,9 @@
 		9041D3661EA36DDA007E134B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		9041D3681EA37272007E134B /* OverlayOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayOnboardingViewController.swift; sourceTree = "<group>"; };
 		9041D36A1EA37427007E134B /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
+		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7CBC070143C3A841AA47925 /* Pods-AlohaGIF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,8 @@
 			children = (
 				9041D3351EA24CF9007E134B /* AlohaGIF */,
 				9041D3341EA24CF9007E134B /* Products */,
+				9618B203B1B89BE41FB6B806 /* Pods */,
+				F644315E057E247DF15F750D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +181,23 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		9618B203B1B89BE41FB6B806 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */,
+				E7CBC070143C3A841AA47925 /* Pods-AlohaGIF.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F644315E057E247DF15F750D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -181,9 +205,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9041D3451EA24CF9007E134B /* Build configuration list for PBXNativeTarget "AlohaGIF" */;
 			buildPhases = (
+				B487BCC4DED0D040DDC2A232 /* [CP] Check Pods Manifest.lock */,
 				9041D32F1EA24CF9007E134B /* Sources */,
 				9041D3301EA24CF9007E134B /* Frameworks */,
 				9041D3311EA24CF9007E134B /* Resources */,
+				BE7881C8FBA2FD3D1D2CD48D /* [CP] Embed Pods Frameworks */,
+				9F69C6E53169C1259F76D347 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -242,6 +269,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9F69C6E53169C1259F76D347 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B487BCC4DED0D040DDC2A232 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BE7881C8FBA2FD3D1D2CD48D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9041D32F1EA24CF9007E134B /* Sources */ = {
@@ -379,7 +454,9 @@
 		};
 		9041D3461EA24CF9007E134B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AS5AAW6A59;
 				INFOPLIST_FILE = AlohaGIF/Info.plist;
@@ -392,7 +469,9 @@
 		};
 		9041D3471EA24CF9007E134B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7CBC070143C3A841AA47925 /* Pods-AlohaGIF.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AS5AAW6A59;
 				INFOPLIST_FILE = AlohaGIF/Info.plist;
@@ -422,6 +501,7 @@
 				9041D3471EA24CF9007E134B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
