@@ -5,4 +5,5 @@ target 'AlohaGIF' do
 	pod 'Permission/Camera'
 	pod 'Permission/Photos'
 	pod 'Permission/SpeechRecognizer'
+	pod 'Permission/Microphone'
 end

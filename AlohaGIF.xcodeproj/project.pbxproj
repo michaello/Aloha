@@ -27,6 +27,7 @@
 		9041D3771EA3D596007E134B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9041D3731EA3D596007E134B /* Info.plist */; };
 		9041D3781EA3D596007E134B /* Promise+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3741EA3D596007E134B /* Promise+Extras.swift */; };
 		9041D3791EA3D596007E134B /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3761EA3D596007E134B /* Promise.swift */; };
+		9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D37A1EA3DBCB007E134B /* PermissionController.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		9041D3741EA3D596007E134B /* Promise+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Promise+Extras.swift"; sourceTree = "<group>"; };
 		9041D3751EA3D596007E134B /* Promise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promise.h; sourceTree = "<group>"; };
 		9041D3761EA3D596007E134B /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		9041D37A1EA3DBCB007E134B /* PermissionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionController.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CBC070143C3A841AA47925 /* Pods-AlohaGIF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				9041D3361EA24CF9007E134B /* AppDelegate.swift */,
 				9041D33D1EA24CF9007E134B /* Assets.xcassets */,
 				9041D3421EA24CF9007E134B /* Info.plist */,
+				9041D37A1EA3DBCB007E134B /* PermissionController.swift */,
 			);
 			path = AlohaGIF;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			files = (
 				9041D35F1EA2864B007E134B /* CHIBasePageControl.swift in Sources */,
 				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
+				9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
 				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
 				9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */,

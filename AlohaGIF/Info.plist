@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app will use camera to record video.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This app will use speech recognition to detect your voice and attach subtitles to video.</string>
 	<key>NSMicrophoneUsageDescription</key>

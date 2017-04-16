@@ -24,6 +24,8 @@ final class OnboardingViewController: UIViewController {
     var lastOnboardingPosition: Double?
     var index = 0
     
+    private let permissionController = PermissionController()
+    
     @IBOutlet weak var swiftyOnboard: SwiftyOnboard! {
         didSet {
             swiftyOnboard.style = .light
@@ -44,6 +46,9 @@ final class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         centerPoint = CGPoint(x: view.center.x, y: view.center.y - 100)
+        permissionController.requestForAllPermissions { permissionSet in
+            print("")
+        }
     }
 }
 
