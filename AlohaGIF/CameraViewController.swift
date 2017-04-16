@@ -13,8 +13,12 @@ final class CameraViewController: UIViewController {
 
     @IBOutlet weak var previewView: PreviewView!
     var recordButton: RecordButton!
+    var recordButtonTimer: Timer!
+    var recordButtonProgress: CGFloat = 0.0
     
     private struct Constants {
+        static let maximumMovieLength: CGFloat = 15.0
+        static let recordButtonIntervalIncrementTime = 0.1
         static let allPossibleCameras: [(cameraType: AVCaptureDeviceType, position: AVCaptureDevicePosition)] = [
 (AVCaptureDeviceType.builtInDualCamera, AVCaptureDevicePosition.back),
 (AVCaptureDeviceType.builtInWideAngleCamera, AVCaptureDevicePosition.back),
@@ -110,5 +114,34 @@ final class CameraViewController: UIViewController {
         recordButton = RecordButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
         recordButton.center = self.view.center
         view.addSubview(recordButton)
+        recordButton.addTarget(self, action: #selector(CameraViewController.startRecording), for: .touchDown)
+        recordButton.addTarget(self, action: #selector(CameraViewController.stopRecording), for: UIControlEvents.touchUpInside)
+    }
+    
+    func updateRecordButtonProgress() {
+        recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / Constants.maximumMovieLength)
+        recordButton.setProgress(recordButtonProgress)
+        if recordButtonProgress >= 1.0 {
+            recordButtonTimer.invalidate()
+        }
+    }
+    
+    @objc private func startRecording() {
+        print("start \(Date())")
+        recordButtonTimer = .scheduledTimer(timeInterval: Constants.recordButtonIntervalIncrementTime, target: self, selector: #selector(CameraViewController.updateRecordButtonProgress), userInfo: nil, repeats: true)
+        let outputFileName = NSUUID().uuidString
+        let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+        movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+    }
+    
+    @objc private func stopRecording() {
+        movieFileOutput.stopRecording()
+        print("stop \(Date())")
+    }
+}
+
+extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
+    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+        print("")
     }
 }
