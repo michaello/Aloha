@@ -28,6 +28,8 @@
 		9041D3781EA3D596007E134B /* Promise+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3741EA3D596007E134B /* Promise+Extras.swift */; };
 		9041D3791EA3D596007E134B /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3761EA3D596007E134B /* Promise.swift */; };
 		9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D37A1EA3DBCB007E134B /* PermissionController.swift */; };
+		904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B860B1EA3F8C400540D3A /* CameraViewController.swift */; };
+		904B860F1EA4012700540D3A /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B860E1EA4012700540D3A /* RecordButton.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		9041D3751EA3D596007E134B /* Promise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promise.h; sourceTree = "<group>"; };
 		9041D3761EA3D596007E134B /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		9041D37A1EA3DBCB007E134B /* PermissionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionController.swift; sourceTree = "<group>"; };
+		904B860B1EA3F8C400540D3A /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		904B860E1EA4012700540D3A /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CBC070143C3A841AA47925 /* Pods-AlohaGIF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 		9041D36C1EA37EA3007E134B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				904B860D1EA400FF00540D3A /* RecordButton */,
 				9041D3721EA3D596007E134B /* Promise */,
 				9041D34C1EA2720D007E134B /* SwiftyOnboard */,
 				9041D3581EA28609007E134B /* CHIPageControl */,
@@ -163,6 +168,7 @@
 				9041D3681EA37272007E134B /* OverlayOnboardingViewController.swift */,
 				9041D3621EA29F52007E134B /* CardOnboardingViewController.swift */,
 				9041D3561EA27255007E134B /* OnboardingViewController.swift */,
+				904B860B1EA3F8C400540D3A /* CameraViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -201,6 +207,14 @@
 				9041D3761EA3D596007E134B /* Promise.swift */,
 			);
 			path = Promise;
+			sourceTree = "<group>";
+		};
+		904B860D1EA400FF00540D3A /* RecordButton */ = {
+			isa = PBXGroup;
+			children = (
+				904B860E1EA4012700540D3A /* RecordButton.swift */,
+			);
+			name = RecordButton;
 			sourceTree = "<group>";
 		};
 		9618B203B1B89BE41FB6B806 /* Pods */ = {
@@ -348,7 +362,9 @@
 			files = (
 				9041D35F1EA2864B007E134B /* CHIBasePageControl.swift in Sources */,
 				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
+				904B860F1EA4012700540D3A /* RecordButton.swift in Sources */,
 				9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */,
+				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
 				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
 				9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */,
