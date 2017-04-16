@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Samuel Beek. All rights reserved.
 //
 
+import UIKit
+
 @objc public enum RecordButtonState : Int {
     case recording, idle, hidden;
 }

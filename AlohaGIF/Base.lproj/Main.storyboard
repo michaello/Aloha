@@ -127,8 +127,23 @@
                     <view key="view" contentMode="scaleToFill" id="izV-p6-NS3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHt-S4-vVB" customClass="PreviewView" customModule="AlohaGIF" customModuleProvider="target">
+                                <rect key="frame" x="80" y="85" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2ir-cw-OKg" firstAttribute="top" secondItem="pHt-S4-vVB" secondAttribute="bottom" id="Fgt-5l-wVe"/>
+                            <constraint firstItem="pHt-S4-vVB" firstAttribute="top" secondItem="dYJ-lm-5vD" secondAttribute="bottom" constant="-22" id="bh6-4B-14k"/>
+                            <constraint firstItem="pHt-S4-vVB" firstAttribute="leading" secondItem="izV-p6-NS3" secondAttribute="leading" id="dbR-fg-cKw"/>
+                            <constraint firstAttribute="trailing" secondItem="pHt-S4-vVB" secondAttribute="trailing" id="yih-Hs-ZB4"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="previewView" destination="pHt-S4-vVB" id="tfO-rk-A49"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1z-Rm-kfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
