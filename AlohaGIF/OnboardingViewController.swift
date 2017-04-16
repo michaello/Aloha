@@ -45,6 +45,7 @@ final class OnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        swiftyOnboard.cardOnboardingView = cardOnboardingViewController.view
         centerPoint = CGPoint(x: view.center.x, y: view.center.y - 100)
         permissionController.requestForAllPermissions { permissionSet in
             print("")

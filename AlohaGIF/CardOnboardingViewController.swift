@@ -12,16 +12,9 @@ final class CardOnboardingViewController: UIViewController {
 
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var permissionsLabel: UILabel!
-    //TODO: Make as UIButton later
-    @IBOutlet weak var allowPermissionsImageView: UIImageView!
+    @IBOutlet weak var allowPermissionsButton: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CardOnboardingViewController.allowPermissionsImageViewAction(sender:)))
-        allowPermissionsImageView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    func allowPermissionsImageViewAction(sender: UITapGestureRecognizer) {
+    @IBAction func allowPermissionsButtonAction(sender: UIButton) {
         print("Action")
     }
 }

@@ -84,6 +84,17 @@ public class SwiftyOnboard: UIView, UIScrollViewDelegate {
     open var shouldSwipe: Bool = true
     open var fadePages: Bool = true
     
+    weak var cardOnboardingView: UIView?
+    
+    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let permissionsButton = cardOnboardingView?.subviews.first?.subviews.flatMap({ $0 as? UIButton }).first else { return super.hitTest(point, with: event) }
+        let convertedPoint = convert(point, to: permissionsButton.superview!)
+        if permissionsButton.frame.contains(convertedPoint) {
+            return nil
+        } else {
+            return super.hitTest(point, with: event)
+        }
+    }
     
     public init(frame: CGRect, style: SwiftyOnboardStyle = .dark) {
         super.init(frame: frame)

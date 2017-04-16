@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCi-bR-a3E">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCi-bR-a3E">
                                 <rect key="frame" x="0.0" y="-4" width="375" height="671"/>
                                 <connections>
                                     <segue destination="40j-9n-v9q" kind="embed" id="mPC-WD-zxp"/>
@@ -120,6 +120,10 @@
         <scene sceneID="HaQ-EQ-lZi">
             <objects>
                 <viewController id="40j-9n-v9q" customClass="CardOnboardingViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3PH-xn-ru5"/>
+                        <viewControllerLayoutGuide type="bottom" id="fFO-vA-CV3"/>
+                    </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="dqe-Uu-i1Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="671"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,21 +151,25 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button" translatesAutoresizingMaskIntoConstraints="NO" id="yqo-KZ-Cfp">
-                                        <rect key="frame" x="32" y="331" width="255" height="63"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1c-Z2-YLm">
+                                        <rect key="frame" x="129" y="269" width="201" height="31"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="63" id="6Xy-UY-DAO"/>
+                                            <constraint firstAttribute="width" constant="255" id="BLw-bM-Eie"/>
+                                            <constraint firstAttribute="height" constant="63" id="aF8-Dt-dtb"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal" image="Button"/>
+                                        <connections>
+                                            <action selector="allowPermissionsButtonActionWithSender:" destination="40j-9n-v9q" eventType="touchUpInside" id="SXQ-j1-qwj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="9pr-Q1-ghf" firstAttribute="centerX" secondItem="5Px-Kn-nmW" secondAttribute="centerX" id="FBl-nN-Id6"/>
-                                    <constraint firstItem="yqo-KZ-Cfp" firstAttribute="width" secondItem="ciZ-jp-Lpg" secondAttribute="width" multiplier="0.8" id="WOh-zL-zW6"/>
-                                    <constraint firstItem="yqo-KZ-Cfp" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="boD-2U-Yya"/>
-                                    <constraint firstAttribute="bottom" secondItem="yqo-KZ-Cfp" secondAttribute="bottom" constant="-24" id="eWT-BY-mvF"/>
+                                    <constraint firstAttribute="bottom" secondItem="M1c-Z2-YLm" secondAttribute="bottom" constant="-24" id="RtX-IC-vqq"/>
                                     <constraint firstItem="9pr-Q1-ghf" firstAttribute="width" secondItem="ciZ-jp-Lpg" secondAttribute="width" multiplier="0.8" id="fjq-xr-8LC"/>
                                     <constraint firstItem="9pr-Q1-ghf" firstAttribute="top" secondItem="5Px-Kn-nmW" secondAttribute="bottom" constant="9" id="iZp-CR-hDd"/>
+                                    <constraint firstItem="M1c-Z2-YLm" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="jDp-K9-RlS"/>
                                     <constraint firstItem="5Px-Kn-nmW" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="nin-yD-gC0"/>
                                     <constraint firstAttribute="height" constant="370" id="vqI-cG-tZi"/>
                                     <constraint firstItem="5Px-Kn-nmW" firstAttribute="top" secondItem="ciZ-jp-Lpg" secondAttribute="top" constant="16" id="yNq-9z-7d8"/>
@@ -176,7 +184,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="allowPermissionsImageView" destination="yqo-KZ-Cfp" id="x24-TI-k20"/>
+                        <outlet property="allowPermissionsButton" destination="M1c-Z2-YLm" id="8bv-pS-Emm"/>
                         <outlet property="cardView" destination="ciZ-jp-Lpg" id="RuU-m4-fn0"/>
                         <outlet property="permissionsLabel" destination="9pr-Q1-ghf" id="nWo-Ef-LjW"/>
                     </connections>
