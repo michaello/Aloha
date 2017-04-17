@@ -15,6 +15,9 @@ final class CameraViewController: UIViewController {
     var recordButton: RecordButton!
     var recordButtonTimer: Timer!
     var recordButtonProgress: CGFloat = 0.0
+    var isSimulator: Bool {
+        return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
+    }
     
     private struct Constants {
         static let maximumMovieLength: CGFloat = 15.0
@@ -38,11 +41,7 @@ final class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRecordButton()
-        previewView.session = session
-        checkAuthorization()
-        sessionQueue.async { [unowned self] in
-            self.configureSession()
-        }
+        setupSession()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +52,16 @@ final class CameraViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         session.stopRunning()
+    }
+    
+    private func setupSession() {
+        guard !isSimulator else { return }
+        previewView.session = session
+        checkAuthorization()
+        sessionQueue.async { [unowned self] in
+            self.configureSession()
+        }
+
     }
     
     private func addVideoInput() {
@@ -114,6 +123,10 @@ final class CameraViewController: UIViewController {
         recordButton = RecordButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
         recordButton.center = self.view.center
         view.addSubview(recordButton)
+        setupRecordButtonActions()
+    }
+    
+    private func setupRecordButtonActions() {
         recordButton.addTarget(self, action: #selector(CameraViewController.startRecording), for: .touchDown)
         recordButton.addTarget(self, action: #selector(CameraViewController.stopRecording), for: UIControlEvents.touchUpInside)
     }
@@ -131,12 +144,14 @@ final class CameraViewController: UIViewController {
         recordButtonTimer = .scheduledTimer(timeInterval: Constants.recordButtonIntervalIncrementTime, target: self, selector: #selector(CameraViewController.updateRecordButtonProgress), userInfo: nil, repeats: true)
         let outputFileName = NSUUID().uuidString
         let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+        guard !isSimulator else { return }
         movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
     }
     
     @objc private func stopRecording() {
-        movieFileOutput.stopRecording()
         print("stop \(Date())")
+        guard !isSimulator else { return }
+        movieFileOutput.stopRecording()
     }
 }
 
