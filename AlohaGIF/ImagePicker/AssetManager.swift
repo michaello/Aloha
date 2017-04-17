@@ -3,6 +3,8 @@ import UIKit
 import Photos
 
 open class AssetManager {
+    
+  static var selectedAsset: PHAsset?
 
   open static func getImage(_ name: String) -> UIImage {
     let traitCollection = UITraitCollection(displayScale: 3)

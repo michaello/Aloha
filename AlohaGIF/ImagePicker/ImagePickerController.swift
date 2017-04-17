@@ -5,7 +5,7 @@ import Photos
 @objc public protocol ImagePickerDelegate: class {
 
   func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
-  func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+  func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset)
   func cancelButtonDidPress(_ imagePicker: ImagePickerController)
   func tooLongMovieSelected()
 }
@@ -311,7 +311,9 @@ extension ImagePickerController: BottomContainerViewDelegate {
       images = AssetManager.resolveAssets(stack.assets)
     }
 
-    delegate?.doneButtonDidPress(self, images: images)
+    if let selectedAsset = AssetManager.selectedAsset {
+      delegate?.doneButtonDidPress(self, asset: selectedAsset)
+    }
   }
 
   func cancelButtonDidPress() {

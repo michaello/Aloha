@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 let maximumMovieLength: CGFloat = 15.0
 
@@ -188,9 +189,14 @@ extension CameraViewController: ImagePickerDelegate {
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        print("done")
+
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
+        imagePicker.dismiss(animated: true, completion: nil)
+        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, options in
+            print("")
+        }
     }
+
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         print("cancel")
     }
