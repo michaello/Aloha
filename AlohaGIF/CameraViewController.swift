@@ -61,7 +61,6 @@ final class CameraViewController: UIViewController {
         sessionQueue.async { [unowned self] in
             self.configureSession()
         }
-
     }
     
     private func addVideoInput() {
@@ -137,6 +136,22 @@ final class CameraViewController: UIViewController {
         if recordButtonProgress >= 1.0 {
             recordButtonTimer.invalidate()
         }
+    }
+    
+    
+    @IBAction func videosButtonAction(_ sender: UIButton) {
+        var config = Configuration()
+        config.doneButtonTitle = "Finish"
+        config.noImagesTitle = "Sorry! There are no images here!"
+        config.allowMultiplePhotoSelection = false
+
+        let imagePicker = ImagePickerController()
+        imagePicker.view.backgroundColor = .clear
+        imagePicker.modalPresentationStyle = .overCurrentContext
+        
+        imagePicker.configuration = config
+        //                imagePicker.delegate = self
+        present(imagePicker, animated: false, completion: nil)
     }
     
     @objc private func startRecording() {
