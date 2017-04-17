@@ -55,6 +55,7 @@
 		904F80C21EA4BE56008574CE /* video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80BB1EA4BE56008574CE /* video@3x.png */; };
 		904F80C41EA5256A008574CE /* infoIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80C31EA5256A008574CE /* infoIcon@3x.png */; };
 		904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */; };
+		90661E721EA553A6009E81D3 /* VideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E711EA553A6009E81D3 /* VideoPreviewViewController.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,7 @@
 		904F80BB1EA4BE56008574CE /* video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video@3x.png"; sourceTree = "<group>"; };
 		904F80C31EA5256A008574CE /* infoIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infoIcon@3x.png"; sourceTree = "<group>"; };
 		904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		90661E711EA553A6009E81D3 /* VideoPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPreviewViewController.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +225,7 @@
 				9041D3621EA29F52007E134B /* CardOnboardingViewController.swift */,
 				9041D3561EA27255007E134B /* OnboardingViewController.swift */,
 				904B860B1EA3F8C400540D3A /* CameraViewController.swift */,
+				90661E711EA553A6009E81D3 /* VideoPreviewViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9041D35F1EA2864B007E134B /* CHIBasePageControl.swift in Sources */,
+				90661E721EA553A6009E81D3 /* VideoPreviewViewController.swift in Sources */,
 				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
 				904F80AE1EA4B9E3008574CE /* ImageGalleryViewCell.swift in Sources */,
 				904B860F1EA4012700540D3A /* RecordButton.swift in Sources */,

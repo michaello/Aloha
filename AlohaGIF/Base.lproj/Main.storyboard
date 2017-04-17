@@ -163,6 +163,24 @@
             </objects>
             <point key="canvasLocation" x="871" y="33"/>
         </scene>
+        <!--Video Preview View Controller-->
+        <scene sceneID="rDu-F2-7Hj">
+            <objects>
+                <viewController storyboardIdentifier="VideoPreviewViewController" id="euV-on-hrI" customClass="VideoPreviewViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YEa-UW-0Mf"/>
+                        <viewControllerLayoutGuide type="bottom" id="L2Y-uc-6b3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Czy-dq-Q4Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uj0-sb-Taj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1634" y="33"/>
+        </scene>
         <!--Card Onboarding View Controller-->
         <scene sceneID="HaQ-EQ-lZi">
             <objects>

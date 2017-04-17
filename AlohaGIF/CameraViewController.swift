@@ -172,7 +172,7 @@ final class CameraViewController: UIViewController {
         print("stop \(Date())")
         guard !isSimulator else { return }
         movieFileOutput.stopRecording()
-    }
+    }    
 }
 
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
@@ -191,9 +191,14 @@ extension CameraViewController: ImagePickerDelegate {
     }
 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
-        imagePicker.dismiss(animated: true, completion: nil)
-        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, options in
-            print("")
+        imagePicker.dismiss(animated: true) {
+            PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, options in
+                DispatchQueue.main.async {
+                    let videoPreviewViewController = self.storyboard?.instantiateViewController(withIdentifier: String(describing: VideoPreviewViewController.self)) as! VideoPreviewViewController
+                    videoPreviewViewController.selectedVideo = asset
+                    self.present(videoPreviewViewController, animated: true, completion: nil)
+                }
+            }
         }
     }
 
