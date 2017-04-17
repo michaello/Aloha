@@ -18,6 +18,7 @@ open class BottomContainerView: UIView {
 
   lazy var pickerButton: ButtonPicker = { [unowned self] in
     let pickerButton = ButtonPicker()
+    pickerButton.isHidden = true
     pickerButton.setTitleColor(UIColor.white, for: UIControlState())
     pickerButton.delegate = self
 
@@ -26,6 +27,7 @@ open class BottomContainerView: UIView {
 
   lazy var borderPickerButton: UIView = {
     let view = UIView()
+    view.isHidden = true
     view.backgroundColor = UIColor.clear
     view.layer.borderColor = UIColor.white.cgColor
     view.layer.borderWidth = ButtonPicker.Dimensions.borderWidth

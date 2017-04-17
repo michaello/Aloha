@@ -128,9 +128,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHt-S4-vVB" customClass="PreviewView" customModule="AlohaGIF" customModuleProvider="target">
-                                <rect key="frame" x="80" y="85" width="240" height="128"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHt-S4-vVB" customClass="PreviewView" customModule="AlohaGIF" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="-2" width="375" height="671"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-t8-2a0">
+                                        <rect key="frame" x="31" y="603" width="74" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Videos"/>
+                                        <connections>
+                                            <action selector="videosButtonAction:" destination="LRg-AH-2wt" eventType="touchUpInside" id="Rq8-ze-zmT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="X0L-t8-2a0" firstAttribute="leading" secondItem="pHt-S4-vVB" secondAttribute="leading" constant="31" id="EW6-ia-GU3"/>
+                                    <constraint firstAttribute="bottom" secondItem="X0L-t8-2a0" secondAttribute="bottom" constant="27" id="HkU-TG-nnp"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

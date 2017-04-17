@@ -150,7 +150,7 @@ final class CameraViewController: UIViewController {
         imagePicker.modalPresentationStyle = .overCurrentContext
         
         imagePicker.configuration = config
-        //                imagePicker.delegate = self
+        imagePicker.delegate = self
         present(imagePicker, animated: false, completion: nil)
     }
     
@@ -173,5 +173,17 @@ final class CameraViewController: UIViewController {
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
         print("")
+    }
+}
+
+extension CameraViewController: ImagePickerDelegate {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        
+    }
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        print("done")
+    }
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        print("cancel")
     }
 }

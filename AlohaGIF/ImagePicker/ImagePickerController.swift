@@ -94,9 +94,8 @@ open class ImagePickerController: UIViewController {
 
   open override func viewDidLoad() {
     super.viewDidLoad()
-
-    let views = [galleryView, bottomContainer] as! [UIView]
-    for subview in views {
+ 
+    for subview in [galleryView, bottomContainer] as [UIView] {
       view.addSubview(subview)
       subview.translatesAutoresizingMaskIntoConstraints = false
     }
