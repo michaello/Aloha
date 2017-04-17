@@ -7,6 +7,7 @@ import Photos
   func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
   func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
   func cancelButtonDidPress(_ imagePicker: ImagePickerController)
+  func tooLongMovieSelected()
 }
 
 open class ImagePickerController: UIViewController {
@@ -333,6 +334,10 @@ extension ImagePickerController: BottomContainerViewDelegate {
 // MARK: - Pan gesture handler
 
 extension ImagePickerController: ImageGalleryPanGestureDelegate {
+    
+  func tooLongMovieSelected() {
+    delegate?.tooLongMovieSelected()
+  }
 
   func panGestureDidStart() {
     guard let collectionSize = galleryView.collectionSize else { return }

@@ -53,6 +53,8 @@
 		904F80C01EA4BE56008574CE /* ON@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80B91EA4BE56008574CE /* ON@3x.png */; };
 		904F80C11EA4BE56008574CE /* selectedImageGallery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80BA1EA4BE56008574CE /* selectedImageGallery@3x.png */; };
 		904F80C21EA4BE56008574CE /* video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80BB1EA4BE56008574CE /* video@3x.png */; };
+		904F80C41EA5256A008574CE /* infoIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80C31EA5256A008574CE /* infoIcon@3x.png */; };
+		904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +110,8 @@
 		904F80B91EA4BE56008574CE /* ON@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ON@3x.png"; sourceTree = "<group>"; };
 		904F80BA1EA4BE56008574CE /* selectedImageGallery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedImageGallery@3x.png"; sourceTree = "<group>"; };
 		904F80BB1EA4BE56008574CE /* video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video@3x.png"; sourceTree = "<group>"; };
+		904F80C31EA5256A008574CE /* infoIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infoIcon@3x.png"; sourceTree = "<group>"; };
+		904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				9041D3661EA36DDA007E134B /* UIColorExtension.swift */,
+				904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			children = (
 				904F80B51EA4BE56008574CE /* AUTO@3x.png */,
 				904F80B61EA4BE56008574CE /* cameraIcon@3x.png */,
+				904F80C31EA5256A008574CE /* infoIcon@3x.png */,
 				904F80B71EA4BE56008574CE /* focusIcon@3x.png */,
 				904F80B81EA4BE56008574CE /* OFF@3x.png */,
 				904F80B91EA4BE56008574CE /* ON@3x.png */,
@@ -427,6 +433,7 @@
 			files = (
 				904F80C01EA4BE56008574CE /* ON@3x.png in Resources */,
 				904F80C11EA4BE56008574CE /* selectedImageGallery@3x.png in Resources */,
+				904F80C41EA5256A008574CE /* infoIcon@3x.png in Resources */,
 				9041D3411EA24CF9007E134B /* LaunchScreen.storyboard in Resources */,
 				9041D33E1EA24CF9007E134B /* Assets.xcassets in Resources */,
 				904F80BC1EA4BE56008574CE /* AUTO@3x.png in Resources */,
@@ -527,6 +534,7 @@
 				9041D3541EA2720D007E134B /* SwiftyOnboardOverlay.swift in Sources */,
 				9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */,
 				9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */,
+				904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */,
 				904F80A51EA4B9E3008574CE /* ImageStack.swift in Sources */,
 				904F80AB1EA4B9E3008574CE /* Helper.swift in Sources */,
 				9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */,

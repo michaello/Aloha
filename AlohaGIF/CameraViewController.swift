@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+let maximumMovieLength: CGFloat = 15.0
+
 final class CameraViewController: UIViewController {
 
     @IBOutlet weak var previewView: PreviewView!
@@ -20,7 +22,6 @@ final class CameraViewController: UIViewController {
     }
     
     private struct Constants {
-        static let maximumMovieLength: CGFloat = 15.0
         static let recordButtonIntervalIncrementTime = 0.1
         static let allPossibleCameras: [(cameraType: AVCaptureDeviceType, position: AVCaptureDevicePosition)] = [
 (AVCaptureDeviceType.builtInDualCamera, AVCaptureDevicePosition.back),
@@ -42,6 +43,9 @@ final class CameraViewController: UIViewController {
         super.viewDidLoad()
         setupRecordButton()
         setupSession()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { 
+            self.videosButtonAction(UIButton())
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,7 +135,7 @@ final class CameraViewController: UIViewController {
     }
     
     func updateRecordButtonProgress() {
-        recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / Constants.maximumMovieLength)
+        recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / maximumMovieLength)
         recordButton.setProgress(recordButtonProgress)
         if recordButtonProgress >= 1.0 {
             recordButtonTimer.invalidate()
@@ -177,6 +181,10 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 }
 
 extension CameraViewController: ImagePickerDelegate {
+    func tooLongMovieSelected() {
+        UIAlertController.showTooLongVideoAlert()
+    }
+    
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }

@@ -17,6 +17,7 @@ protocol ImageGalleryPanGestureDelegate: class {
   func panGestureDidStart()
   func panGestureDidChange(_ translation: CGPoint)
   func panGestureDidEnd(_ translation: CGPoint, velocity: CGPoint)
+  func tooLongMovieSelected()
 }
 
 open class ImageGalleryView: UIView {
@@ -213,6 +214,10 @@ extension ImageGalleryView: UICollectionViewDelegate {
   public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = collectionView.cellForItem(at: indexPath)
       as? ImageGalleryViewCell else { return }
+    guard !cell.shouldBeMarkedAsMovieWithTooLongDuration else {
+        delegate?.tooLongMovieSelected()
+        return
+    }
     if configuration.allowMultiplePhotoSelection == false {
       // Clear selected photos array
       for asset in self.selectedStack.assets {
