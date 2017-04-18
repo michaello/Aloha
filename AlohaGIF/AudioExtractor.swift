@@ -21,6 +21,7 @@ struct AudioExtractor {
                     fulfill(audioFromVideoURL)
                 }
                 catch {
+                    Logger.error("Could not remove file that would be for temporary audio file. Error message: \(error.localizedDescription)")
                     reject(error)
                 }
             } else {
@@ -34,6 +35,7 @@ struct AudioExtractor {
             asset.writeAudioTrack(to: url, success: {
                 fulfill(url)
             }) { error in
+                Logger.error("Could not write audio from video. Error message: \(error.localizedDescription)")
                 reject(error)
             }
         })

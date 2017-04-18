@@ -6,4 +6,5 @@ target 'AlohaGIF' do
 	pod 'Permission/Photos'
 	pod 'Permission/SpeechRecognizer'
 	pod 'Permission/Microphone'
+	pod 'SwiftyBeaver'
 end

@@ -28,7 +28,7 @@ final class CameraViewController: UIViewController {
         static let allPossibleCameras: [(cameraType: AVCaptureDeviceType, position: AVCaptureDevicePosition)] = [
 (AVCaptureDeviceType.builtInDualCamera, AVCaptureDevicePosition.back),
 (AVCaptureDeviceType.builtInWideAngleCamera, AVCaptureDevicePosition.back),
-(AVCaptureDeviceType.builtInWideAngleCamera ,AVCaptureDevicePosition.front)
+(AVCaptureDeviceType.builtInWideAngleCamera, AVCaptureDevicePosition.front)
         ]
     }
     
@@ -45,21 +45,26 @@ final class CameraViewController: UIViewController {
         super.viewDidLoad()
         setupRecordButton()
         setupSession()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { 
-            self.videosButtonAction(UIButton())
-        }
+        permissionController.requestForAllPermissions { _ in }
+        debugTestConvertVideoToDynamicSubtitles()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        permissionController.requestForAllPermissions { _ in
-            self.session.startRunning()
-        }
+        session.startRunning()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         session.stopRunning()
+    }
+    
+    private func debugTestConvertVideoToDynamicSubtitles() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            let movieFromProject = Bundle.main.url(forResource: "IMG_0418", withExtension: "MOV")!
+            let assetFromURL = AVURLAsset(url: movieFromProject)
+            self.convertAssetToVideoWithDynamicSubtitles(asset: assetFromURL)
+        }
     }
     
     private func setupSession() {
@@ -163,7 +168,7 @@ final class CameraViewController: UIViewController {
     }
     
     @objc private func startRecording() {
-        print("start \(Date())")
+        Logger.verbose("Started recording. \(NSDate())")
         recordButtonTimer = .scheduledTimer(timeInterval: Constants.recordButtonIntervalIncrementTime, target: self, selector: #selector(CameraViewController.updateRecordButtonProgress), userInfo: nil, repeats: true)
         let outputFileName = NSUUID().uuidString
         let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
@@ -172,7 +177,7 @@ final class CameraViewController: UIViewController {
     }
     
     @objc private func stopRecording() {
-        print("stop \(Date())")
+        Logger.verbose("Ended recording. \(NSDate())")
         guard !isSimulator else { return }
         movieFileOutput.stopRecording()
     }    
@@ -186,6 +191,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
 extension CameraViewController: ImagePickerDelegate {
     func tooLongMovieSelected() {
+        Logger.info("User tapped movie that is too long.")
         UIAlertController.showTooLongVideoAlert()
     }
     
@@ -196,13 +202,23 @@ extension CameraViewController: ImagePickerDelegate {
         imagePicker.dismiss(animated: true) {
             PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, options in
                 DispatchQueue.main.async {
+                    self.convertAssetToVideoWithDynamicSubtitles(asset: asset)
 //                    presentVideoPreviewViewController(with: asset)
-                    if let asset = asset {
-                        let speechController = SpeechController()
-                        speechController.detectSpeech(from: asset)
-                    }
                 }
             }
+        }
+    }
+    
+    //TODO: move it out from here
+    fileprivate func convertAssetToVideoWithDynamicSubtitles(asset: AVAsset?) {
+        if let asset = asset {
+            let speechController = SpeechController()
+            speechController.detectSpeech(from: asset, completion: { url in
+                DispatchQueue.main.async {
+                    let assetFromURL = AVURLAsset(url: url)
+                    self.presentVideoPreviewViewController(with: assetFromURL)
+                }
+            })
         }
     }
     

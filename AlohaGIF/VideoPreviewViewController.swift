@@ -33,7 +33,7 @@ class VideoPreviewViewController: UIViewController {
         }
 
         if let newValue = change?[.newKey] as? Int {
-            print("Replay count: \(newValue)")
+            Logger.verbose("Replayed movie \(selectedVideo.description). Count: \(newValue)")
         }
     }
 }

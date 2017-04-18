@@ -62,6 +62,10 @@
 		90661E7D1EA61379009E81D3 /* SpeechModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E7C1EA61379009E81D3 /* SpeechModel.swift */; };
 		90661E7F1EA614C6009E81D3 /* SpeechController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E7E1EA614C6009E81D3 /* SpeechController.swift */; };
 		90661E891EA6253A009E81D3 /* VideoSubtitlesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E881EA6253A009E81D3 /* VideoSubtitlesComposer.swift */; };
+		90661E8B1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E8A1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift */; };
+		90661E8F1EA66FC7009E81D3 /* IMG_0418.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 90661E8E1EA66FC7009E81D3 /* IMG_0418.MOV */; };
+		90661E911EA67626009E81D3 /* AnimationsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E901EA67626009E81D3 /* AnimationsComposer.swift */; };
+		90661E931EA678CE009E81D3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E921EA678CE009E81D3 /* Logger.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
@@ -126,6 +130,10 @@
 		90661E7C1EA61379009E81D3 /* SpeechModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechModel.swift; sourceTree = "<group>"; };
 		90661E7E1EA614C6009E81D3 /* SpeechController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechController.swift; sourceTree = "<group>"; };
 		90661E881EA6253A009E81D3 /* VideoSubtitlesComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSubtitlesComposer.swift; sourceTree = "<group>"; };
+		90661E8A1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesComposer.swift; sourceTree = "<group>"; };
+		90661E8E1EA66FC7009E81D3 /* IMG_0418.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0418.MOV; sourceTree = "<group>"; };
+		90661E901EA67626009E81D3 /* AnimationsComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsComposer.swift; sourceTree = "<group>"; };
+		90661E921EA678CE009E81D3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +173,7 @@
 		9041D3351EA24CF9007E134B /* AlohaGIF */ = {
 			isa = PBXGroup;
 			children = (
+				90661E8E1EA66FC7009E81D3 /* IMG_0418.MOV */,
 				90661E751EA56052009E81D3 /* Models */,
 				9041D3701EA37EDB007E134B /* Storyboards */,
 				9041D36F1EA37ECF007E134B /* Extensions */,
@@ -368,6 +377,9 @@
 				90661E7C1EA61379009E81D3 /* SpeechModel.swift */,
 				90661E7E1EA614C6009E81D3 /* SpeechController.swift */,
 				90661E881EA6253A009E81D3 /* VideoSubtitlesComposer.swift */,
+				90661E8A1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift */,
+				90661E901EA67626009E81D3 /* AnimationsComposer.swift */,
+				90661E921EA678CE009E81D3 /* Logger.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -467,6 +479,7 @@
 				9041D33E1EA24CF9007E134B /* Assets.xcassets in Resources */,
 				904F80BC1EA4BE56008574CE /* AUTO@3x.png in Resources */,
 				904F80C21EA4BE56008574CE /* video@3x.png in Resources */,
+				90661E8F1EA66FC7009E81D3 /* IMG_0418.MOV in Resources */,
 				9041D34B1EA25B63007E134B /* LeckerliOne-Regular.otf in Resources */,
 				9041D3771EA3D596007E134B /* Info.plist in Resources */,
 				904F80BF1EA4BE56008574CE /* OFF@3x.png in Resources */,
@@ -536,9 +549,11 @@
 				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
 				904F80AE1EA4B9E3008574CE /* ImageGalleryViewCell.swift in Sources */,
 				904B860F1EA4012700540D3A /* RecordButton.swift in Sources */,
+				90661E8B1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift in Sources */,
 				9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */,
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
+				90661E931EA678CE009E81D3 /* Logger.swift in Sources */,
 				904F80B21EA4B9E3008574CE /* LocationManager.swift in Sources */,
 				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
 				904F80AD1EA4B9E3008574CE /* ImageGalleryView.swift in Sources */,
@@ -562,6 +577,7 @@
 				9041D3551EA2720D007E134B /* SwiftyOnboardPage.swift in Sources */,
 				904F80AF1EA4B9E3008574CE /* ImageGalleryViewDataSource.swift in Sources */,
 				9041D36B1EA37427007E134B /* CardView.swift in Sources */,
+				90661E911EA67626009E81D3 /* AnimationsComposer.swift in Sources */,
 				9041D3611EA2864B007E134B /* CHIPageControllable.swift in Sources */,
 				904F80A91EA4B9E3008574CE /* Configuration.swift in Sources */,
 				9041D3541EA2720D007E134B /* SwiftyOnboardOverlay.swift in Sources */,
