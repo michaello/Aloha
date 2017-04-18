@@ -21,7 +21,7 @@ struct SpeechController {
                 self.audioExtractor.writeAudioPromise(with: asset, to: url)
             }
             .then { url in
-                self.speechRecognizer.detectSpeechPromise(from: url)
+                Promise<URL>.retry(count: 3, delay: 0.5) { self.speechRecognizer.detectSpeechPromise(from: url) }
             }
             .then { speechModelArray in
                 self.videoSubtitlesComposer.composeVideoWithDynamicSubtitlesPromise(asset: asset, speechArray: speechModelArray)

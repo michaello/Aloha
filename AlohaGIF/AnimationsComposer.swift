@@ -15,15 +15,18 @@ struct AnimationModel {
 }
 
 struct AnimationsComposer {
-    func applyRevealAnimation(textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel]) {
+    func applyRevealAnimation(textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel], customDuration: TimeInterval? = nil, customSpeed: Float? = nil) {
         let animationModels = self.animationModels(speechModelArray: speechModelArray)
         zip(textLayers, animationModels).forEach { textLayer, animationModel in
             let animation = CABasicAnimation(keyPath: "opacity")
             animation.toValue = 1.0
             animation.autoreverses = false
             animation.fillMode = kCAFillModeForwards
+            if let customSpeed = customSpeed {
+                animation.speed = customSpeed
+            }
             animation.isRemovedOnCompletion = false
-            animation.duration = animationModel.duration
+            animation.duration = customDuration ?? animationModel.duration
             animation.repeatCount = 1
             //IMPORTANT - Set animations’ beginTime property to AVCoreAnimationBeginTimeAtZero rather than 0 (which CoreAnimation replaces with CACurrentMediaTime)
             animation.beginTime = AVCoreAnimationBeginTimeAtZero + animationModel.beginTime
@@ -31,7 +34,21 @@ struct AnimationsComposer {
         }
     }
     
-    func applyShowAndHideAnimation(textLayersArrayToApply textLayers: [CATextLayer]) {
+    func applyShowAndHideAnimation(textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel]) {
+        applyRevealAnimation(textLayersArrayToApply: textLayers, speechModelArray: speechModelArray, customDuration: 0.0, customSpeed: 4.0)
+        let animationModels = self.animationModels(speechModelArray: speechModelArray)
+        zip(textLayers, animationModels).forEach { textLayer, animationModel in
+            let animation = CABasicAnimation(keyPath: "opacity")
+            animation.toValue = 0.0
+            animation.speed = 4.0
+            animation.autoreverses = false
+            animation.fillMode = kCAFillModeForwards
+            animation.isRemovedOnCompletion = false
+            animation.duration = 0.0
+            animation.repeatCount = 1
+            animation.beginTime = AVCoreAnimationBeginTimeAtZero + CFTimeInterval(animationModel.duration + animationModel.beginTime)
+            textLayer.add(animation, forKey: "animateOpacityFadeOut")
+        }
     }
     
     private func animationModels(speechModelArray: [SpeechModel]) -> [AnimationModel] {

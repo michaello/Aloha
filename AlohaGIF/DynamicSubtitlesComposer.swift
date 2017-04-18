@@ -15,7 +15,7 @@ enum DynamicSubtitlesType {
     case oneWordOnly
     
     var font: UIFont {
-        let multiplier = self == .oneAfterAnother ? 6.0 : 10.0
+        let multiplier = self == .oneAfterAnother ? 6.0 : 12.0
         let fontSize: CGFloat = 10.0 * CGFloat(multiplier)
         let font = UIFont.boldSystemFont(ofSize: fontSize)
         
@@ -34,14 +34,14 @@ enum DynamicSubtitlesType {
 
 struct DynamicSubtitlesComposer {
     
-    private let dynamicSubtitlesType = DynamicSubtitlesType.oneAfterAnother
+    private let dynamicSubtitlesType = DynamicSubtitlesType.oneWordOnly
     private let animationsComposer = AnimationsComposer()
     
     func applyChangingText(to compostion: AVMutableVideoComposition, speechArray: [SpeechModel?], size: CGSize) {
         Logger.debug("Will begin applying dynamic fonts to movie...")
         let overlayLayer = self.overlayLayer(size: size)
         let array = speechArray.flatMap { $0 }
-        textLayers(speechInfoArray: array, size: size).forEach {
+        textLayers(speechArray: array, size: size).forEach {
             overlayLayer.addSublayer($0)
         }
         
@@ -52,8 +52,8 @@ struct DynamicSubtitlesComposer {
         compostion.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, in: parentLayer)
     }
     
-    func textLayers(speechInfoArray: [SpeechModel], size: CGSize) -> [CATextLayer] {
-        let textArray = speechInfoArray.map { $0.content }
+    func textLayers(speechArray: [SpeechModel], size: CGSize) -> [CATextLayer] {
+        let textArray = speechArray.map { $0.content }
         var textLayersArray = [CATextLayer]()
         var textLayersSizes = [CGFloat]()
         
@@ -70,16 +70,34 @@ struct DynamicSubtitlesComposer {
                 currentOrigin.x = designatedX
             }
             currentOrigin.y = designatedY
-            textLayer.frame = CGRect(origin: currentOrigin, size: currentSize)
+            if case .oneWordOnly = dynamicSubtitlesType {
+                textLayer.frame = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
+            } else {
+                textLayer.frame = CGRect(origin: currentOrigin, size: currentSize)
+            }
             textLayersArray.append(textLayer)
             let space = currentSize.width / CGFloat((text as String).characters.count)
             textLayersSizes.append(currentOrigin.x + currentSize.width + space)
             
             return textLayer
         }
-        animationsComposer.applyRevealAnimation(textLayersArrayToApply: textLayersArray, speechModelArray: speechInfoArray)
+        
+        if case .oneAfterAnother = dynamicSubtitlesType {
+            animationsComposer.applyRevealAnimation(textLayersArrayToApply: textLayersArray, speechModelArray: speechArray)
+        } else {
+            animationsComposer.applyShowAndHideAnimation(textLayersArrayToApply: textLayersArray, speechModelArray: speechArray)
+        }
         
         return layers
+    }
+    
+    private func centerFrameForTextLayer(textLayerSize: CGSize, movieSize: CGSize) -> CGRect {
+        let halfWidth = movieSize.width / 2
+        let halfHeight = movieSize.height / 2
+        let halfTextWidth = textLayerSize.width / 2
+        let halfTextHeight = textLayerSize.height / 2
+
+        return CGRect(origin: CGPoint(x: halfWidth - halfTextWidth, y: halfHeight - halfTextHeight), size: textLayerSize)
     }
     
     private func textRect(for text: String = "Whatever") -> CGSize {
