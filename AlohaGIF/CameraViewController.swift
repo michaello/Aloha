@@ -21,6 +21,7 @@ final class CameraViewController: UIViewController {
     var isSimulator: Bool {
         return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
     }
+    let permissionController = PermissionController()
     
     private struct Constants {
         static let recordButtonIntervalIncrementTime = 0.1
@@ -51,7 +52,9 @@ final class CameraViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        session.startRunning()
+        permissionController.requestForAllPermissions { _ in
+            self.session.startRunning()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -186,23 +189,26 @@ extension CameraViewController: ImagePickerDelegate {
         UIAlertController.showTooLongVideoAlert()
     }
     
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        
-    }
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {}
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {}
 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
         imagePicker.dismiss(animated: true) {
             PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, options in
                 DispatchQueue.main.async {
-                    let videoPreviewViewController = self.storyboard?.instantiateViewController(withIdentifier: String(describing: VideoPreviewViewController.self)) as! VideoPreviewViewController
-                    videoPreviewViewController.selectedVideo = asset
-                    self.present(videoPreviewViewController, animated: true, completion: nil)
+//                    presentVideoPreviewViewController(with: asset)
+                    if let asset = asset {
+                        let speechController = SpeechController()
+                        speechController.detectSpeech(from: asset)
+                    }
                 }
             }
         }
     }
-
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        print("cancel")
+    
+    private func presentVideoPreviewViewController(with asset: AVAsset) {
+        let videoPreviewViewController = self.storyboard?.instantiateViewController(withIdentifier: String(describing: VideoPreviewViewController.self)) as! VideoPreviewViewController
+        videoPreviewViewController.selectedVideo = asset
+        present(videoPreviewViewController, animated: true, completion: nil)
     }
 }

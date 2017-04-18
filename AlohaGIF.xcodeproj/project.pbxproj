@@ -56,6 +56,11 @@
 		904F80C41EA5256A008574CE /* infoIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 904F80C31EA5256A008574CE /* infoIcon@3x.png */; };
 		904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */; };
 		90661E721EA553A6009E81D3 /* VideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E711EA553A6009E81D3 /* VideoPreviewViewController.swift */; };
+		90661E741EA55EF2009E81D3 /* AVAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E731EA55EF2009E81D3 /* AVAssetExtension.swift */; };
+		90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E761EA56140009E81D3 /* SpeechRecognizer.swift */; };
+		90661E7B1EA60FBB009E81D3 /* AudioExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E7A1EA60FBB009E81D3 /* AudioExtractor.swift */; };
+		90661E7D1EA61379009E81D3 /* SpeechModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E7C1EA61379009E81D3 /* SpeechModel.swift */; };
+		90661E7F1EA614C6009E81D3 /* SpeechController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E7E1EA614C6009E81D3 /* SpeechController.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +119,11 @@
 		904F80C31EA5256A008574CE /* infoIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infoIcon@3x.png"; sourceTree = "<group>"; };
 		904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		90661E711EA553A6009E81D3 /* VideoPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPreviewViewController.swift; sourceTree = "<group>"; };
+		90661E731EA55EF2009E81D3 /* AVAssetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetExtension.swift; sourceTree = "<group>"; };
+		90661E761EA56140009E81D3 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		90661E7A1EA60FBB009E81D3 /* AudioExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioExtractor.swift; sourceTree = "<group>"; };
+		90661E7C1EA61379009E81D3 /* SpeechModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechModel.swift; sourceTree = "<group>"; };
+		90661E7E1EA614C6009E81D3 /* SpeechController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechController.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +163,7 @@
 		9041D3351EA24CF9007E134B /* AlohaGIF */ = {
 			isa = PBXGroup;
 			children = (
+				90661E751EA56052009E81D3 /* Models */,
 				9041D3701EA37EDB007E134B /* Storyboards */,
 				9041D36F1EA37ECF007E134B /* Extensions */,
 				9041D36E1EA37EC2007E134B /* Views */,
@@ -243,6 +254,7 @@
 			children = (
 				9041D3661EA36DDA007E134B /* UIColorExtension.swift */,
 				904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */,
+				90661E731EA55EF2009E81D3 /* AVAssetExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -344,6 +356,17 @@
 				904F80BB1EA4BE56008574CE /* video@3x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		90661E751EA56052009E81D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				90661E761EA56140009E81D3 /* SpeechRecognizer.swift */,
+				90661E7A1EA60FBB009E81D3 /* AudioExtractor.swift */,
+				90661E7C1EA61379009E81D3 /* SpeechModel.swift */,
+				90661E7E1EA614C6009E81D3 /* SpeechController.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		90D6B7381EA40E7E002B26EE /* PreviewView */ = {
@@ -528,20 +551,25 @@
 				9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */,
 				904F80B01EA4B9E3008574CE /* VideoInfoView.swift in Sources */,
 				9041D3781EA3D596007E134B /* Promise+Extras.swift in Sources */,
+				90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */,
 				9041D3571EA27255007E134B /* OnboardingViewController.swift in Sources */,
 				9041D3601EA2864B007E134B /* CHILayer.swift in Sources */,
+				90661E741EA55EF2009E81D3 /* AVAssetExtension.swift in Sources */,
 				9041D3551EA2720D007E134B /* SwiftyOnboardPage.swift in Sources */,
 				904F80AF1EA4B9E3008574CE /* ImageGalleryViewDataSource.swift in Sources */,
 				9041D36B1EA37427007E134B /* CardView.swift in Sources */,
 				9041D3611EA2864B007E134B /* CHIPageControllable.swift in Sources */,
 				904F80A91EA4B9E3008574CE /* Configuration.swift in Sources */,
 				9041D3541EA2720D007E134B /* SwiftyOnboardOverlay.swift in Sources */,
+				90661E7D1EA61379009E81D3 /* SpeechModel.swift in Sources */,
 				9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */,
 				9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */,
 				904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */,
 				904F80A51EA4B9E3008574CE /* ImageStack.swift in Sources */,
+				90661E7B1EA60FBB009E81D3 /* AudioExtractor.swift in Sources */,
 				904F80AB1EA4B9E3008574CE /* Helper.swift in Sources */,
 				9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */,
+				90661E7F1EA614C6009E81D3 /* SpeechController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
