@@ -173,7 +173,6 @@
 				9041D3361EA24CF9007E134B /* AppDelegate.swift */,
 				9041D33D1EA24CF9007E134B /* Assets.xcassets */,
 				9041D3421EA24CF9007E134B /* Info.plist */,
-				9041D37A1EA3DBCB007E134B /* PermissionController.swift */,
 			);
 			path = AlohaGIF;
 			sourceTree = "<group>";
@@ -363,6 +362,7 @@
 			children = (
 				90661E761EA56140009E81D3 /* SpeechRecognizer.swift */,
 				90661E7A1EA60FBB009E81D3 /* AudioExtractor.swift */,
+				9041D37A1EA3DBCB007E134B /* PermissionController.swift */,
 				90661E7C1EA61379009E81D3 /* SpeechModel.swift */,
 				90661E7E1EA614C6009E81D3 /* SpeechController.swift */,
 			);
