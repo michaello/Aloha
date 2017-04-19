@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="euV-on-hrI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LRg-AH-2wt">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -129,10 +129,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHt-S4-vVB" customClass="PreviewView" customModule="AlohaGIF" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="-2" width="375" height="671"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-t8-2a0">
-                                        <rect key="frame" x="31" y="603" width="74" height="41"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-t8-2a0">
+                                        <rect key="frame" x="31" y="-68" width="74" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Videos"/>
                                         <connections>
@@ -149,8 +149,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2ir-cw-OKg" firstAttribute="top" secondItem="pHt-S4-vVB" secondAttribute="bottom" constant="-2" id="Fgt-5l-wVe"/>
-                            <constraint firstItem="pHt-S4-vVB" firstAttribute="top" secondItem="dYJ-lm-5vD" secondAttribute="bottom" constant="-22" id="bh6-4B-14k"/>
+                            <constraint firstItem="pHt-S4-vVB" firstAttribute="top" secondItem="izV-p6-NS3" secondAttribute="topMargin" id="HMn-Nc-IdM"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="pHt-S4-vVB" secondAttribute="bottom" id="XUm-P5-d7N"/>
                             <constraint firstItem="pHt-S4-vVB" firstAttribute="leading" secondItem="izV-p6-NS3" secondAttribute="leading" id="dbR-fg-cKw"/>
                             <constraint firstAttribute="trailing" secondItem="pHt-S4-vVB" secondAttribute="trailing" id="yih-Hs-ZB4"/>
                         </constraints>
@@ -207,7 +207,7 @@
                                 <rect key="frame" x="28" y="525" width="319" height="370"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
-                                        <rect key="frame" x="115" y="16" width="91" height="40"/>
+                                        <rect key="frame" x="114" y="16" width="91" height="40"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Aloha">
                                                 <attributes>

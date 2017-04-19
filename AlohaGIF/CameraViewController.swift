@@ -157,7 +157,6 @@ final class CameraViewController: UIViewController {
         var config = Configuration()
         config.doneButtonTitle = "Finish"
         config.noImagesTitle = "Sorry! There are no images here!"
-        config.allowMultiplePhotoSelection = false
 
         let imagePicker = ImagePickerController()
         imagePicker.view.backgroundColor = .clear

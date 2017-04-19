@@ -47,6 +47,7 @@ open class ImagePickerController: UIViewController {
 
   lazy var volumeView: MPVolumeView = { [unowned self] in
     let view = MPVolumeView()
+    view.isHidden = true
     view.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
 
     return view

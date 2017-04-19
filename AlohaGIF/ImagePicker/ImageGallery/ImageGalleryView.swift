@@ -53,6 +53,7 @@ open class ImageGalleryView: UIView {
 
   lazy var topSeparator: UIView = { [unowned self] in
     let view = UIView()
+    view.isHidden = true
     view.translatesAutoresizingMaskIntoConstraints = false
     view.addGestureRecognizer(self.panGestureRecognizer)
     view.backgroundColor = self.configuration.gallerySeparatorColor
@@ -137,7 +138,7 @@ open class ImageGalleryView: UIView {
     topSeparator.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleWidth]
     configuration.indicatorView.frame = CGRect(x: (totalWidth - configuration.indicatorWidth) / 2, y: (topSeparator.frame.height - configuration.indicatorHeight) / 2,
       width: configuration.indicatorWidth, height: configuration.indicatorHeight)
-    collectionView.frame = CGRect(x: 0, y: topSeparator.frame.height, width: totalWidth, height: collectionFrame - topSeparator.frame.height)
+    collectionView.frame = CGRect(x: 0, y: 0, width: totalWidth, height: collectionFrame)
     collectionSize = CGSize(width: collectionView.frame.height, height: collectionView.frame.height)
 
     collectionView.reloadData()
@@ -218,7 +219,8 @@ extension ImageGalleryView: UICollectionViewDelegate {
         delegate?.tooLongMovieSelected()
         return
     }
-    if configuration.allowMultiplePhotoSelection == false {
+    if true {
+//    if configuration.allowMultiplePhotoSelection == false {
       // Clear selected photos array
       for asset in self.selectedStack.assets {
         self.selectedStack.dropAsset(asset)
@@ -226,7 +228,7 @@ extension ImageGalleryView: UICollectionViewDelegate {
       // Animate deselecting photos for any selected visible cells
       guard let visibleCells = collectionView.visibleCells as? [ImageGalleryViewCell] else { return }
       for cell in visibleCells {
-        if cell.selectedImageView.image != nil {
+        if cell.selectedImageView.image != nil && cell.selectedImageView.image != AssetManager.getImage("infoIcon") {
           UIView.animate(withDuration: 0.2, animations: {
             cell.selectedImageView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
           }, completion: { _ in

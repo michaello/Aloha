@@ -25,7 +25,6 @@ final class VideoPreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        shouldUseAVCoreAnimationZeroTime = false
         playerLayer.frame = CGRect(origin: .zero, size: view.frame.size)
         self.view.layer.addSublayer(playerLayer)
         player.play()
@@ -45,7 +44,6 @@ final class VideoPreviewViewController: UIViewController {
                 aScale = baz!.height / self.playerLayer.videoRect.height
             }
             self.baz(frame: self.playerLayer.videoRect)
-            shouldUseAVCoreAnimationZeroTime = true
         }
     }
     
