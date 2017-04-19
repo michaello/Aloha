@@ -14,8 +14,15 @@ struct AnimationModel {
     let duration: TimeInterval
 }
 
+var shouldAlwaysShowSubtitles = false
+
 struct AnimationsComposer {
-    func applyRevealAnimation(textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel], customDuration: TimeInterval? = nil, customSpeed: Float? = nil) {
+    
+    func zeroTimeAnimation(animationDestination: AnimationDestination) -> CFTimeInterval {
+        return animationDestination == .preview ? CACurrentMediaTime() : AVCoreAnimationBeginTimeAtZero
+    }
+
+    func applyRevealAnimation(animationDestination: AnimationDestination, textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel], customDuration: TimeInterval? = nil, customSpeed: Float? = nil, lastTextLayerDelegate: CAAnimationDelegate? = nil) {
         let animationModels = self.animationModels(speechModelArray: speechModelArray)
         zip(textLayers, animationModels).forEach { textLayer, animationModel in
             let animation = CABasicAnimation(keyPath: "opacity")
@@ -28,14 +35,16 @@ struct AnimationsComposer {
             animation.isRemovedOnCompletion = false
             animation.duration = customDuration ?? animationModel.duration
             animation.repeatCount = 1
-            //IMPORTANT - Set animations’ beginTime property to AVCoreAnimationBeginTimeAtZero rather than 0 (which CoreAnimation replaces with CACurrentMediaTime)
-            animation.beginTime = AVCoreAnimationBeginTimeAtZero + animationModel.beginTime
+            if textLayers.last == textLayer {
+                animation.delegate = lastTextLayerDelegate
+            }
+            animation.beginTime = zeroTimeAnimation(animationDestination: animationDestination) + animationModel.beginTime
             textLayer.add(animation, forKey: "animateOpacity")
         }
     }
     
-    func applyShowAndHideAnimation(textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel]) {
-        applyRevealAnimation(textLayersArrayToApply: textLayers, speechModelArray: speechModelArray, customDuration: 0.0, customSpeed: 4.0)
+    func applyShowAndHideAnimation(animationDestination: AnimationDestination, textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel], lastTextLayerDelegate: CAAnimationDelegate? = nil) {
+        applyRevealAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayers, speechModelArray: speechModelArray, customDuration: 0.0, customSpeed: 4.0)
         let animationModels = self.animationModels(speechModelArray: speechModelArray)
         zip(textLayers, animationModels).forEach { textLayer, animationModel in
             let animation = CABasicAnimation(keyPath: "opacity")
@@ -46,7 +55,10 @@ struct AnimationsComposer {
             animation.isRemovedOnCompletion = false
             animation.duration = 0.0
             animation.repeatCount = 1
-            animation.beginTime = AVCoreAnimationBeginTimeAtZero + CFTimeInterval(animationModel.duration + animationModel.beginTime)
+            if textLayers.last == textLayer {
+                animation.delegate = lastTextLayerDelegate
+            }
+            animation.beginTime = zeroTimeAnimation(animationDestination: animationDestination) + CFTimeInterval(animationModel.duration + animationModel.beginTime)
             textLayer.add(animation, forKey: "animateOpacityFadeOut")
         }
     }

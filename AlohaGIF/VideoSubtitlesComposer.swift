@@ -70,20 +70,27 @@ struct VideoSubtitlesComposer {
             mainCompositionInst.renderSize = CGSize(width: naturalSize.width, height: naturalSize.height)
             mainCompositionInst.instructions = [mainInstruction]
             mainCompositionInst.frameDuration = CMTime(value: 1, timescale: 30)
-            DynamicSubtitlesComposer().applyChangingText(to: mainCompositionInst, speechArray: speechArray, size: naturalSize)
+            let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainCompositionInst)
+            DynamicSubtitlesComposer().applyDynamicSubtitles(to: dynamicSubtitlesContext, speechArray: speechArray, size: naturalSize)
             //TODO: name collision?
-            let videoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("finalVideo\(arc4random() % 100000).mov")
-            let exportSession = AVAssetExportSession(asset: mixComposition, presetName: self.exportQuality)
-            exportSession?.outputURL = videoURL
-            exportSession?.outputFileType = AVFileTypeQuickTimeMovie
-            exportSession?.videoComposition = mainCompositionInst
-            exportSession?.shouldOptimizeForNetworkUse = true
-            exportSession?.exportAsynchronously(completionHandler: {
+            self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainCompositionInst) { url in
                 DispatchQueue.main.async {
                     Logger.debug("Successfully exported video with dynamic subtitles.")
-                    fulfill(videoURL)
+                    fulfill(url)
                 }
-            })
+            }
+        })
+    }
+    
+    private func beginExportSession(composition: AVMutableComposition, mainCompositionWithInstructions: AVMutableVideoComposition, completion: @escaping (URL) -> ()) {
+        let videoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("finalVideo\(arc4random() % 100000).mov")
+        let exportSession = AVAssetExportSession(asset: composition, presetName: self.exportQuality)
+        exportSession?.outputURL = videoURL
+        exportSession?.outputFileType = AVFileTypeQuickTimeMovie
+        exportSession?.videoComposition = mainCompositionWithInstructions
+        exportSession?.shouldOptimizeForNetworkUse = true
+        exportSession?.exportAsynchronously(completionHandler: {
+            completion(videoURL)
         })
     }
     

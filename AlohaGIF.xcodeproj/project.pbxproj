@@ -66,6 +66,7 @@
 		90661E8F1EA66FC7009E81D3 /* IMG_0418.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 90661E8E1EA66FC7009E81D3 /* IMG_0418.MOV */; };
 		90661E911EA67626009E81D3 /* AnimationsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E901EA67626009E81D3 /* AnimationsComposer.swift */; };
 		90661E931EA678CE009E81D3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E921EA678CE009E81D3 /* Logger.swift */; };
+		90661E951EA6BD28009E81D3 /* IMG_0421.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 90661E941EA6BD28009E81D3 /* IMG_0421.MOV */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
@@ -134,6 +135,7 @@
 		90661E8E1EA66FC7009E81D3 /* IMG_0418.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0418.MOV; sourceTree = "<group>"; };
 		90661E901EA67626009E81D3 /* AnimationsComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsComposer.swift; sourceTree = "<group>"; };
 		90661E921EA678CE009E81D3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		90661E941EA6BD28009E81D3 /* IMG_0421.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0421.MOV; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				90661E8E1EA66FC7009E81D3 /* IMG_0418.MOV */,
+				90661E941EA6BD28009E81D3 /* IMG_0421.MOV */,
 				90661E751EA56052009E81D3 /* Models */,
 				9041D3701EA37EDB007E134B /* Storyboards */,
 				9041D36F1EA37ECF007E134B /* Extensions */,
@@ -480,6 +483,7 @@
 				904F80BC1EA4BE56008574CE /* AUTO@3x.png in Resources */,
 				904F80C21EA4BE56008574CE /* video@3x.png in Resources */,
 				90661E8F1EA66FC7009E81D3 /* IMG_0418.MOV in Resources */,
+				90661E951EA6BD28009E81D3 /* IMG_0421.MOV in Resources */,
 				9041D34B1EA25B63007E134B /* LeckerliOne-Regular.otf in Resources */,
 				9041D3771EA3D596007E134B /* Info.plist in Resources */,
 				904F80BF1EA4BE56008574CE /* OFF@3x.png in Resources */,

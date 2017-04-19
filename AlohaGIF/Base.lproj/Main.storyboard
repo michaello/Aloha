@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LRg-AH-2wt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="euV-on-hrI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -35,14 +35,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atv-WI-exN">
-                                <rect key="frame" x="348.5" y="549" width="26.5" height="118"/>
+                                <rect key="frame" x="349" y="549" width="26" height="118"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="118" id="iee-Hl-WSb"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4a-nn-kIJ">
-                                <rect key="frame" x="0.0" y="550" width="26.5" height="118"/>
+                                <rect key="frame" x="0.0" y="550" width="27" height="118"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="118" id="7hF-tq-5J7"/>
@@ -94,7 +94,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OnboardingScreen1" translatesAutoresizingMaskIntoConstraints="NO" id="acs-56-Pd4">
-                                <rect key="frame" x="88.5" y="28" width="198" height="400"/>
+                                <rect key="frame" x="89" y="28" width="198" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="acs-56-Pd4" secondAttribute="height" multiplier="199:404" id="1c8-fk-sY1"/>
                                 </constraints>
@@ -119,7 +119,7 @@
         <!--Camera View Controller-->
         <scene sceneID="3gF-ZR-Bps">
             <objects>
-                <viewController id="LRg-AH-2wt" customClass="CameraViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" id="LRg-AH-2wt" customClass="CameraViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dYJ-lm-5vD"/>
                         <viewControllerLayoutGuide type="bottom" id="2ir-cw-OKg"/>
@@ -174,6 +174,16 @@
                     <view key="view" contentMode="scaleToFill" id="Czy-dq-Q4Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-Zx-g3b">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="debugAction:" destination="euV-on-hrI" eventType="touchUpInside" id="jpJ-Sc-vJJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -197,7 +207,7 @@
                                 <rect key="frame" x="28" y="525" width="319" height="370"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
-                                        <rect key="frame" x="114.5" y="16" width="91" height="40"/>
+                                        <rect key="frame" x="115" y="16" width="91" height="40"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Aloha">
                                                 <attributes>
@@ -211,7 +221,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now, we will ask for permissions. This is a long text to simulate how it would look like on real device ayy lmao" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-Q1-ghf">
-                                        <rect key="frame" x="32" y="65" width="255" height="81.5"/>
+                                        <rect key="frame" x="32" y="65" width="255" height="82"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

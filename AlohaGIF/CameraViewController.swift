@@ -11,6 +11,7 @@ import AVFoundation
 import Photos
 
 let maximumMovieLength: CGFloat = 15.0
+let resourceName = "IMG_0418"
 
 final class CameraViewController: UIViewController {
 
@@ -61,7 +62,7 @@ final class CameraViewController: UIViewController {
     
     private func debugTestConvertVideoToDynamicSubtitles() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            let movieFromProject = Bundle.main.url(forResource: "IMG_0418", withExtension: "MOV")!
+            let movieFromProject = Bundle.main.url(forResource: resourceName, withExtension: "MOV")!
             let assetFromURL = AVURLAsset(url: movieFromProject)
             self.convertAssetToVideoWithDynamicSubtitles(asset: assetFromURL)
         }
@@ -225,6 +226,7 @@ extension CameraViewController: ImagePickerDelegate {
     private func presentVideoPreviewViewController(with asset: AVAsset) {
         let videoPreviewViewController = self.storyboard?.instantiateViewController(withIdentifier: String(describing: VideoPreviewViewController.self)) as! VideoPreviewViewController
         videoPreviewViewController.selectedVideo = asset
+        videoPreviewViewController.shouldShowOverlayText = false
         present(videoPreviewViewController, animated: true, completion: nil)
     }
 }
