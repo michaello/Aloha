@@ -13,6 +13,11 @@ import Photos
 let maximumMovieLength: CGFloat = 15.0
 let resourceName = "IMG_0418"
 
+enum CameraType {
+    case front
+    case back
+}
+
 final class CameraViewController: UIViewController {
 
     @IBOutlet private weak var previewView: PreviewView!
@@ -30,6 +35,7 @@ final class CameraViewController: UIViewController {
     fileprivate let assetController = AssetController()
     private let permissionController = PermissionController()
     private var recording = Recording()
+    private var cameraType = CameraType.front
     
     private struct Constants {
         static let recordButtonIntervalIncrementTime = 0.1
@@ -45,10 +51,14 @@ final class CameraViewController: UIViewController {
     private let sessionPresetQuality = AVCaptureSessionPresetHigh
     private let movieFileOutput = AVCaptureMovieFileOutput()
     private var videoDeviceInput: AVCaptureDeviceInput?
-    var anyCamera: AVCaptureDevice? {
+    private var anyCamera: AVCaptureDevice? {
         return Constants.allPossibleCameras.flatMap { AVCaptureDevice.defaultDevice(withDeviceType: $0.cameraType, mediaType: AVMediaTypeVideo, position: $0.position) }.first
     }
-    
+    private var frontCamera: AVCaptureDevice? {
+        let frontCameraType = Constants.allPossibleCameras.last!
+        return AVCaptureDevice.defaultDevice(withDeviceType: frontCameraType.cameraType, mediaType: AVMediaTypeVideo, position: frontCameraType.position)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -75,6 +85,13 @@ final class CameraViewController: UIViewController {
         }
     }
     
+    @IBAction func changeCameraAction(_ sender: UIButton) {
+        cameraType = cameraType == .front ? .back : .front
+        sessionQueue.async { [unowned self] in
+            self.addVideoInput(type: self.cameraType)
+        }
+    }
+
     @IBAction func videosButtonAction(_ sender: UIButton) {
         var config = Configuration()
         config.doneButtonTitle = "Finish"
@@ -137,15 +154,26 @@ final class CameraViewController: UIViewController {
         }
     }
     
-    private func addVideoInput() {
-        guard let anyCamera = anyCamera, let videoDeviceInput = try? AVCaptureDeviceInput(device: anyCamera) else { return }
+    private func addVideoInput(type: CameraType) {
+        let camera = type == .front ? frontCamera : anyCamera
+        guard let cameraToSet = camera, let videoDeviceInput = try? AVCaptureDeviceInput(device: cameraToSet) else { return }
+        removePreviousCameraDeviceInputIfNeeded()
         if session.canAddInput(videoDeviceInput) {
+            session.beginConfiguration()
             session.addInput(videoDeviceInput)
             self.videoDeviceInput = videoDeviceInput
+            session.commitConfiguration()
             DispatchQueue.main.async {
                 self.previewView.videoPreviewLayer.connection.videoOrientation = .portrait
             }
         }
+    }
+    
+    private func removePreviousCameraDeviceInputIfNeeded() {
+        guard let input = videoDeviceInput else { return }
+        session.beginConfiguration()
+        session.removeInput(input)
+        session.commitConfiguration()
     }
     
     private func addAudioInput() {
@@ -158,7 +186,7 @@ final class CameraViewController: UIViewController {
     }
     
     private func configureSession() {
-        addVideoInput()
+        addVideoInput(type: cameraType)
         addAudioInput()
 
         if session.canAddOutput(movieFileOutput) {

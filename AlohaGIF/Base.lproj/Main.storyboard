@@ -134,34 +134,40 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-ab-4wh">
                                         <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-t8-2a0">
-                                                <rect key="frame" x="20" y="27" width="71" height="39"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                                <state key="normal" title="Videos"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-t8-2a0">
+                                                <rect key="frame" x="20" y="10" width="70" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="VHM-BH-w0J"/>
+                                                    <constraint firstAttribute="height" constant="70" id="rW8-nj-liL"/>
+                                                </constraints>
+                                                <state key="normal" image="VideosIcon"/>
                                                 <connections>
                                                     <action selector="videosButtonAction:" destination="LRg-AH-2wt" eventType="touchUpInside" id="Rq8-ze-zmT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8e8-Em-qKP">
-                                                <rect key="frame" x="283" y="34" width="70" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8e8-Em-qKP">
+                                                <rect key="frame" x="285" y="10" width="70" height="70"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="E2K-Ad-dgC"/>
                                                     <constraint firstAttribute="width" constant="70" id="kS9-Zc-GIz"/>
                                                 </constraints>
                                                 <state key="normal" image="CameraCapture"/>
+                                                <connections>
+                                                    <action selector="changeCameraAction:" destination="LRg-AH-2wt" eventType="touchUpInside" id="Ir6-Kz-CVE"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="0.24526434075342465" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="X0L-t8-2a0" secondAttribute="bottom" constant="24" id="N8O-wq-q6q"/>
                                             <constraint firstAttribute="height" constant="90" id="RMf-aw-GJe"/>
                                             <constraint firstItem="X0L-t8-2a0" firstAttribute="leading" secondItem="W3C-ab-4wh" secondAttribute="leading" constant="20" id="SXn-uR-jXO"/>
-                                            <constraint firstItem="8e8-Em-qKP" firstAttribute="centerY" secondItem="X0L-t8-2a0" secondAttribute="centerY" id="cTb-Y0-aR6"/>
+                                            <constraint firstItem="X0L-t8-2a0" firstAttribute="centerY" secondItem="W3C-ab-4wh" secondAttribute="centerY" id="cTL-xc-3ea"/>
                                             <constraint firstAttribute="trailing" secondItem="8e8-Em-qKP" secondAttribute="trailing" constant="20" id="xAb-vV-I5p"/>
+                                            <constraint firstItem="8e8-Em-qKP" firstAttribute="centerY" secondItem="W3C-ab-4wh" secondAttribute="centerY" id="zQY-fy-Nrd"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="W3C-ab-4wh" secondAttribute="trailing" id="3fd-L9-8al"/>
                                     <constraint firstAttribute="bottom" secondItem="W3C-ab-4wh" secondAttribute="bottom" id="I9l-V8-L4e"/>
@@ -256,7 +262,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now, we will ask for permissions. This is a long text to simulate how it would look like on real device ayy lmao" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-Q1-ghf">
-                                        <rect key="frame" x="32" y="65" width="255" height="81.5"/>
+                                        <rect key="frame" x="32" y="65" width="255" height="82"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -308,5 +314,6 @@
         <image name="Button" width="147" height="31"/>
         <image name="CameraCapture" width="60" height="60"/>
         <image name="OnboardingScreen1" width="992" height="2018"/>
+        <image name="VideosIcon" width="60" height="60"/>
     </resources>
 </document>
