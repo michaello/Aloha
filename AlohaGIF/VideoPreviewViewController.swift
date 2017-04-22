@@ -46,18 +46,19 @@ final class VideoPreviewViewController: UIViewController {
             } else {
                 aScale = videoSize.height / self.playerLayer.videoRect.height
             }
-            self.baz(frame: self.playerLayer.videoRect)
+            self.addDynamicSubtitlesViewAndApplySubtitles(frame: self.playerLayer.videoRect)
         }
     }
     
-    func baz(frame: CGRect) {
-            dynamicSubtitlesView = OverlayView(frame: view.frame)
-            dynamicSubtitlesView.buttons = view.subviews.flatMap { $0 as? UIButton }
-            dynamicSubtitlesView.frame = dynamicSubtitlesView.frame
-            let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove))
-            dynamicSubtitlesView.addGestureRecognizer(panRecognizer)
-            subtitlesInitialPointCenter = dynamicSubtitlesView.center
-        DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, size: frame.size, delegate: self)
+    func addDynamicSubtitlesViewAndApplySubtitles(frame: CGRect) {
+        dynamicSubtitlesView = OverlayView(frame: view.frame)
+        dynamicSubtitlesView.buttons = view.subviews.flatMap { $0 as? UIButton }
+        dynamicSubtitlesView.frame = dynamicSubtitlesView.frame
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove))
+        dynamicSubtitlesView.addGestureRecognizer(panRecognizer)
+        view.addSubview(dynamicSubtitlesView)
+        subtitlesInitialPointCenter = dynamicSubtitlesView.center
+    DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, size: frame.size, delegate: self)
     }
     
     @objc private func dynamicSubtitlesViewDidMove(sender: UIPanGestureRecognizer) {

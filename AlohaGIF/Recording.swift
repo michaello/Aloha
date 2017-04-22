@@ -18,7 +18,6 @@ struct Recording {
     
     mutating func end() -> TimeInterval {
         let endDateNotNil = self.endDate ?? Date()
-        
-        return endDateNotNil.timeIntervalSince1970 - startDate.timeIntervalSince1970
+        return (endDateNotNil.timeIntervalSince1970 - startDate.timeIntervalSince1970).rounded()
     }
 }

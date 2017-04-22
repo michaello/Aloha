@@ -107,7 +107,7 @@ final class CameraViewController: UIViewController {
     }
     
     @objc private func stopRecording() {
-        Logger.verbose("Ended recording. Recording time: \(recording.end())")
+        Logger.verbose("Ended recording. Recording time: \(recording.end()) seconds")
         guard !isSimulator else { return }
         movieFileOutput.stopRecording()
     }
