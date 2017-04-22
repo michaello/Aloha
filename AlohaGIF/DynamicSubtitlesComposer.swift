@@ -60,7 +60,7 @@ enum DynamicSubtitlesContext {
 
 final class DynamicSubtitlesComposer {
     
-    let dynamicSubtitlesType = DynamicSubtitlesType.oneWordOnly
+    let dynamicSubtitlesType = DynamicSubtitlesType.oneAfterAnother
     private var animationsComposer = AnimationsComposer()
     
     func applyDynamicSubtitles(to dynamicSubtitlesContext: DynamicSubtitlesContext, speechArray: [SpeechModel?], size: CGSize, delegate: CAAnimationDelegate? = nil) {
@@ -108,7 +108,7 @@ final class DynamicSubtitlesComposer {
         let multiplierForNewlineWithSomeSpace: CGFloat = 1.2
         
         if isRenderingVideo {
-            designatedY = (textRect(for: wholeTextContent).height * estimatedNumberOfLines * multiplierForNewlineWithSomeSpace) - -offsetY
+            designatedY = (textRect(for: wholeTextContent).height * (estimatedNumberOfLines - 1) * multiplierForNewlineWithSomeSpace) - -offsetY
         } else {
             designatedY = size.height - (textRect(for: wholeTextContent).height * estimatedNumberOfLines * multiplierForNewlineWithSomeSpace)  + offsetY
         }

@@ -39,6 +39,7 @@ open class BottomContainerView: UIView {
   open lazy var doneButton: UIButton = { [unowned self] in
     let button = UIButton()
     button.setTitle(self.configuration.cancelButtonTitle, for: UIControlState())
+    button.setTitleColor(.themeColor, for: [])
     button.titleLabel?.font = self.configuration.doneButton
     button.addTarget(self, action: #selector(doneButtonDidPress(_:)), for: .touchUpInside)
 
@@ -84,7 +85,11 @@ open class BottomContainerView: UIView {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    backgroundColor = configuration.backgroundColor
+//    backgroundColor = configuration.backgroundColor
+//    let effectView = CustomBlurRadiusView()
+//    effectView.frame = bounds
+//    insertSubview(effectView, at: 0)
+
     stackView.accessibilityLabel = "Image stack"
     stackView.isHidden = true
     stackView.addGestureRecognizer(tapGestureRecognizer)

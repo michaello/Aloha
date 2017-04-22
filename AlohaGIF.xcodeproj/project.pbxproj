@@ -67,6 +67,11 @@
 		90661E911EA67626009E81D3 /* AnimationsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E901EA67626009E81D3 /* AnimationsComposer.swift */; };
 		90661E931EA678CE009E81D3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E921EA678CE009E81D3 /* Logger.swift */; };
 		90661E951EA6BD28009E81D3 /* IMG_0421.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 90661E941EA6BD28009E81D3 /* IMG_0421.MOV */; };
+		906D9E351EA8185500181EC2 /* ALLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E341EA8185500181EC2 /* ALLoadingView.swift */; };
+		906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E361EA827DB00181EC2 /* OverlayView.swift */; };
+		9084C8881EABAAC300B60BCF /* CustomBlurRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */; };
+		9084C88A1EABAD0D00B60BCF /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8891EABAD0D00B60BCF /* Recording.swift */; };
+		9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C88C1EABAF0F00B60BCF /* AssetController.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
@@ -136,6 +141,11 @@
 		90661E901EA67626009E81D3 /* AnimationsComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsComposer.swift; sourceTree = "<group>"; };
 		90661E921EA678CE009E81D3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		90661E941EA6BD28009E81D3 /* IMG_0421.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0421.MOV; sourceTree = "<group>"; };
+		906D9E341EA8185500181EC2 /* ALLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALLoadingView.swift; sourceTree = "<group>"; };
+		906D9E361EA827DB00181EC2 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBlurRadiusView.swift; sourceTree = "<group>"; };
+		9084C8891EABAD0D00B60BCF /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		9084C88C1EABAF0F00B60BCF /* AssetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetController.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +242,7 @@
 		9041D36C1EA37EA3007E134B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				906D9E331EA8182D00181EC2 /* ALLoadingView */,
 				904F808A1EA4B9E3008574CE /* ImagePicker */,
 				90D6B7381EA40E7E002B26EE /* PreviewView */,
 				904B860D1EA400FF00540D3A /* RecordButton */,
@@ -258,6 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				9041D36A1EA37427007E134B /* CardView.swift */,
+				906D9E361EA827DB00181EC2 /* OverlayView.swift */,
+				9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -383,8 +396,18 @@
 				90661E8A1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift */,
 				90661E901EA67626009E81D3 /* AnimationsComposer.swift */,
 				90661E921EA678CE009E81D3 /* Logger.swift */,
+				9084C8891EABAD0D00B60BCF /* Recording.swift */,
+				9084C88C1EABAF0F00B60BCF /* AssetController.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		906D9E331EA8182D00181EC2 /* ALLoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				906D9E341EA8185500181EC2 /* ALLoadingView.swift */,
+			);
+			name = ALLoadingView;
 			sourceTree = "<group>";
 		};
 		90D6B7381EA40E7E002B26EE /* PreviewView */ = {
@@ -447,7 +470,7 @@
 				TargetAttributes = {
 					9041D3321EA24CF9007E134B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = AS5AAW6A59;
+						DevelopmentTeam = 27FAFL2WP5;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -553,10 +576,13 @@
 				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
 				904F80AE1EA4B9E3008574CE /* ImageGalleryViewCell.swift in Sources */,
 				904B860F1EA4012700540D3A /* RecordButton.swift in Sources */,
+				9084C8881EABAAC300B60BCF /* CustomBlurRadiusView.swift in Sources */,
 				90661E8B1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift in Sources */,
 				9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */,
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
+				9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
+				906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */,
 				90661E931EA678CE009E81D3 /* Logger.swift in Sources */,
 				904F80B21EA4B9E3008574CE /* LocationManager.swift in Sources */,
 				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
@@ -576,6 +602,7 @@
 				9041D3781EA3D596007E134B /* Promise+Extras.swift in Sources */,
 				90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */,
 				9041D3571EA27255007E134B /* OnboardingViewController.swift in Sources */,
+				906D9E351EA8185500181EC2 /* ALLoadingView.swift in Sources */,
 				9041D3601EA2864B007E134B /* CHILayer.swift in Sources */,
 				90661E741EA55EF2009E81D3 /* AVAssetExtension.swift in Sources */,
 				9041D3551EA2720D007E134B /* SwiftyOnboardPage.swift in Sources */,
@@ -594,6 +621,7 @@
 				904F80AB1EA4B9E3008574CE /* Helper.swift in Sources */,
 				9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */,
 				90661E7F1EA614C6009E81D3 /* SpeechController.swift in Sources */,
+				9084C88A1EABAD0D00B60BCF /* Recording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,10 +744,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = AS5AAW6A59;
+				DEVELOPMENT_TEAM = 27FAFL2WP5;
 				INFOPLIST_FILE = AlohaGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MP.AlohaGIF;
+				PRODUCT_BUNDLE_IDENTIFIER = droids.AlohaGIF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -731,10 +759,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = AS5AAW6A59;
+				DEVELOPMENT_TEAM = 27FAFL2WP5;
 				INFOPLIST_FILE = AlohaGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MP.AlohaGIF;
+				PRODUCT_BUNDLE_IDENTIFIER = droids.AlohaGIF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -22,7 +22,9 @@ import UIKit
     }
     open var progressColor: UIColor!  = .red {
         didSet {
-            gradientMaskLayer.colors = [progressColor.cgColor, progressColor.cgColor]
+            gradientMaskLayer.colors = [UIColor(colorLiteralRed: 232/255.0, green: 137/255.0, blue: 98/255.0, alpha: 1.0).cgColor, UIColor(colorLiteralRed: 217/255.0, green: 90/255.0, blue: 84/255.0, alpha: 1.0).cgColor]
+
+//            gradientMaskLayer.colors = [progressColor.cgColor, progressColor.cgColor]
         }
     }
     

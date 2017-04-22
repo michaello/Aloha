@@ -70,6 +70,7 @@ open class ImageGalleryView: UIView {
 
   open lazy var noImagesLabel: UILabel = { [unowned self] in
     let label = UILabel()
+    label.isHidden = true
     label.font = self.configuration.noImagesFont
     label.textColor = self.configuration.noImagesColor
     label.text = self.configuration.noImagesTitle

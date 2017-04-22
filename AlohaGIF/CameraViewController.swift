@@ -15,14 +15,21 @@ let resourceName = "IMG_0418"
 
 final class CameraViewController: UIViewController {
 
-    @IBOutlet weak var previewView: PreviewView!
-    var recordButton: RecordButton!
-    var recordButtonTimer: Timer!
-    var recordButtonProgress: CGFloat = 0.0
-    var isSimulator: Bool {
+    @IBOutlet private weak var previewView: PreviewView!
+    @IBOutlet private weak var bottomCameraView: UIView!
+    @IBOutlet private weak var videosButton: UIButton!
+    private var effectView: UIVisualEffectView!
+    
+    private var recordButton: RecordButton!
+    private var recordButtonTimer: Timer!
+    private var recordButtonProgress: CGFloat = 0.0
+    private var isSimulator: Bool {
         return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
     }
-    let permissionController = PermissionController()
+    fileprivate let speechController = SpeechController()
+    fileprivate let assetController = AssetController()
+    private let permissionController = PermissionController()
+    private var recording = Recording()
     
     private struct Constants {
         static let recordButtonIntervalIncrementTime = 0.1
@@ -44,10 +51,10 @@ final class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRecordButton()
+        setupLayout()
         setupSession()
         permissionController.requestForAllPermissions { _ in }
-        debugTestConvertVideoToDynamicSubtitles()
+//        debugTestConvertVideoToDynamicSubtitles()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +65,59 @@ final class CameraViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         session.stopRunning()
+    }
+    
+    func updateRecordButtonProgress() {
+        recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / maximumMovieLength)
+        recordButton.setProgress(recordButtonProgress)
+        if recordButtonProgress >= 1.0 {
+            recordButtonTimer.invalidate()
+        }
+    }
+    
+    @IBAction func videosButtonAction(_ sender: UIButton) {
+        var config = Configuration()
+        config.doneButtonTitle = "Finish"
+        config.noImagesTitle = "Sorry! There are no images here!"
+        
+        let imagePicker = ImagePickerController()
+        imagePicker.view.backgroundColor = .clear
+        imagePicker.modalPresentationStyle = .overCurrentContext
+        
+        imagePicker.configuration = config
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func performSpeechDetection(from asset: AVAsset) {
+        speechController.detectSpeechPromise(from: asset)
+            .then { [unowned self] speechArray in
+                self.presentVideoPreviewViewController(with: asset, speechArray: speechArray)
+            }
+    }
+    
+    @objc private func startRecording() {
+        recording.start()
+        Logger.verbose("Started recording. \(Date())")
+        recordButtonTimer = .scheduledTimer(timeInterval: Constants.recordButtonIntervalIncrementTime, target: self, selector: #selector(CameraViewController.updateRecordButtonProgress), userInfo: nil, repeats: true)
+        let outputFileName = NSUUID().uuidString
+        let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+        guard !isSimulator else { return }
+        movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+    }
+    
+    @objc private func stopRecording() {
+        Logger.verbose("Ended recording. Recording time: \(recording.end())")
+        guard !isSimulator else { return }
+        movieFileOutput.stopRecording()
+    }
+    
+    private func setupLayout() {
+        setupRecordButton()
+        setupVideosButton()
+        effectView = CustomBlurRadiusView()
+        effectView.frame = bottomCameraView.bounds
+        bottomCameraView.insertSubview(effectView, at: 0)
     }
     
     private func debugTestConvertVideoToDynamicSubtitles() {
@@ -132,10 +192,15 @@ final class CameraViewController: UIViewController {
         })
     }
     
+    private func setupVideosButton() {
+        videosButton.setTitleColor(.themeColor, for: [])
+    }
+    
     private func setupRecordButton() {
         recordButton = RecordButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
-        recordButton.center = self.view.center
-        view.addSubview(recordButton)
+        recordButton.progressColor = .white
+        recordButton.center = CGPoint(x: bottomCameraView.center.x, y: bottomCameraView.frame.height / 2)
+        bottomCameraView.addSubview(recordButton)
         setupRecordButtonActions()
     }
     
@@ -143,49 +208,12 @@ final class CameraViewController: UIViewController {
         recordButton.addTarget(self, action: #selector(CameraViewController.startRecording), for: .touchDown)
         recordButton.addTarget(self, action: #selector(CameraViewController.stopRecording), for: UIControlEvents.touchUpInside)
     }
-    
-    func updateRecordButtonProgress() {
-        recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / maximumMovieLength)
-        recordButton.setProgress(recordButtonProgress)
-        if recordButtonProgress >= 1.0 {
-            recordButtonTimer.invalidate()
-        }
-    }
-    
-    
-    @IBAction func videosButtonAction(_ sender: UIButton) {
-        var config = Configuration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-
-        let imagePicker = ImagePickerController()
-        imagePicker.view.backgroundColor = .clear
-        imagePicker.modalPresentationStyle = .overCurrentContext
-        
-        imagePicker.configuration = config
-        imagePicker.delegate = self
-        present(imagePicker, animated: false, completion: nil)
-    }
-    
-    @objc private func startRecording() {
-        Logger.verbose("Started recording. \(NSDate())")
-        recordButtonTimer = .scheduledTimer(timeInterval: Constants.recordButtonIntervalIncrementTime, target: self, selector: #selector(CameraViewController.updateRecordButtonProgress), userInfo: nil, repeats: true)
-        let outputFileName = NSUUID().uuidString
-        let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
-        guard !isSimulator else { return }
-        movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
-    }
-    
-    @objc private func stopRecording() {
-        Logger.verbose("Ended recording. \(NSDate())")
-        guard !isSimulator else { return }
-        movieFileOutput.stopRecording()
-    }    
 }
 
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-        print("")
+        let asset = AVURLAsset(url: outputFileURL)
+        performSpeechDetection(from: asset)
     }
 }
 
@@ -200,32 +228,31 @@ extension CameraViewController: ImagePickerDelegate {
 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
         imagePicker.dismiss(animated: true) {
-            PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, options in
-                DispatchQueue.main.async {
-                    self.convertAssetToVideoWithDynamicSubtitles(asset: asset)
-//                    presentVideoPreviewViewController(with: asset)
-                }
+            self.assetController.AVAssetPromise(from: asset)
+                .then { [unowned self] videoAsset in
+                    self.performSpeechDetection(from: videoAsset)
             }
         }
     }
     
-    //TODO: move it out from here
-    fileprivate func convertAssetToVideoWithDynamicSubtitles(asset: AVAsset?) {
-        if let asset = asset {
-            let speechController = SpeechController()
-            speechController.detectSpeech(from: asset, completion: { url in
-                DispatchQueue.main.async {
-                    let assetFromURL = AVURLAsset(url: url)
-                    self.presentVideoPreviewViewController(with: assetFromURL)
-                }
-            })
-        }
+    //For debug purposes
+    fileprivate func convertAssetToVideoWithDynamicSubtitles(asset: AVAsset) {
+        let speechController = SpeechController()
+        speechController.createVideoWithDynamicSubtitles(from: asset, completion: { url in
+            DispatchQueue.main.async {
+                let assetFromURL = AVURLAsset(url: url)
+                self.presentVideoPreviewViewController(with: assetFromURL)
+            }
+        })
     }
     
-    private func presentVideoPreviewViewController(with asset: AVAsset) {
+    fileprivate func presentVideoPreviewViewController(with asset: AVAsset?, speechArray: [SpeechModel]? = nil) {
+        guard let asset = asset else { return }
         let videoPreviewViewController = self.storyboard?.instantiateViewController(withIdentifier: String(describing: VideoPreviewViewController.self)) as! VideoPreviewViewController
         videoPreviewViewController.selectedVideo = asset
-        videoPreviewViewController.shouldShowOverlayText = false
+        if let speechArray = speechArray {
+            videoPreviewViewController.speechArray = speechArray
+        }
         present(videoPreviewViewController, animated: true, completion: nil)
     }
 }
