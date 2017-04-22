@@ -470,7 +470,7 @@
 				TargetAttributes = {
 					9041D3321EA24CF9007E134B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 27FAFL2WP5;
+						DevelopmentTeam = AS5AAW6A59;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -744,10 +744,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 27FAFL2WP5;
+				DEVELOPMENT_TEAM = AS5AAW6A59;
 				INFOPLIST_FILE = AlohaGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = droids.AlohaGIF;
+				PRODUCT_BUNDLE_IDENTIFIER = MP.AlohaGIF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -759,10 +759,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 27FAFL2WP5;
+				DEVELOPMENT_TEAM = AS5AAW6A59;
 				INFOPLIST_FILE = AlohaGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = droids.AlohaGIF;
+				PRODUCT_BUNDLE_IDENTIFIER = MP.AlohaGIF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
