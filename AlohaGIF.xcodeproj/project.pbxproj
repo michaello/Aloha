@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */; };
+		9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E31EACAED300A817A9 /* EffectsViewController.swift */; };
 		9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041D3361EA24CF9007E134B /* AppDelegate.swift */; };
 		9041D33C1EA24CF9007E134B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33A1EA24CF9007E134B /* Main.storyboard */; };
 		9041D33E1EA24CF9007E134B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9041D33D1EA24CF9007E134B /* Assets.xcassets */; };
@@ -72,11 +74,21 @@
 		9084C8881EABAAC300B60BCF /* CustomBlurRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */; };
 		9084C88A1EABAD0D00B60BCF /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8891EABAD0D00B60BCF /* Recording.swift */; };
 		9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C88C1EABAF0F00B60BCF /* AssetController.swift */; };
+		90CD57E01EACCF60007B1D6E /* FontCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57DF1EACCF60007B1D6E /* FontCell.swift */; };
+		90CD57E41EACEB86007B1D6E /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E31EACEB86007B1D6E /* UINavigationControllerExtension.swift */; };
+		90CD57E61EACF206007B1D6E /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E51EACF206007B1D6E /* UIStoryboardExtension.swift */; };
+		90CD57E81EAD1875007B1D6E /* VideoToolbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */; };
+		90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
+		90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C641EACBD6C0055A390 /* ColorCell.swift */; };
+		90DE8C671EACBF8E0055A390 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */; };
+		90DE8C691EACCC3C0055A390 /* FontsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C681EACCC3C0055A390 /* FontsViewController.swift */; };
 		B9C3E75D9DEEC3D2B152EF40 /* Pods_AlohaGIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarViewController.swift; sourceTree = "<group>"; };
+		9013E2E31EACAED300A817A9 /* EffectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsViewController.swift; sourceTree = "<group>"; };
 		9041D3331EA24CF9007E134B /* AlohaGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlohaGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9041D3361EA24CF9007E134B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9041D33B1EA24CF9007E134B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -146,7 +158,15 @@
 		9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBlurRadiusView.swift; sourceTree = "<group>"; };
 		9084C8891EABAD0D00B60BCF /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		9084C88C1EABAF0F00B60BCF /* AssetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetController.swift; sourceTree = "<group>"; };
+		90CD57DF1EACCF60007B1D6E /* FontCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontCell.swift; sourceTree = "<group>"; };
+		90CD57E31EACEB86007B1D6E /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		90CD57E51EACF206007B1D6E /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarCoordinator.swift; sourceTree = "<group>"; };
+		90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarAnimator.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		90DE8C641EACBD6C0055A390 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
+		90DE8C681EACCC3C0055A390 /* FontsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsViewController.swift; sourceTree = "<group>"; };
 		D77CB4BF8FC3A67C62DE7004 /* Pods-AlohaGIF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.debug.xcconfig"; sourceTree = "<group>"; };
 		E3DFBEE17AE862F9197E9286 /* Pods_AlohaGIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlohaGIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CBC070143C3A841AA47925 /* Pods-AlohaGIF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlohaGIF.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlohaGIF/Pods-AlohaGIF.release.xcconfig"; sourceTree = "<group>"; };
@@ -261,6 +281,10 @@
 				9041D3561EA27255007E134B /* OnboardingViewController.swift */,
 				904B860B1EA3F8C400540D3A /* CameraViewController.swift */,
 				90661E711EA553A6009E81D3 /* VideoPreviewViewController.swift */,
+				9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */,
+				9013E2E31EACAED300A817A9 /* EffectsViewController.swift */,
+				90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */,
+				90DE8C681EACCC3C0055A390 /* FontsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -271,6 +295,8 @@
 				9041D36A1EA37427007E134B /* CardView.swift */,
 				906D9E361EA827DB00181EC2 /* OverlayView.swift */,
 				9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */,
+				90DE8C641EACBD6C0055A390 /* ColorCell.swift */,
+				90CD57DF1EACCF60007B1D6E /* FontCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -281,6 +307,8 @@
 				9041D3661EA36DDA007E134B /* UIColorExtension.swift */,
 				904F80C51EA534A5008574CE /* UIAlertControllerExtension.swift */,
 				90661E731EA55EF2009E81D3 /* AVAssetExtension.swift */,
+				90CD57E31EACEB86007B1D6E /* UINavigationControllerExtension.swift */,
+				90CD57E51EACF206007B1D6E /* UIStoryboardExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -398,6 +426,8 @@
 				90661E921EA678CE009E81D3 /* Logger.swift */,
 				9084C8891EABAD0D00B60BCF /* Recording.swift */,
 				9084C88C1EABAF0F00B60BCF /* AssetController.swift */,
+				90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */,
+				90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -584,6 +614,7 @@
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
 				906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */,
 				90661E931EA678CE009E81D3 /* Logger.swift in Sources */,
+				90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */,
 				904F80B21EA4B9E3008574CE /* LocationManager.swift in Sources */,
 				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
 				904F80AD1EA4B9E3008574CE /* ImageGalleryView.swift in Sources */,
@@ -595,13 +626,19 @@
 				90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */,
 				904F80A21EA4B9E3008574CE /* AssetManager.swift in Sources */,
 				904F80A61EA4B9E3008574CE /* StackView.swift in Sources */,
+				90CD57E01EACCF60007B1D6E /* FontCell.swift in Sources */,
 				90661E891EA6253A009E81D3 /* VideoSubtitlesComposer.swift in Sources */,
+				90DE8C671EACBF8E0055A390 /* ColorsViewController.swift in Sources */,
 				904F80AC1EA4B9E3008574CE /* ImageGalleryLayout.swift in Sources */,
 				9041D3691EA37272007E134B /* OverlayOnboardingViewController.swift in Sources */,
 				904F80B01EA4B9E3008574CE /* VideoInfoView.swift in Sources */,
+				90CD57E81EAD1875007B1D6E /* VideoToolbarCoordinator.swift in Sources */,
+				90DE8C691EACCC3C0055A390 /* FontsViewController.swift in Sources */,
 				9041D3781EA3D596007E134B /* Promise+Extras.swift in Sources */,
 				90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */,
+				9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */,
 				9041D3571EA27255007E134B /* OnboardingViewController.swift in Sources */,
+				90CD57E41EACEB86007B1D6E /* UINavigationControllerExtension.swift in Sources */,
 				906D9E351EA8185500181EC2 /* ALLoadingView.swift in Sources */,
 				9041D3601EA2864B007E134B /* CHILayer.swift in Sources */,
 				90661E741EA55EF2009E81D3 /* AVAssetExtension.swift in Sources */,
@@ -616,8 +653,11 @@
 				9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */,
 				9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */,
 				904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */,
+				9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */,
+				90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */,
 				904F80A51EA4B9E3008574CE /* ImageStack.swift in Sources */,
 				90661E7B1EA60FBB009E81D3 /* AudioExtractor.swift in Sources */,
+				90CD57E61EACF206007B1D6E /* UIStoryboardExtension.swift in Sources */,
 				904F80AB1EA4B9E3008574CE /* Helper.swift in Sources */,
 				9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */,
 				90661E7F1EA614C6009E81D3 /* SpeechController.swift in Sources */,

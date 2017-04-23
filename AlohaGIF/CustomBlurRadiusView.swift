@@ -24,11 +24,12 @@ final class CustomBlurRadiusView: UIVisualEffectView {
         animator.pauseAnimation()
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            self.animator.fractionComplete = 0.7
+            self.animator.fractionComplete = 0.5
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        effect = UIBlurEffect(style: .dark)
     }
 }

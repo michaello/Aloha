@@ -15,6 +15,12 @@ final class VideoPreviewViewController: UIViewController {
         static let loopCountPath = "loopCount"
     }
     
+    private let videoToolbarCoordinator = VideoToolbarCoordinator()
+    @IBOutlet fileprivate weak var arrowButton: UIButton!
+    @IBOutlet weak var movieToolbarBackgrounContainerView: CustomBlurRadiusView!
+    @IBOutlet private weak var movieToolbarContainerView: UIView!
+    @IBOutlet private weak var playerView: UIView!
+    
     var selectedVideo: AVAsset = AVURLAsset(url: Bundle.main.url(forResource: resourceName, withExtension: "MOV")!)
     var speechArray = [SpeechModel]()
     private let player = AVQueuePlayer()
@@ -28,8 +34,11 @@ final class VideoPreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerLayer.frame = CGRect(origin: .zero, size: view.frame.size)
-        view.layer.addSublayer(playerLayer)
+        arrowButton.addTarget(videoToolbarCoordinator, action: #selector(VideoToolbarCoordinator.arrowButtonAction(_:)), for: .touchUpInside)
+        videoToolbarCoordinator.passViewsToAnimate(arrowButton: arrowButton, movieToolbarBackgroundContainerView: movieToolbarBackgrounContainerView, movieToolbarContainerView: movieToolbarContainerView)
+        return
+        playerLayer.frame = CGRect(origin: .zero, size: playerView.frame.size)
+        playerView.layer.addSublayer(playerLayer)
         view.subviews.flatMap { $0 as? UIButton }.forEach {
             view.bringSubview(toFront: $0)
         }
@@ -101,6 +110,11 @@ final class VideoPreviewViewController: UIViewController {
                 self.presentVideoPreviewViewController(with: AVURLAsset(url: url))
             }
         })
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navigationController = segue.destination as? UINavigationController, let videoToolbarViewController = navigationController.topViewController as? VideoToolbarViewController else { return }
+            videoToolbarCoordinator.videoToolbarViewController = videoToolbarViewController
     }
     
     //TODO: For debug purposes only to check whether dynamic subtitles on video have correct position like in preview
