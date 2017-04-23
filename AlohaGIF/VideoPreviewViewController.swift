@@ -35,6 +35,7 @@ final class VideoPreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         arrowButton.addTarget(videoToolbarCoordinator, action: #selector(VideoToolbarCoordinator.arrowButtonAction(_:)), for: .touchUpInside)
+        arrowButton.touchAreaEdgeInsets = UIEdgeInsets(top: -20, left: -20, bottom: -10, right: -20)
         videoToolbarCoordinator.passViewsToAnimate(arrowButton: arrowButton, movieToolbarBackgroundContainerView: movieToolbarBackgrounContainerView, movieToolbarContainerView: movieToolbarContainerView)
         return
         playerLayer.frame = CGRect(origin: .zero, size: playerView.frame.size)

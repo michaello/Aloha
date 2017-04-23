@@ -8,10 +8,17 @@
 
 import UIKit
 
+struct DynamicSubtitlesStyle {
+    let effect: DynamicSubtitlesType
+    let font: UIFont
+    let color: UIColor
+}
+
 final class VideoToolbarCoordinator {
     
     weak var navigationController: UINavigationController?
     fileprivate var isInVideoOptionMenu = false
+    var dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
     fileprivate var animator = VideoToolbarAnimator()
     private var isCollapsed = false {
         didSet {
@@ -37,8 +44,22 @@ final class VideoToolbarCoordinator {
             return
         }
         isInVideoOptionMenu = false
+        collectSelectedVideoOptionForDynamicSubtitles()
         videoToolbarViewController?.navigationController?.popViewControllerWithFadeAnimation()
         animator.animateGoingBackToMain()
+    }
+    
+    private func collectSelectedVideoOptionForDynamicSubtitles() {
+        guard let viewController = navigationController?.topViewController else { return }
+        switch viewController {
+        case let vc as EffectsViewController:
+            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: vc.selectedEffect, font: dynamicSubtitlesStyle.font, color: dynamicSubtitlesStyle.color)
+        case let vc as FontsViewController:
+            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: vc.selectedFont, color: dynamicSubtitlesStyle.color)
+        case let vc as ColorsViewController:
+            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: dynamicSubtitlesStyle.font, color: vc.selectedColor)
+        default: ()
+        }
     }
 }
 

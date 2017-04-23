@@ -13,7 +13,7 @@ class EffectsViewController: UIViewController {
     @IBOutlet weak var oneAfterAnotherButton: UIButton!
     @IBOutlet weak var oneWordOnlyButton: UIButton!
     @IBOutlet weak var selectedEffectHighlightView: UIView!
-    private(set) var selectedSubtitlesEffect: DynamicSubtitlesType = .oneAfterAnother
+    private(set) var selectedEffect: DynamicSubtitlesType = .oneAfterAnother
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +23,10 @@ class EffectsViewController: UIViewController {
     
     @IBAction func effectButtonAction(_ sender: UIButton) {
         if sender == oneAfterAnotherButton {
-            selectedSubtitlesEffect = .oneAfterAnother
+            selectedEffect = .oneAfterAnother
             print("One after another")
         } else {
-            selectedSubtitlesEffect = .oneWordOnly
+            selectedEffect = .oneWordOnly
             print("One word only")
         }
         

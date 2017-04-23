@@ -79,6 +79,7 @@
 		90CD57E61EACF206007B1D6E /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E51EACF206007B1D6E /* UIStoryboardExtension.swift */; };
 		90CD57E81EAD1875007B1D6E /* VideoToolbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */; };
 		90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */; };
+		90CD57EC1EAD2DF0007B1D6E /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C641EACBD6C0055A390 /* ColorCell.swift */; };
 		90DE8C671EACBF8E0055A390 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */; };
@@ -163,6 +164,7 @@
 		90CD57E51EACF206007B1D6E /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarCoordinator.swift; sourceTree = "<group>"; };
 		90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarAnimator.swift; sourceTree = "<group>"; };
+		90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		90DE8C641EACBD6C0055A390 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				90661E731EA55EF2009E81D3 /* AVAssetExtension.swift */,
 				90CD57E31EACEB86007B1D6E /* UINavigationControllerExtension.swift */,
 				90CD57E51EACF206007B1D6E /* UIStoryboardExtension.swift */,
+				90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				90661E7D1EA61379009E81D3 /* SpeechModel.swift in Sources */,
 				9041D3371EA24CF9007E134B /* AppDelegate.swift in Sources */,
 				9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */,
+				90CD57EC1EAD2DF0007B1D6E /* UIButtonExtension.swift in Sources */,
 				904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */,
 				9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */,
 				90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */,

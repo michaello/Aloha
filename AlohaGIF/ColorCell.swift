@@ -9,12 +9,12 @@
 import UIKit
 
 final class ColorCell: UICollectionViewCell {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    private var internalColor: UIColor?
+    var color: UIColor {
+        get { return internalColor ?? backgroundColor ?? .white }
+        set {
+            internalColor = newValue
+            backgroundColor = internalColor
+        }
     }
 }

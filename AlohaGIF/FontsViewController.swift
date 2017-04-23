@@ -31,6 +31,7 @@ class FontsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     fileprivate let fonts = Constants.fonts
+    fileprivate(set) var selectedFont = UIFont.boldSystemFont(ofSize: 16.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,7 @@ class FontsViewController: UIViewController {
 extension FontsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! FontCell
-        print(cell.fontLabel.font.fontName)
+        selectedFont = cell.fontLabel.font
     }
 }
 
