@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FontsViewController: UIViewController {
+class FontsViewController: DynamicSubtitlesModifyingViewController {
     
     private struct Constants {
         static let fontSize: CGFloat = 22.0
@@ -31,12 +31,17 @@ class FontsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     fileprivate let fonts = Constants.fonts
-    fileprivate(set) var selectedFont = UIFont.boldSystemFont(ofSize: 16.0)
+    fileprivate(set) var selectedFont = UIFont.boldSystemFont(ofSize: 16.0) {
+        didSet {
+            handler?.handle(.font(selectedFont))
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.indicatorStyle = .white
         (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSize(width: 100, height: 100)
     }
 }
@@ -55,7 +60,7 @@ extension FontsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: FontCell.self), for: indexPath) as! FontCell
-        cell.fontLabel.attributedText = NSAttributedString.init(string: "Lorem ipsum", attributes: DynamicSubtitlesType.oneWordOnly.textAttributes)
+        cell.fontLabel.attributedText = NSAttributedString.init(string: "Lorem ipsum", attributes: DynamicSubtitlesStyle.default.textAttributes)
         cell.fontLabel.font = fonts[indexPath.row]
         
         return cell

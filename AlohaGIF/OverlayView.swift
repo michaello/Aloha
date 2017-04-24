@@ -10,15 +10,14 @@ import UIKit
 
 final class OverlayView: UIView {
     
-    var buttons = [UIButton]()
-    
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        var hitTest: UIView?
-        buttons.forEach {
-            hitTest = $0.hitTest(self.convert(point, to: $0), with: event)
+        var viewsPassingHitTest = [UIView?]()
+        let superviewButtons = superview?.subviews.flatMap { $0 as? UIButton }
+        superviewButtons?.forEach {
+            viewsPassingHitTest.append($0.hitTest(self.convert(point, to: $0), with: event))
         }
-        if hitTest != nil {
-            return hitTest!
+        if let view = viewsPassingHitTest.flatMap({ $0 }).first {
+            return view
         }
         
         return super.hitTest(point, with: event)

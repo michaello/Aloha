@@ -80,6 +80,7 @@
 		90CD57E81EAD1875007B1D6E /* VideoToolbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */; };
 		90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */; };
 		90CD57EC1EAD2DF0007B1D6E /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */; };
+		90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C641EACBD6C0055A390 /* ColorCell.swift */; };
 		90DE8C671EACBF8E0055A390 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */; };
@@ -165,6 +166,7 @@
 		90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarCoordinator.swift; sourceTree = "<group>"; };
 		90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarAnimator.swift; sourceTree = "<group>"; };
 		90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesModifyingViewController.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		90DE8C641EACBD6C0055A390 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				9013E2E31EACAED300A817A9 /* EffectsViewController.swift */,
 				90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */,
 				90DE8C681EACCC3C0055A390 /* FontsViewController.swift */,
+				90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
+				90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift in Sources */,
 				906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */,
 				90661E931EA678CE009E81D3 /* Logger.swift in Sources */,
 				90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */,

@@ -8,12 +8,20 @@
 
 import UIKit
 
-class EffectsViewController: UIViewController {
+protocol ModifiedDynamicSubtitlesHandler: class {
+    func handle(_ modification: DynamicSubtitlesModification)
+}
+
+class EffectsViewController: DynamicSubtitlesModifyingViewController {
     
     @IBOutlet weak var oneAfterAnotherButton: UIButton!
     @IBOutlet weak var oneWordOnlyButton: UIButton!
     @IBOutlet weak var selectedEffectHighlightView: UIView!
-    private(set) var selectedEffect: DynamicSubtitlesType = .oneAfterAnother
+    private(set) var selectedEffect: DynamicSubtitlesType = .oneAfterAnother {
+        didSet {
+            handler?.handle(.effect(selectedEffect))
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

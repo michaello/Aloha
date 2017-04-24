@@ -9,16 +9,43 @@
 import UIKit
 
 struct DynamicSubtitlesStyle {
+    static let `default` = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
     let effect: DynamicSubtitlesType
     let font: UIFont
     let color: UIColor
+    
+    func font(forRenderingVideo logicValue: Bool) -> UIFont {
+        var multiplier = effect == .oneAfterAnother ? 6.0 : 12.0
+        multiplier = logicValue ? multiplier : (multiplier / Double(aScale))
+        let fontSize: CGFloat = 10.0 * CGFloat(multiplier)
+        
+        return font.withSize(fontSize)
+    }
+    
+    var textAttributes: [String : Any] {
+        return [
+            NSStrokeWidthAttributeName : -2.0,
+            NSStrokeColorAttributeName : UIColor.black,
+            NSFontAttributeName : font,
+            NSForegroundColorAttributeName : color
+        ]
+    }
+}
+
+protocol VideoToolbarCoordinatorDelegate: class {
+    func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle)
 }
 
 final class VideoToolbarCoordinator {
     
     weak var navigationController: UINavigationController?
+    weak var delegate: VideoToolbarCoordinatorDelegate?
     fileprivate var isInVideoOptionMenu = false
-    var dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
+    var dynamicSubtitlesStyle = DynamicSubtitlesStyle.default {
+        didSet {
+            delegate?.dynamicSubtitlesStyleDidChange(dynamicSubtitlesStyle)
+        }
+    }
     fileprivate var animator = VideoToolbarAnimator()
     private var isCollapsed = false {
         didSet {
@@ -49,7 +76,8 @@ final class VideoToolbarCoordinator {
         animator.animateGoingBackToMain()
     }
     
-    private func collectSelectedVideoOptionForDynamicSubtitles() {
+    //TODO: Remove it
+    fileprivate func collectSelectedVideoOptionForDynamicSubtitles() {
         guard let viewController = navigationController?.topViewController else { return }
         switch viewController {
         case let vc as EffectsViewController:
@@ -68,7 +96,21 @@ extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
         isInVideoOptionMenu = true
         animator.animateGoingToVideoOptionMenu()
         if let viewController = navigationController?.storyboard?.viewController(forVideoOptionMenu: videoOptionMenu) {
+            viewController.handler = self
             navigationController?.pushViewControllerWithFadeAnimation(viewController)
+        }
+    }
+}
+
+extension VideoToolbarCoordinator: ModifiedDynamicSubtitlesHandler {
+    func handle(_ modification: DynamicSubtitlesModification) {
+        switch modification {
+        case .effect(let dynamicSubtitlesType):
+            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesType, font: dynamicSubtitlesStyle.font, color: dynamicSubtitlesStyle.color)
+        case .color(let color):
+            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: dynamicSubtitlesStyle.font, color: color)
+        case .font(let font):
+            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: font, color: dynamicSubtitlesStyle.color)
         }
     }
 }

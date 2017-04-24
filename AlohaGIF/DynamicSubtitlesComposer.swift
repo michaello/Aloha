@@ -6,7 +6,6 @@
 //  Copyright © 2017 Michal Pyrka. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 import UIKit
 
@@ -18,24 +17,6 @@ var aOffsetY: CGFloat = 0.0
 enum DynamicSubtitlesType {
     case oneAfterAnother
     case oneWordOnly
-    
-    var font: UIFont {
-        var multiplier = self == .oneAfterAnother ? 6.0 : 12.0
-        multiplier = isRenderingVideo ? multiplier : (multiplier / Double(aScale))
-        let fontSize: CGFloat = 10.0 * CGFloat(multiplier)
-        let font = UIFont.boldSystemFont(ofSize: fontSize)
-        
-        return font
-    }
-    
-    var textAttributes: [String : Any] {
-        return [
-            NSStrokeWidthAttributeName : -2.0,
-            NSStrokeColorAttributeName : UIColor.black,
-            NSFontAttributeName : font,
-            NSForegroundColorAttributeName : UIColor.white
-        ]
-    }
 }
 
 enum AnimationDestination {
@@ -60,11 +41,14 @@ enum DynamicSubtitlesContext {
 
 final class DynamicSubtitlesComposer {
     
-    let dynamicSubtitlesType = DynamicSubtitlesType.oneAfterAnother
     private var animationsComposer = AnimationsComposer()
+    private var dynamicSubtitlesStyle = DynamicSubtitlesStyle.default
     
-    func applyDynamicSubtitles(to dynamicSubtitlesContext: DynamicSubtitlesContext, speechArray: [SpeechModel?], size: CGSize, delegate: CAAnimationDelegate? = nil) {
+    func applyDynamicSubtitles(to dynamicSubtitlesContext: DynamicSubtitlesContext, speechArray: [SpeechModel?], dynamicSubtitlesStyle: DynamicSubtitlesStyle? = nil, size: CGSize, startTime: Double = 0.0) {
         Logger.debug("Will begin applying dynamic subtitles to movie...")
+        if let style = dynamicSubtitlesStyle {
+            self.dynamicSubtitlesStyle = style
+        }
         if case .videoComposition = dynamicSubtitlesContext {
             isRenderingVideo = true
         } else {
@@ -74,7 +58,7 @@ final class DynamicSubtitlesComposer {
         let array = speechArray.flatMap { $0 }
         let textLayers = self.textLayers(speechArray: array, size: size, dynamicSubtitlesContext: dynamicSubtitlesContext)
         textLayers.forEach { overlayLayer.addSublayer($0) }
-        applyAnimations(animationDestination: dynamicSubtitlesContext.destination, textLayersArray: textLayers, speechModelArray: array, dynamicSubtitlesType: dynamicSubtitlesType, delegate: delegate)
+        applyAnimations(animationDestination: dynamicSubtitlesContext.destination, textLayersArray: textLayers, speechModelArray: array, dynamicSubtitlesType: self.dynamicSubtitlesStyle.effect, startTime: startTime)
         
         let layers = parentAndVideoLayer(size: size)
         let parentLayer = layers.0
@@ -128,7 +112,7 @@ final class DynamicSubtitlesComposer {
                 currentOrigin.x = designatedX
             }
             currentOrigin.y = designatedY
-            if case .oneWordOnly = dynamicSubtitlesType {
+            if case .oneWordOnly = dynamicSubtitlesStyle.effect {
                 textLayer.frame = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
                 textLayer.frame = textLayer.frame.offsetBy(dx: -offsetX, dy: offsetY)
             } else {
@@ -143,11 +127,12 @@ final class DynamicSubtitlesComposer {
         return layers
     }
     
-    private func applyAnimations(animationDestination: AnimationDestination, textLayersArray: [CATextLayer], speechModelArray: [SpeechModel], dynamicSubtitlesType: DynamicSubtitlesType, delegate: CAAnimationDelegate? = nil) {
+    private func applyAnimations(animationDestination: AnimationDestination, textLayersArray: [CATextLayer], speechModelArray: [SpeechModel], dynamicSubtitlesType: DynamicSubtitlesType, startTime: Double) {
+        animationsComposer.startTime = startTime
         if case .oneAfterAnother = dynamicSubtitlesType {
-            animationsComposer.applyRevealAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayersArray, speechModelArray: speechModelArray, lastTextLayerDelegate: delegate)
+            animationsComposer.applyRevealAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayersArray, speechModelArray: speechModelArray)
         } else {
-            animationsComposer.applyShowAndHideAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayersArray, speechModelArray: speechModelArray, lastTextLayerDelegate: delegate)
+            animationsComposer.applyShowAndHideAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayersArray, speechModelArray: speechModelArray)
         }
     }
     
@@ -161,7 +146,7 @@ final class DynamicSubtitlesComposer {
     }
     
     private func textRect(for text: String = "Whatever") -> CGSize {
-        return (text as NSString).size(attributes: dynamicSubtitlesType.textAttributes)
+        return (text as NSString).size(attributes: dynamicSubtitlesStyle.textAttributes)
     }
     
     private func textLayer(text: String) -> CATextLayer {
@@ -169,7 +154,7 @@ final class DynamicSubtitlesComposer {
         textLayer.contentsScale = UIScreen.main.scale
         textLayer.opacity = shouldAlwaysShowSubtitles ? 1.0 : 0.0
         textLayer.alignmentMode = kCAAlignmentLeft
-        textLayer.string = NSAttributedString(string: text, attributes: dynamicSubtitlesType.textAttributes)
+        textLayer.string = NSAttributedString(string: text, attributes: dynamicSubtitlesStyle.textAttributes)
         
         return textLayer
     }

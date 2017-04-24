@@ -109,7 +109,9 @@ final class CameraViewController: UIViewController {
     fileprivate func performSpeechDetection(from asset: AVAsset) {
         speechController.detectSpeechPromise(from: asset)
             .then { [unowned self] speechArray in
-                self.presentVideoPreviewViewController(with: asset, speechArray: speechArray)
+                DispatchQueue.main.async {
+                    self.presentVideoPreviewViewController(with: asset, speechArray: speechArray)
+                }
             }
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIStoryboard {
-    func viewController(forVideoOptionMenu videoOptionMenu: VideoOptionMenu) -> UIViewController? {
+    func viewController(forVideoOptionMenu videoOptionMenu: VideoOptionMenu) -> DynamicSubtitlesModifyingViewController? {
         switch videoOptionMenu {
         case .effects:
             return instantiateViewController(withIdentifier: String(describing: EffectsViewController.self)) as! EffectsViewController

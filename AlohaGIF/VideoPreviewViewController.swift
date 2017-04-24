@@ -31,24 +31,42 @@ final class VideoPreviewViewController: UIViewController {
     private var shouldShowOverlayText = true
     fileprivate var dynamicSubtitlesView: OverlayView!
     private var subtitlesInitialPointCenter: CGPoint!
+    var dynamicSubtitlesStyle: DynamicSubtitlesStyle?
+    var currentTimeOfPreviewMovie: Double {
+        return playerLooper.loopingPlayerItems
+            .map { $0.currentTime().seconds }
+            .filter { $0 > 0.0 }
+            .sorted()
+            .first ?? 0.0
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        movieToolbarBackgrounContainerView.setToCustomBlurRadius()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        videoToolbarCoordinator.delegate = self
         arrowButton.addTarget(videoToolbarCoordinator, action: #selector(VideoToolbarCoordinator.arrowButtonAction(_:)), for: .touchUpInside)
-        arrowButton.touchAreaEdgeInsets = UIEdgeInsets(top: -20, left: -20, bottom: -10, right: -20)
+        view.subviews.flatMap { $0 as? UIButton }.forEach {
+            $0.touchAreaEdgeInsets = UIEdgeInsets(top: -20, left: -20, bottom: -10, right: -20)
+        }
         videoToolbarCoordinator.passViewsToAnimate(arrowButton: arrowButton, movieToolbarBackgroundContainerView: movieToolbarBackgrounContainerView, movieToolbarContainerView: movieToolbarContainerView)
-        return
         playerLayer.frame = CGRect(origin: .zero, size: playerView.frame.size)
         playerView.layer.addSublayer(playerLayer)
-        view.subviews.flatMap { $0 as? UIButton }.forEach {
-            view.bringSubview(toFront: $0)
-        }
         player.play()
         playerLooper.addObserver(self, forKeyPath: Constants.loopCountPath, options: [.new, .old], context: &observerContext)
         guard shouldShowOverlayText else { return }
         //TODO: Refactor
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             let videoSize = self.selectedVideo.tracks(withMediaType: AVMediaTypeVideo).first?.naturalSize ?? .zero
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
+            print("lmao \(self.currentTimeOfPreviewMovie)")})
             //For now let's say it's vertical
             let isVerticalVideo = true
             if isVerticalVideo {
@@ -62,13 +80,31 @@ final class VideoPreviewViewController: UIViewController {
     
     func addDynamicSubtitlesViewAndApplySubtitles(frame: CGRect) {
         dynamicSubtitlesView = OverlayView(frame: view.frame)
-        dynamicSubtitlesView.buttons = view.subviews.flatMap { $0 as? UIButton }
         dynamicSubtitlesView.frame = dynamicSubtitlesView.frame
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove))
         dynamicSubtitlesView.addGestureRecognizer(panRecognizer)
         view.addSubview(dynamicSubtitlesView)
         subtitlesInitialPointCenter = dynamicSubtitlesView.center
-    DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, size: frame.size, delegate: self)
+        
+        if speechArray.isEmpty {
+            var array = [SpeechModel]()
+            "TSA is it turning phone and are plenty of awesome new things about it but one thing that kind of went on the radar I need to know if it was Ashley said during the announcement".components(separatedBy: " ").enumerated().forEach {
+                index, text in
+                var time = Double(index) * 0.4
+                array.append(SpeechModel(duration: 0.5, timestamp: TimeInterval(time), content: text))
+           }
+            speechArray = array
+        }
+        
+        
+    DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: self.dynamicSubtitlesStyle, size: frame.size)
+    }
+    
+    
+    @IBAction func closeButtonAction(_ sender: UIButton) {
+        player.remove(playerItem)
+        playerLooper.disableLooping()
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func dynamicSubtitlesViewDidMove(sender: UIPanGestureRecognizer) {
@@ -90,6 +126,8 @@ final class VideoPreviewViewController: UIViewController {
 
         if let newValue = change?[.newKey] as? Int {
             Logger.verbose("Replayed movie \(selectedVideo.description). Count: \(newValue)")
+            dynamicSubtitlesView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: self.dynamicSubtitlesStyle, size: dynamicSubtitlesView.bounds.size, startTime: 0.0)
         }
     }
     
@@ -136,10 +174,17 @@ final class VideoPreviewViewController: UIViewController {
     }
 }
 
+extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
+    func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle) {
+        print("ayy \(currentTimeOfPreviewMovie)")
+        self.dynamicSubtitlesStyle = dynamicSubtitlesStyle
+        dynamicSubtitlesView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: self.dynamicSubtitlesStyle, size: dynamicSubtitlesView.bounds.size, startTime: currentTimeOfPreviewMovie)
+    }
+}
+
 extension VideoPreviewViewController: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         guard flag else { return }
-        dynamicSubtitlesView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, size: dynamicSubtitlesView.bounds.size, delegate: self)
     }
 }
