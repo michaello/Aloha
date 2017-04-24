@@ -63,7 +63,7 @@ final class VideoPreviewViewController: UIViewController {
         playerLooper.addObserver(self, forKeyPath: Constants.loopCountPath, options: [.new, .old], context: &observerContext)
         guard shouldShowOverlayText else { return }
         //TODO: Refactor
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             let videoSize = self.selectedVideo.tracks(withMediaType: AVMediaTypeVideo).first?.naturalSize ?? .zero
             //For now let's say it's vertical
             let isVerticalVideo = true
@@ -79,6 +79,7 @@ final class VideoPreviewViewController: UIViewController {
     func addDynamicSubtitlesViewAndApplySubtitles(frame: CGRect) {
         dynamicSubtitlesView = OverlayView(frame: view.frame)
         dynamicSubtitlesView.frame = dynamicSubtitlesView.frame
+        dynamicSubtitlesView.videoToolbarView = movieToolbarContainerView
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove))
         dynamicSubtitlesView.addGestureRecognizer(panRecognizer)
         view.addSubview(dynamicSubtitlesView)
@@ -182,11 +183,5 @@ extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
         self.dynamicSubtitlesStyle = dynamicSubtitlesStyle
         dynamicSubtitlesView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: self.dynamicSubtitlesStyle, size: dynamicSubtitlesView.bounds.size, startTime: currentTimeOfPreviewMovie)
-    }
-}
-
-extension VideoPreviewViewController: CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        guard flag else { return }
     }
 }

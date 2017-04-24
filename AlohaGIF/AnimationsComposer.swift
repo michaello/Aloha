@@ -67,6 +67,7 @@ struct AnimationsComposer {
         return speechModelArray.map { AnimationModel(beginTime: $0.timestamp - startTime, duration: $0.duration) }
     }
     
+    //Function for applying opacity animation for custom start time.
     private func zipped(textLayers: [CATextLayer], animationModelArray: [AnimationModel]) -> ([CATextLayer], [AnimationModel]) {
         guard textLayers.count == animationModelArray.count else {
             Logger.error("Warning: SpeechModels and TextLayers count don't match.")

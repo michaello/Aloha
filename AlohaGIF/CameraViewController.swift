@@ -34,6 +34,7 @@ final class CameraViewController: UIViewController {
     fileprivate let speechController = SpeechController()
     fileprivate let assetController = AssetController()
     private let permissionController = PermissionController()
+    private var isRecording = false
     private var recording = Recording()
     private var cameraType = CameraType.front
     
@@ -81,7 +82,7 @@ final class CameraViewController: UIViewController {
         recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / maximumMovieLength)
         recordButton.setProgress(recordButtonProgress)
         if recordButtonProgress >= 1.0 {
-            recordButtonTimer.invalidate()
+            stopRecording()
         }
     }
     
@@ -117,6 +118,7 @@ final class CameraViewController: UIViewController {
     
     @objc private func startRecording() {
         recording.start()
+        isRecording = true
         Logger.verbose("Started recording. \(Date())")
         recordButtonTimer = .scheduledTimer(timeInterval: Constants.recordButtonIntervalIncrementTime, target: self, selector: #selector(CameraViewController.updateRecordButtonProgress), userInfo: nil, repeats: true)
         let outputFileName = NSUUID().uuidString
@@ -126,9 +128,18 @@ final class CameraViewController: UIViewController {
     }
     
     @objc private func stopRecording() {
+        guard isRecording else { return }
+        isRecording = false
         Logger.verbose("Ended recording. Recording time: \(recording.end()) seconds")
+        recordButtonStopRecording()
         guard !isSimulator else { return }
         movieFileOutput.stopRecording()
+    }
+    
+    private func recordButtonStopRecording() {
+        recordButtonTimer.invalidate()
+        recordButtonProgress = 0.0
+        recordButton.buttonState = .idle
     }
     
     private func setupLayout() {
