@@ -65,8 +65,6 @@ final class VideoPreviewViewController: UIViewController {
         //TODO: Refactor
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             let videoSize = self.selectedVideo.tracks(withMediaType: AVMediaTypeVideo).first?.naturalSize ?? .zero
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
-            print("lmao \(self.currentTimeOfPreviewMovie)")})
             //For now let's say it's vertical
             let isVerticalVideo = true
             if isVerticalVideo {
