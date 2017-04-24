@@ -63,7 +63,7 @@ final class VideoPreviewViewController: UIViewController {
         playerLooper.addObserver(self, forKeyPath: Constants.loopCountPath, options: [.new, .old], context: &observerContext)
         guard shouldShowOverlayText else { return }
         //TODO: Refactor
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             let videoSize = self.selectedVideo.tracks(withMediaType: AVMediaTypeVideo).first?.naturalSize ?? .zero
             //For now let's say it's vertical
             let isVerticalVideo = true
@@ -169,6 +169,10 @@ final class VideoPreviewViewController: UIViewController {
         player.remove(playerItem)
         playerLooper.disableLooping()
         dismiss(animated: true, completion: nil)
+    }
+    
+    deinit {
+        playerLooper.removeObserver(self, forKeyPath: Constants.loopCountPath, context: &observerContext)
     }
 }
 
