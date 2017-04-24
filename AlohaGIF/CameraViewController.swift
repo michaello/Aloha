@@ -150,14 +150,6 @@ final class CameraViewController: UIViewController {
         bottomCameraView.insertSubview(effectView, at: 0)
     }
     
-    private func debugTestConvertVideoToDynamicSubtitles() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            let movieFromProject = Bundle.main.url(forResource: resourceName, withExtension: "MOV")!
-            let assetFromURL = AVURLAsset(url: movieFromProject)
-            self.convertAssetToVideoWithDynamicSubtitles(asset: assetFromURL)
-        }
-    }
-    
     private func setupSession() {
         guard !isSimulator else { return }
         previewView.session = session
@@ -274,17 +266,6 @@ extension CameraViewController: ImagePickerDelegate {
                     self.performSpeechDetection(from: videoAsset)
             }
         }
-    }
-    
-    //For debug purposes
-    fileprivate func convertAssetToVideoWithDynamicSubtitles(asset: AVAsset) {
-        let speechController = SpeechController()
-        speechController.createVideoWithDynamicSubtitles(from: asset, completion: { url in
-            DispatchQueue.main.async {
-                let assetFromURL = AVURLAsset(url: url)
-                self.presentVideoPreviewViewController(with: assetFromURL)
-            }
-        })
     }
     
     fileprivate func presentVideoPreviewViewController(with asset: AVAsset?, speechArray: [SpeechModel]? = nil) {

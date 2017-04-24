@@ -7,56 +7,39 @@
 //
 
 import UIKit
-
-struct DynamicSubtitlesStyle {
-    static let `default` = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
-    let effect: DynamicSubtitlesType
-    let font: UIFont
-    let color: UIColor
-    
-    func font(forRenderingVideo logicValue: Bool) -> UIFont {
-        var multiplier = effect == .oneAfterAnother ? 6.0 : 12.0
-        multiplier = logicValue ? multiplier : (multiplier / Double(aScale))
-        let fontSize: CGFloat = 10.0 * CGFloat(multiplier)
-        
-        return font.withSize(fontSize)
-    }
-    
-    var textAttributes: [String : Any] {
-        return [
-            NSStrokeWidthAttributeName : -2.0,
-            NSStrokeColorAttributeName : UIColor.black,
-            NSFontAttributeName : font,
-            NSForegroundColorAttributeName : color
-        ]
-    }
-}
+import AVFoundation
 
 protocol VideoToolbarCoordinatorDelegate: class {
     func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle)
+    func dynamicSubtitlesVideoForRendering() -> DynamicSubtitlesVideo
 }
 
 final class VideoToolbarCoordinator {
     
     weak var navigationController: UINavigationController?
     weak var delegate: VideoToolbarCoordinatorDelegate?
-    fileprivate var isInVideoOptionMenu = false
+    weak var videoToolbarViewController: VideoToolbarViewController? {
+        didSet {
+            videoToolbarViewController?.delegate = self
+            navigationController = videoToolbarViewController?.navigationController
+        }
+    }
     var dynamicSubtitlesStyle = DynamicSubtitlesStyle.default {
         didSet {
             delegate?.dynamicSubtitlesStyleDidChange(dynamicSubtitlesStyle)
         }
     }
+    fileprivate let selectedVideo: AVAsset
+    fileprivate var isInVideoOptionMenu = false
     fileprivate var animator = VideoToolbarAnimator()
     private var isCollapsed = false {
         didSet {
             isCollapsed ? animator.animateHidden() : animator.animateVisible()
         }
     }
-    weak var videoToolbarViewController: VideoToolbarViewController? {
-        didSet {
-            videoToolbarViewController?.delegate = self
-            navigationController = videoToolbarViewController?.navigationController
-        }
+    
+    init(selectedVideo: AVAsset) {
+        self.selectedVideo = selectedVideo
     }
     
     func passViewsToAnimate(arrowButton: UIButton, movieToolbarBackgroundContainerView: UIView, movieToolbarContainerView: UIView) {
@@ -93,12 +76,37 @@ final class VideoToolbarCoordinator {
 
 extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
     func willEnterToVideoOptionMenu(videoOptionMenu: VideoOptionMenu) {
+        guard videoOptionMenu != .complete else { return exportToVideoWithDynamicSubtitles() }
         isInVideoOptionMenu = true
         animator.animateGoingToVideoOptionMenu()
         if let viewController = navigationController?.storyboard?.viewController(forVideoOptionMenu: videoOptionMenu) {
             viewController.handler = self
             navigationController?.pushViewControllerWithFadeAnimation(viewController)
         }
+    }
+    
+    private func presentRenderingLoadingView() {
+        ALLoadingView.manager.blurredBackground = true
+        ALLoadingView.manager.messageText = "👽👽👽 ayy lmao"
+        ALLoadingView.manager.showLoadingView(ofType: .messageWithIndicator, windowMode: .fullscreen)
+    }
+    
+    private func exportToVideoWithDynamicSubtitles() {
+        guard let dynamicSubtitlesVideo = delegate?.dynamicSubtitlesVideoForRendering() else { return }
+        presentRenderingLoadingView()
+        let speechController = SpeechController()
+        speechController.createVideoWithDynamicSubtitles(from: dynamicSubtitlesVideo, completion: { url in
+            DispatchQueue.main.async {
+                ALLoadingView.manager.hideLoadingView()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                    if let foo = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController as? VideoPreviewViewController {
+                        let debug = foo.storyboard!.instantiateViewController(withIdentifier: "DebugViewController") as! DebugViewController
+                        debug.exportedVideo = AVURLAsset(url: url)
+                        foo.present(debug, animated: true, completion: nil)
+                    }
+                })
+            }
+        })
     }
 }
 

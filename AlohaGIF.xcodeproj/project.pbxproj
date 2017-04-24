@@ -69,6 +69,9 @@
 		90661E911EA67626009E81D3 /* AnimationsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E901EA67626009E81D3 /* AnimationsComposer.swift */; };
 		90661E931EA678CE009E81D3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E921EA678CE009E81D3 /* Logger.swift */; };
 		90661E951EA6BD28009E81D3 /* IMG_0421.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 90661E941EA6BD28009E81D3 /* IMG_0421.MOV */; };
+		906C0DD61EAEA42E00A8555D /* DynamicSubtitlesStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD51EAEA42E00A8555D /* DynamicSubtitlesStyle.swift */; };
+		906C0DD81EAEA5C200A8555D /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD71EAEA5C200A8555D /* DebugViewController.swift */; };
+		906C0DDA1EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */; };
 		906D9E351EA8185500181EC2 /* ALLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E341EA8185500181EC2 /* ALLoadingView.swift */; };
 		906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E361EA827DB00181EC2 /* OverlayView.swift */; };
 		9084C8881EABAAC300B60BCF /* CustomBlurRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */; };
@@ -155,6 +158,9 @@
 		90661E901EA67626009E81D3 /* AnimationsComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsComposer.swift; sourceTree = "<group>"; };
 		90661E921EA678CE009E81D3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		90661E941EA6BD28009E81D3 /* IMG_0421.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0421.MOV; sourceTree = "<group>"; };
+		906C0DD51EAEA42E00A8555D /* DynamicSubtitlesStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesStyle.swift; sourceTree = "<group>"; };
+		906C0DD71EAEA5C200A8555D /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
+		906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesVideo.swift; sourceTree = "<group>"; };
 		906D9E341EA8185500181EC2 /* ALLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALLoadingView.swift; sourceTree = "<group>"; };
 		906D9E361EA827DB00181EC2 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBlurRadiusView.swift; sourceTree = "<group>"; };
@@ -290,6 +296,7 @@
 				90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */,
 				90DE8C681EACCC3C0055A390 /* FontsViewController.swift */,
 				90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */,
+				906C0DD71EAEA5C200A8555D /* DebugViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -434,6 +441,8 @@
 				9084C88C1EABAF0F00B60BCF /* AssetController.swift */,
 				90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */,
 				90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */,
+				906C0DD51EAEA42E00A8555D /* DynamicSubtitlesStyle.swift */,
+				906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -618,6 +627,7 @@
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
+				906C0DD61EAEA42E00A8555D /* DynamicSubtitlesStyle.swift in Sources */,
 				90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift in Sources */,
 				906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */,
 				90661E931EA678CE009E81D3 /* Logger.swift in Sources */,
@@ -661,10 +671,12 @@
 				9041D35A1EA2860F007E134B /* CHIPageControlChimayo.swift in Sources */,
 				90CD57EC1EAD2DF0007B1D6E /* UIButtonExtension.swift in Sources */,
 				904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */,
+				906C0DDA1EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift in Sources */,
 				9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */,
 				90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */,
 				904F80A51EA4B9E3008574CE /* ImageStack.swift in Sources */,
 				90661E7B1EA60FBB009E81D3 /* AudioExtractor.swift in Sources */,
+				906C0DD81EAEA5C200A8555D /* DebugViewController.swift in Sources */,
 				90CD57E61EACF206007B1D6E /* UIStoryboardExtension.swift in Sources */,
 				904F80AB1EA4B9E3008574CE /* Helper.swift in Sources */,
 				9041D3671EA36DDA007E134B /* UIColorExtension.swift in Sources */,

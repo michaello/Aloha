@@ -18,8 +18,9 @@ struct VideoSubtitlesComposer {
     
     let exportQuality = AVAssetExportPresetHighestQuality
     
-    func composeVideoWithDynamicSubtitlesPromise(asset: AVAsset, speechArray: [SpeechModel?]) -> Promise<URL> {
+    func composeVideoWithDynamicSubtitlesPromise(dynamicSubtitlesVideo: DynamicSubtitlesVideo) -> Promise<URL> {
         return Promise<URL>(work: { fulfill, reject in
+            let asset = dynamicSubtitlesVideo.video
             let mixComposition = AVMutableComposition()
             let videoTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
             let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
@@ -71,7 +72,7 @@ struct VideoSubtitlesComposer {
             mainCompositionInst.instructions = [mainInstruction]
             mainCompositionInst.frameDuration = CMTime(value: 1, timescale: 30)
             let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainCompositionInst)
-            DynamicSubtitlesComposer().applyDynamicSubtitles(to: dynamicSubtitlesContext, speechArray: speechArray, size: naturalSize)
+            DynamicSubtitlesComposer().applyDynamicSubtitles(to: dynamicSubtitlesContext, speechArray: dynamicSubtitlesVideo.speechArray, dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, size: naturalSize)
             //TODO: name collision?
             self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainCompositionInst) { url in
                 DispatchQueue.main.async {

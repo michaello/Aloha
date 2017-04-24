@@ -616,6 +616,24 @@
             </objects>
             <point key="canvasLocation" x="3417" y="1164"/>
         </scene>
+        <!--Debug View Controller-->
+        <scene sceneID="fzh-uy-yMh">
+            <objects>
+                <viewController storyboardIdentifier="DebugViewController" id="0TI-8H-7ba" customClass="DebugViewController" customModule="AlohaGIF" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sQX-9Q-CMj"/>
+                        <viewControllerLayoutGuide type="bottom" id="n8S-hf-DTD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UU2-Ir-Jza">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZi-oQ-NBV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3991" y="1458"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="tTh-Rs-VdN">
             <objects>

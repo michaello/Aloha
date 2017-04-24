@@ -15,7 +15,6 @@ final class VideoPreviewViewController: UIViewController {
         static let loopCountPath = "loopCount"
     }
     
-    private let videoToolbarCoordinator = VideoToolbarCoordinator()
     @IBOutlet fileprivate weak var arrowButton: UIButton!
     @IBOutlet weak var movieToolbarBackgrounContainerView: CustomBlurRadiusView!
     @IBOutlet private weak var movieToolbarContainerView: UIView!
@@ -23,6 +22,7 @@ final class VideoPreviewViewController: UIViewController {
     
     var selectedVideo: AVAsset = AVURLAsset(url: Bundle.main.url(forResource: resourceName, withExtension: "MOV")!)
     var speechArray = [SpeechModel]()
+    private lazy var videoToolbarCoordinator: VideoToolbarCoordinator = VideoToolbarCoordinator(selectedVideo: self.selectedVideo)
     private let player = AVQueuePlayer()
     private lazy var playerLayer: AVPlayerLayer = AVPlayerLayer(player: self.player)
     private lazy var playerItem: AVPlayerItem = AVPlayerItem(asset: self.selectedVideo)
@@ -39,14 +39,18 @@ final class VideoPreviewViewController: UIViewController {
             .sorted()
             .first ?? 0.0
     }
+    var dynamicSubtitlesVideo: DynamicSubtitlesVideo {
+        return DynamicSubtitlesVideo(video: selectedVideo, speechArray: speechArray, dynamicSubtitlesStyle: videoToolbarCoordinator.dynamicSubtitlesStyle)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         movieToolbarBackgrounContainerView.setToCustomBlurRadius()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        player.pause()
     }
     
     override func viewDidLoad() {
@@ -140,7 +144,7 @@ final class VideoPreviewViewController: UIViewController {
     //TODO: It makes analysis once again, and we already know about speech, so later is should just apply subtitles into AVAsset.
     private func exportVideoToDynamicSubtitlesVideo() {
         let speechController = SpeechController()
-        speechController.createVideoWithDynamicSubtitles(from: selectedVideo, completion: { url in
+        speechController.createVideoWithDynamicSubtitles(from: dynamicSubtitlesVideo, completion: { url in
             DispatchQueue.main.async {
                 self.player.remove(self.playerItem)
                 self.playerLooper.disableLooping()
@@ -183,5 +187,9 @@ extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
         self.dynamicSubtitlesStyle = dynamicSubtitlesStyle
         dynamicSubtitlesView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         DynamicSubtitlesComposer().applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: self.dynamicSubtitlesStyle, size: dynamicSubtitlesView.bounds.size, startTime: currentTimeOfPreviewMovie)
+    }
+    
+    func dynamicSubtitlesVideoForRendering() -> DynamicSubtitlesVideo {
+        return dynamicSubtitlesVideo
     }
 }

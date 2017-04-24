@@ -15,11 +15,8 @@ struct SpeechController {
     private let speechRecognizer = SpeechRecognizer()
     private let videoSubtitlesComposer = VideoSubtitlesComposer()
     
-    func createVideoWithDynamicSubtitles(from asset: AVAsset, completion: @escaping (URL) -> ()) {
-        detectSpeechPromise(from: asset)
-            .then { speechModelArray in
-                self.videoSubtitlesComposer.composeVideoWithDynamicSubtitlesPromise(asset: asset, speechArray: speechModelArray)
-            }
+    func createVideoWithDynamicSubtitles(from dynamicSubtitlesVideo: DynamicSubtitlesVideo, completion: @escaping (URL) -> ()) {
+            videoSubtitlesComposer.composeVideoWithDynamicSubtitlesPromise(dynamicSubtitlesVideo: dynamicSubtitlesVideo)
             .then {
                 completion($0)
             }
