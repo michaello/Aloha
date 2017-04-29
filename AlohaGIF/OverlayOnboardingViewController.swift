@@ -11,5 +11,5 @@ import UIKit
 final class OverlayOnboardingViewController: UIViewController {
     
     @IBOutlet weak var phoneImageView: UIImageView!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!    
 }

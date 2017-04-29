@@ -8,16 +8,33 @@
 
 import UIKit
 
+fileprivate enum Storyboard: String {
+    case main = "Main"
+}
+
+
 extension UIStoryboard {
-    func viewController(forVideoOptionMenu videoOptionMenu: VideoOptionMenu) -> DynamicSubtitlesModifyingViewController? {
+    func viewController(forVideoOptionMenu videoOptionMenu: VideoOptionMenu, dynamicSubtitlesStyle: DynamicSubtitlesStyle = DynamicSubtitlesStyle.default) -> DynamicSubtitlesModifyingViewController? {
         switch videoOptionMenu {
         case .effects:
-            return instantiateViewController(withIdentifier: String(describing: EffectsViewController.self)) as! EffectsViewController
+            let viewController = UIStoryboard.viewController(EffectsViewController.self)
+            viewController.selectedEffect = dynamicSubtitlesStyle.effect
+            return viewController
         case .fonts:
-            return instantiateViewController(withIdentifier: String(describing: FontsViewController.self)) as! FontsViewController
+            let viewController = UIStoryboard.viewController(FontsViewController.self)
+            viewController.selectedFont = dynamicSubtitlesStyle.font
+            return viewController
         case .colors:
-            return instantiateViewController(withIdentifier: String(describing: ColorsViewController.self)) as! ColorsViewController
+            let viewController = UIStoryboard.viewController(ColorsViewController.self)
+            viewController.selectedColor = dynamicSubtitlesStyle.color
+            return viewController
         case .complete: return nil
         }
+    }
+    
+    static func viewController<T: UIViewController>(_ type: T.Type) -> T {
+        let storyboard = UIStoryboard(name: Storyboard.main.rawValue, bundle: nil)
+        
+        return storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
     }
 }

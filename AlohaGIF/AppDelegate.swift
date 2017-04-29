@@ -14,11 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupLogging()
-
+        window?.rootViewController = startingViewController()
+        
         return true
+    }
+    
+    private func startingViewController() -> UIViewController {
+        if UserDefaults.standard.isOnboardingCompleted {
+            return UIStoryboard.viewController(CameraViewController.self)
+        } else {
+            return UIStoryboard.viewController(OnboardingViewController.self)
+        }
     }
     
     private func setupLogging() {

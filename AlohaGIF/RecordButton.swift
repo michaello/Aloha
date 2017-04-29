@@ -8,28 +8,29 @@
 
 import UIKit
 
-@objc public enum RecordButtonState : Int {
-    case recording, idle, hidden;
+public enum RecordButtonState: Int {
+    case recording
+    case idle
+    case hidden
 }
 
 @objc open class RecordButton : UIButton {
     
-    open var buttonColor: UIColor! = .blue{
+    open var buttonColor: UIColor! = .white {
         didSet {
             circleLayer.backgroundColor = buttonColor.cgColor
-            circleBorder.borderColor = buttonColor.cgColor
+            circleBorder.borderColor = UIColor(white: 1.0, alpha: 0.5).cgColor
         }
     }
     open var progressColor: UIColor!  = .red {
         didSet {
-            gradientMaskLayer.colors = [UIColor(colorLiteralRed: 232/255.0, green: 137/255.0, blue: 98/255.0, alpha: 1.0).cgColor, UIColor(colorLiteralRed: 217/255.0, green: 90/255.0, blue: 84/255.0, alpha: 1.0).cgColor]
-
-//            gradientMaskLayer.colors = [progressColor.cgColor, progressColor.cgColor]
+            gradientMaskLayer.colors = [UIColor.themeColor.cgColor, UIColor(colorLiteralRed: 250.0/255.0, green: 188.0/255.0, blue: 81.0/255.0, alpha: 1.0).cgColor]
         }
     }
     
     /// Closes the circle and hides when the RecordButton is finished
     open var closeWhenFinished: Bool = false
+    var indicator: UIActivityIndicatorView!
     
     open var buttonState : RecordButtonState = .idle {
         didSet {
@@ -96,7 +97,7 @@ import UIKit
         circleBorder = CALayer()
         circleBorder.backgroundColor = UIColor.clear.cgColor
         circleBorder.borderWidth = 1
-        circleBorder.borderColor = buttonColor.cgColor
+        circleBorder.borderColor = UIColor(white: 1.0, alpha: 0.2).cgColor
         circleBorder.bounds = CGRect(x: 0, y: 0, width: self.bounds.size.width - 1.5, height: self.bounds.size.height - 1.5)
         circleBorder.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         circleBorder.position = CGPoint(x: self.bounds.midX,y: self.bounds.midY)
@@ -117,6 +118,7 @@ import UIKit
         progressLayer.strokeEnd = 0.0
         gradientMaskLayer.mask = progressLayer
         layer.insertSublayer(gradientMaskLayer, at: 0)
+        addSpinner()
     }
     
     fileprivate func setRecording(_ recording: Bool) {
@@ -223,6 +225,30 @@ import UIKit
         progressLayer.strokeEnd = newProgress
     }
     
+    private func addSpinner() {
+        indicator = UIActivityIndicatorView()
+        indicator.alpha = 0.0
+        indicator.frame = bounds
+        indicator.color = .themeColor
+        indicator.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        addSubview(indicator)
+    }
     
+    func startLoading() {
+        isEnabled = false
+        UIView.animate(withDuration: 0.3) {
+            self.indicator.alpha = 1.0
+        }
+        indicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        isEnabled = true
+        UIView.animate(withDuration: 0.3, animations: { 
+            self.indicator.alpha = 0.0
+        }) { _ in
+            self.indicator.stopAnimating()
+        }
+    }
 }
 

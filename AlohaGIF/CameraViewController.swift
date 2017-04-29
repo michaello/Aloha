@@ -10,8 +10,8 @@ import UIKit
 import AVFoundation
 import Photos
 
-let maximumMovieLength: CGFloat = 15.0
-let resourceName = "IMG_0418"
+let maximumMovieLength: CGFloat = 10.0
+let isSimulator = ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
 
 enum CameraType {
     case front
@@ -23,20 +23,19 @@ final class CameraViewController: UIViewController {
     @IBOutlet private weak var previewView: PreviewView!
     @IBOutlet private weak var bottomCameraView: UIView!
     @IBOutlet private weak var videosButton: UIButton!
-    private var effectView: UIVisualEffectView!
+    fileprivate var recordButton: RecordButton!
+    private var effectView: CustomBlurRadiusView!
     
-    private var recordButton: RecordButton!
     private var recordButtonTimer: Timer!
     private var recordButtonProgress: CGFloat = 0.0
-    private var isSimulator: Bool {
-        return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
-    }
-    fileprivate let speechController = SpeechController()
-    fileprivate let assetController = AssetController()
-    private let permissionController = PermissionController()
     private var isRecording = false
     private var recording = Recording()
     private var cameraType = CameraType.front
+    
+    fileprivate let speechController = SpeechController()
+    fileprivate let assetController = AssetController()
+    private let permissionController = PermissionController()
+
     
     private struct Constants {
         static let recordButtonIntervalIncrementTime = 0.1
@@ -49,7 +48,7 @@ final class CameraViewController: UIViewController {
     
     private let session = AVCaptureSession()
     private let sessionQueue = DispatchQueue(label: "sessionQueue", attributes: [], target: nil)
-    private let sessionPresetQuality = AVCaptureSessionPresetHigh
+    private let sessionPresetQuality = AVCaptureSessionPresetMedium
     private let movieFileOutput = AVCaptureMovieFileOutput()
     private var videoDeviceInput: AVCaptureDeviceInput?
     private var anyCamera: AVCaptureDevice? {
@@ -65,12 +64,14 @@ final class CameraViewController: UIViewController {
         setupLayout()
         setupSession()
         permissionController.requestForAllPermissions { _ in }
-//        debugTestConvertVideoToDynamicSubtitles()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        session.startRunning()
+        effectView.setToCustomBlurRadius()
+        //TODO: Fix to avoid crash between commitConfiguration and startRunning
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            self.session.startRunning()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -114,6 +115,12 @@ final class CameraViewController: UIViewController {
                     self.presentVideoPreviewViewController(with: asset, speechArray: speechArray)
                 }
             }
+            .catch { _ in
+                DispatchQueue.main.async { UIAlertController.showSpeechNotDetectedAlert() }
+            }
+            .always {
+                DispatchQueue.main.async { self.recordButton.stopLoading() }
+            }
     }
     
     @objc private func startRecording() {
@@ -140,6 +147,7 @@ final class CameraViewController: UIViewController {
         recordButtonTimer.invalidate()
         recordButtonProgress = 0.0
         recordButton.buttonState = .idle
+        recordButton.startLoading()
     }
     
     private func setupLayout() {
@@ -191,6 +199,7 @@ final class CameraViewController: UIViewController {
     }
     
     private func configureSession() {
+        previewView.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         addVideoInput(type: cameraType)
         addAudioInput()
 
@@ -232,7 +241,7 @@ final class CameraViewController: UIViewController {
     private func setupRecordButton() {
         recordButton = RecordButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
         recordButton.progressColor = .white
-        recordButton.center = CGPoint(x: bottomCameraView.center.x, y: bottomCameraView.frame.height / 2)
+        recordButton.center = CGPoint(x: bottomCameraView.center.x - (recordButton.frame.width / 4), y: bottomCameraView.frame.height / 2)
         bottomCameraView.addSubview(recordButton)
         setupRecordButtonActions()
     }
@@ -260,10 +269,13 @@ extension CameraViewController: ImagePickerDelegate {
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {}
 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
+        recordButton.startLoading()
         imagePicker.dismiss(animated: true) {
             self.assetController.AVAssetPromise(from: asset)
                 .then { [unowned self] videoAsset in
-                    self.performSpeechDetection(from: videoAsset)
+                    DispatchQueue.main.async {
+                        self.presentVideoEditorViewController(videoToEdit: videoAsset)
+                    }
             }
         }
     }
@@ -276,5 +288,26 @@ extension CameraViewController: ImagePickerDelegate {
             videoPreviewViewController.speechArray = speechArray
         }
         present(videoPreviewViewController, animated: true, completion: nil)
+    }
+    
+    private func presentVideoEditorViewController(videoToEdit video: AVAsset) {
+        guard let videoPath = (video as? AVURLAsset)?.url.path else { return }
+        let videoEditorController = UIVideoEditorController()
+        videoEditorController.videoMaximumDuration = TimeInterval(maximumMovieLength)
+        videoEditorController.videoQuality = .typeMedium
+        videoEditorController.delegate = self
+        videoEditorController.videoPath = videoPath
+        present(videoEditorController, animated: true, completion: nil)
+    }
+}
+
+extension CameraViewController: UINavigationControllerDelegate, UIVideoEditorControllerDelegate {
+    func videoEditorController(_ editor: UIVideoEditorController, didSaveEditedVideoToPath editedVideoPath: String) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) { 
+            editor.dismiss(animated: true) {
+                let asset = AVURLAsset(url: URL(fileURLWithPath: editedVideoPath))
+                self.performSpeechDetection(from: asset)
+            }
+        }
     }
 }

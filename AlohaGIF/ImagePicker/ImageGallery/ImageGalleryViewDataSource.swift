@@ -49,6 +49,7 @@ extension ImageGalleryView: UICollectionViewDataSource {
   }
     
     private func shouldCellBeMarkedAsMovieWithTooLongDuration(cell: ImageGalleryViewCell) -> Bool {
-        return cell.duration ?? 0.0 > TimeInterval(maximumMovieLength)
+        return false
+//        return cell.duration ?? 0.0 > TimeInterval(maximumMovieLength)
     }
 }

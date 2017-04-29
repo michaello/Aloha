@@ -15,18 +15,15 @@ fileprivate struct OnboardingModel {
 
 final class OnboardingViewController: UIViewController {
     
-    var cardOnboardingViewController: CardOnboardingViewController {
+    fileprivate var cardOnboardingViewController: CardOnboardingViewController {
         return childViewControllers.first as! CardOnboardingViewController
     }
+    fileprivate var initialPoint: CGPoint?
+    fileprivate var centerPoint: CGPoint?
+    fileprivate var lastOnboardingPosition: Double?
+    fileprivate var index = 0
     
-    var initialPoint: CGPoint? = nil
-    var centerPoint: CGPoint? = nil
-    var lastOnboardingPosition: Double?
-    var index = 0
-    
-    private let permissionController = PermissionController()
-    
-    @IBOutlet weak var swiftyOnboard: SwiftyOnboard! {
+    @IBOutlet fileprivate weak var swiftyOnboard: SwiftyOnboard! {
         didSet {
             swiftyOnboard.style = .light
             swiftyOnboard.delegate = self
@@ -36,7 +33,7 @@ final class OnboardingViewController: UIViewController {
     
     fileprivate struct Constants {
         static let onboardingModels: [OnboardingModel?] = [
-            OnboardingModel(text: "Create GIFs and movies easily. Just record a short video or pick one from your Photos.", image: #imageLiteral(resourceName: "OnboardingScreen1")),
+            OnboardingModel(text: "Create GIFs easily. Just record a short video or pick one from your Photos.", image: #imageLiteral(resourceName: "OnboardingScreen1")),
             OnboardingModel(text: "Worried about losing what you’re saying? 😟Don’t worry, we got this. We will add subtitles for you! 😎", image: #imageLiteral(resourceName: "OnboardingScreen2")),
             OnboardingModel(text: "Export, save it or send to your friends! 🎉", image: #imageLiteral(resourceName: "OnboardingScreen3")),
             nil
@@ -47,14 +44,10 @@ final class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         swiftyOnboard.cardOnboardingView = cardOnboardingViewController.view
         centerPoint = CGPoint(x: view.center.x, y: view.center.y - 100)
-        permissionController.requestForAllPermissions { permissionSet in
-            print("")
-        }
     }
 }
 
 extension OnboardingViewController: SwiftyOnboardDelegate {
-
     func swiftyOnboard(_ swiftyOnboard: SwiftyOnboard, currentPage index: Int) {
         self.index = index
     }
@@ -68,28 +61,24 @@ extension OnboardingViewController: SwiftyOnboardDelegate {
         animatePermissionsLabel(basedOnPosition: position)
         moveCardToCenterIfNeeded(basedOnPosition: position)
         if position.isInPermissionsRange {
-            if let alpha = swiftyOnboard.overlay?.pageControl.alpha, alpha != 0.0 {
-                swiftyOnboard.overlay?.pageControl.tintColor = .themeColorForPermissionPageControl(withPosition: position)
-            }
+            swiftyOnboard.overlay?.pageControl.tintColor = .themeColorForPermissionPageControl(withPosition: position)
         } else {
             moveCardToOnboardingPositionIfNeeded()
-            setPageOControlOpaqueTintColorIfNeeded()
+            setPageControlOpaqueTintColor()
         }
     }
     
-    private func setPageOControlOpaqueTintColorIfNeeded() {
-        if let alpha = swiftyOnboard.overlay?.pageControl.alpha, alpha != 1.0 {
-            UIView.animate(withDuration: 0.5) {
-                self.swiftyOnboard.overlay?.pageControl.tintColor = .themeColor
-            }
+    private func setPageControlOpaqueTintColor() {
+        UIView.animate(withDuration: 0.5) {
+            self.swiftyOnboard.overlay?.pageControl.tintColor = .themeColor
         }
     }
     
     private func moveCardToCenterIfNeeded(basedOnPosition position: Double) {
-        guard position.isInPermissionsRange else { return }
+        guard let lastOnboardingPosition = lastOnboardingPosition, position.isInPermissionsRange else { return }
         let diff = initialPoint!.y - centerPoint!.y
         let acc = diff * CGFloat(position - Double.permissionsPosition)
-        let yChange = lastOnboardingPosition! < position ? initialPoint!.y - acc : centerPoint!.y + (cardOnboardingViewController.cardView.frame.size.height / 2) - acc
+        let yChange = lastOnboardingPosition < position ? initialPoint!.y : centerPoint!.y + (cardOnboardingViewController.cardView.frame.size.height / 2) - acc
         cardOnboardingViewController.cardView.frame.origin = CGPoint(x: cardOnboardingViewController.cardView.frame.origin.x, y: yChange)
     }
     
@@ -108,19 +97,21 @@ extension OnboardingViewController: SwiftyOnboardDelegate {
 }
 
 extension OnboardingViewController: SwiftyOnboardDataSource {
-    
     func swiftyOnboardNumberOfPages(_ swiftyOnboard: SwiftyOnboard) -> Int {
         return Constants.onboardingModels.count
     }
     
-    func swiftyOnboardPageForIndex(_ swiftyOnboard: SwiftyOnboard, index: Int) -> SwiftyOnboardPage? {
-        guard shouldShowOnboardingOverlayViewController(basedOn: index),
-            let overlayOnboardingViewController = storyboard?.instantiateViewController(withIdentifier: String(describing: OverlayOnboardingViewController.self)) as? OverlayOnboardingViewController,
-            let overlayView = overlayOnboardingViewController.view else { return nil }
+    func swiftyOnboardPageForIndex(_ swiftyOnboard: SwiftyOnboard, index: Int) ->
+        SwiftyOnboardPage? {
+        guard shouldShowOnboardingOverlayViewController(basedOn: index) else { return nil }
+        let overlayOnboardingViewController = UIStoryboard.viewController(OverlayOnboardingViewController.self)
+        let overlayView = overlayOnboardingViewController.view
         overlayOnboardingViewController.phoneImageView.image = Constants.onboardingModels[index]?.image
         overlayOnboardingViewController.subtitleLabel.text = Constants.onboardingModels[index]?.text
-        let page = SwiftyOnboardPage(frame: overlayView.frame)
-        page.addSubview(overlayView)
+        let page = SwiftyOnboardPage(frame: overlayView?.frame ?? .zero)
+        if let overlayView = overlayView {
+            page.addSubview(overlayView)
+        }
         
         return page
     }
@@ -136,9 +127,9 @@ extension OnboardingViewController: SwiftyOnboardDataSource {
 
 fileprivate extension Double {
     
-    static let permissionsPosition = 2.0
+    fileprivate static let permissionsPosition = 2.0
     
-    var isInPermissionsRange: Bool {
+    fileprivate var isInPermissionsRange: Bool {
         return self > Double.permissionsPosition
     }
 }

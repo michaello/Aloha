@@ -8,12 +8,14 @@
 
 import UIKit
 
-final class ColorsViewController: DynamicSubtitlesModifyingViewController {
+final class ColorsViewController: DynamicSubtitlesModifyingViewController, ScrollableCollectionViewController {
     
-    @IBOutlet private weak var collectionView: UICollectionView!
-    fileprivate var selectedCellIndexPath: IndexPath?
-    fileprivate(set) var selectedColor: UIColor = .white {
+    @IBOutlet weak var collectionView: UICollectionView!
+    var selectedIndexPath: IndexPath?
+    var selectedColor: UIColor = .white {
         didSet {
+            Logger.info("User selected color: \(selectedColor.description)")
+            selectedIndexPath = IndexPath(row: colors.index(of: selectedColor) ?? 0, section: 0)
             handler?.handle(.color(selectedColor))
         }
     }
@@ -25,14 +27,15 @@ final class ColorsViewController: DynamicSubtitlesModifyingViewController {
         collectionView.delegate = self
         collectionView.indicatorStyle = .white
         (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: 60.0, height: 60.0)
+        scrollToSelectedFontIfNeeded()
     }
 }
 
 extension ColorsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard selectedCellIndexPath != indexPath else { return }
-        let previousIndexPath = selectedCellIndexPath
-        selectedCellIndexPath = indexPath
+        guard selectedIndexPath != indexPath else { return }
+        let previousIndexPath = selectedIndexPath
+        selectedIndexPath = indexPath
         collectionView.reloadItems(at: [previousIndexPath, indexPath].flatMap { $0 })
         selectedColor = colors[indexPath.row]
     }
@@ -48,7 +51,7 @@ extension ColorsViewController: UICollectionViewDataSource {
         cell.color = colors[indexPath.row]
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.cornerRadius = cell.frame.width / 2
-        if let selectedCellIndexPath = selectedCellIndexPath, indexPath == selectedCellIndexPath {
+        if let selectedIndexPath = selectedIndexPath, indexPath == selectedIndexPath {
             cell.layer.borderWidth = 2.0
         } else {
             cell.layer.borderWidth = 0.0

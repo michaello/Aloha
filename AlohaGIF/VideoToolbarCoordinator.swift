@@ -9,6 +9,9 @@
 import UIKit
 import AVFoundation
 
+let muteNotification = NSNotification.Name("muteNotification")
+let unmuteNotification = NSNotification.Name("unmuteNotification")
+
 protocol VideoToolbarCoordinatorDelegate: class {
     func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle)
     func dynamicSubtitlesVideoForRendering() -> DynamicSubtitlesVideo
@@ -79,34 +82,41 @@ extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
         guard videoOptionMenu != .complete else { return exportToVideoWithDynamicSubtitles() }
         isInVideoOptionMenu = true
         animator.animateGoingToVideoOptionMenu()
-        if let viewController = navigationController?.storyboard?.viewController(forVideoOptionMenu: videoOptionMenu) {
+        if let viewController = navigationController?.storyboard?.viewController(forVideoOptionMenu: videoOptionMenu, dynamicSubtitlesStyle: dynamicSubtitlesStyle) {
             viewController.handler = self
             navigationController?.pushViewControllerWithFadeAnimation(viewController)
         }
     }
     
-    private func presentRenderingLoadingView() {
-        ALLoadingView.manager.blurredBackground = true
-        ALLoadingView.manager.messageText = "👽👽👽 ayy lmao"
-        ALLoadingView.manager.showLoadingView(ofType: .messageWithIndicator, windowMode: .fullscreen)
+    fileprivate func presentRenderingLoadingView() {
+        ALLoadingView.show()
     }
     
     private func exportToVideoWithDynamicSubtitles() {
         guard let dynamicSubtitlesVideo = delegate?.dynamicSubtitlesVideoForRendering() else { return }
         presentRenderingLoadingView()
+        muteSoundInVideoPreview()
         let speechController = SpeechController()
         speechController.createVideoWithDynamicSubtitles(from: dynamicSubtitlesVideo, completion: { url in
+            self.createGif(from: url)
+        })
+    }
+    
+    private func createGif(from URL: URL) {
+        let frameCount = Int(Double(selectedVideo.duration.seconds) * 15.0)
+        Regift.createGIFFromSource(URL, frameCount: frameCount, delayTime: 0.08333, completion: { url in
             DispatchQueue.main.async {
-                ALLoadingView.manager.hideLoadingView()
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-                    if let foo = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController as? VideoPreviewViewController {
-                        let debug = foo.storyboard!.instantiateViewController(withIdentifier: "DebugViewController") as! DebugViewController
-                        debug.exportedVideo = AVURLAsset(url: url)
-                        foo.present(debug, animated: true, completion: nil)
-                    }
-                })
+                guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController else { return }
+                    let previewViewController = UIStoryboard.viewController(GIFPreviewViewController.self)
+                    previewViewController.gifURL = url
+                    presentedViewController.present(previewViewController, animated: true, completion: nil)
             }
         })
+    }
+    
+    //NotificationCenter is meh, but...
+    private func muteSoundInVideoPreview() {
+        NotificationCenter.default.post(name: muteNotification, object: nil)
     }
 }
 

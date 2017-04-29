@@ -190,7 +190,10 @@ public class ALLoadingView: NSObject {
     /// - parameter windowMode: Type of window mode. Optional. `fullscreen` by default.
     /// - parameter completionBlock: The closure called when loading view is presented. Optional.
     public func showLoadingView(ofType type: ALLVType, windowMode: ALLVWindowMode? = nil, completionBlock: ALLVCompletionBlock? = nil) {
-        assert(loadingViewProgress == .hidden || loadingViewProgress == .hiding, "ALLoadingView Presentation Error. Trying to push loading view while there is one already presented")
+        guard loadingViewProgress == .hidden || loadingViewProgress == .hiding else {
+            Logger.error("ALLoadingView Presentation Error. Trying to push loading view while there is one already presented")
+            return
+        }
 
         loadingViewProgress = .initializing
         loadingViewWindowMode = windowMode ?? .fullscreen
@@ -234,6 +237,7 @@ public class ALLoadingView: NSObject {
     /// - parameter delay: Time interval for delay. Optional. 0 by default
     /// - parameter completionBlock: The closure called when loading view is removed. Optional.
     public func hideLoadingView(withDelay delay: TimeInterval? = nil, completionBlock: ALLVCompletionBlock? = nil) {
+        stackView?.isHidden = false
         let delayValue : TimeInterval = delay ?? 0.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delayValue * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.loadingViewProgress = .hiding
@@ -438,9 +442,19 @@ public class ALLoadingView: NSObject {
         guard let loadingView = loadingView, let appearanceView = appearanceView else {
             return
         }
+        let container: UIView
         
-        let container = UIApplication.shared.windows[0]
+        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        let viewControllerCurrentlyVisible = rootViewController?.presentedViewController ?? rootViewController
+        
+        if let viewControllerView = viewControllerCurrentlyVisible?.view {
+            container = viewControllerView
+        } else {
+            container = UIApplication.shared.windows[0]
+        }
+        
         container.addSubview(loadingView)
+        
         
         // Set constraints for loading view (container)
         view_setWholeScreenConstraints(forView: loadingView, inContainer: container)
@@ -630,6 +644,10 @@ public class ALLoadingView: NSObject {
         if let _ = sender as? UIButton {
             cancelCallback?()
         }
+    }
+    
+    public func coverContent() {
+        stackView?.isHidden = true
     }
 }
 

@@ -11,10 +11,27 @@ import UIKit
 final class CardOnboardingViewController: UIViewController {
 
     @IBOutlet weak var cardView: CardView!
-    @IBOutlet weak var permissionsLabel: UILabel!
-    @IBOutlet weak var allowPermissionsButton: UIButton!
+    @IBOutlet weak var permissionsLabel: UILabel! {
+        didSet { permissionsLabel.text = Constants.onboardingText }
+    }
+    @IBOutlet private weak var allowPermissionsButton: UIButton!
+    private let permissionController = PermissionController()
+    
+    private struct Constants {
+        static let onboardingText = "We need to ask you for permissions:\n\n📷 Camera - for recording your short videos.\n\n🎞 Video Library - for choosing short videos from your iPhone.\n\n🎙 Microphone - for recording audio with your videos.\n\n🙊 Speech Recognition - for embedding dynamic subtitles to your GIF!"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cardView.setupLayout()
+    }
     
     @IBAction func allowPermissionsButtonAction(sender: UIButton) {
-        print("Action")
+        UserDefaults.standard.userPassedOnboarding()
+        permissionController.requestForAllPermissions { permissionSet in
+            DispatchQueue.main.async { [unowned self] in
+                UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.viewController(CameraViewController.self)
+            }
+        }
     }
 }

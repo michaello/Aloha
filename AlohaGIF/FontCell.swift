@@ -9,6 +9,34 @@
 import UIKit
 
 final class FontCell: UICollectionViewCell {
+
+    var font: UIFont {
+        get { return fontLabel.font }
+        set { fontLabel.font = newValue }
+    }
+    var attributedText: NSAttributedString {
+        get { return fontLabel.attributedText ?? NSAttributedString() }
+        set { fontLabel.attributedText = newValue }
+    }
+    @IBOutlet private weak var fontLabel: UILabel!
+    @IBOutlet private weak var highlightView: UIView! {
+        didSet {
+            highlightView.backgroundColor = .themeColor
+        }
+    }
     
-    @IBOutlet weak var fontLabel: UILabel!
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        highlightView.alpha = 0.0
+    }
+    
+    func mark(isSelected: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.highlightView.alpha = isSelected ? 1.0 : 0.0
+        }
+    }
+    
+    private func setHighlightView() {
+        highlightView.backgroundColor = .themeColor
+    }
 }

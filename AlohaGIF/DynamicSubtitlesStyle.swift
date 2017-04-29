@@ -16,8 +16,8 @@ struct DynamicSubtitlesStyle {
     
     func font(forRenderingVideo logicValue: Bool) -> UIFont {
         var multiplier = effect == .oneAfterAnother ? 6.0 : 12.0
-        multiplier = logicValue ? multiplier : (multiplier / Double(aScale))
-        let fontSize: CGFloat = 10.0 * CGFloat(multiplier)
+        multiplier = logicValue ? (multiplier * 1.5) : (multiplier / Double(aScale))
+        let fontSize: CGFloat = 4.0 * CGFloat(multiplier)
         
         return font.withSize(fontSize)
     }

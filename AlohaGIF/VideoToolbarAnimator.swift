@@ -12,6 +12,7 @@ final class VideoToolbarAnimator {
     
     private struct Constants {
         static let duration = 0.5
+        static let oneEightyRotationTime = 0.3
         static let ninetyDegreeRotationTime = 0.25
         static let magicMultiplierThatMakesHiddenWithVisibleArrow: CGFloat = 0.74
     }
@@ -28,14 +29,14 @@ final class VideoToolbarAnimator {
     private var collapsedOffset: CGFloat = 0.0
     
     func animateHidden() {
-        UIView.animate(withDuration: Constants.duration) {
+        UIView.animate(withDuration: Constants.oneEightyRotationTime ) {
             self.arrowButton?.transform = CGAffineTransform(rotationAngle: CGFloat(0.999) * CGFloat(Double.pi))
         }
         move(toUp: false)
     }
     
     func animateVisible() {
-        UIView.animate(withDuration: Constants.duration) {
+        UIView.animate(withDuration: Constants.oneEightyRotationTime ) {
             self.arrowButton?.transform = .identity
         }
         move(toUp: true)

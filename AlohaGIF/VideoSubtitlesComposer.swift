@@ -54,15 +54,13 @@ struct VideoSubtitlesComposer {
             let mainInstruction = AVMutableVideoCompositionInstruction()
             mainInstruction.timeRange = assetDuration
             let videoLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
-            var isVideoAssetPortrait = false
             videoLayerInstruction.setTransform(video.preferredTransform, at: kCMTimeZero)
             videoLayerInstruction.setOpacity(0.0, at: asset.duration)
             mainInstruction.layerInstructions = [videoLayerInstruction]
             let mainCompositionInst = AVMutableVideoComposition()
             
             var naturalSize = CGSize.zero
-            isVideoAssetPortrait = self.videoAssetOrientation(assetTrack: video).isPortrait
-            if isVideoAssetPortrait {
+            if video.videoAssetOrientation.isPortrait {
                 naturalSize = CGSize(width: video.naturalSize.height, height: video.naturalSize.width)
             } else {
                 naturalSize = video.naturalSize
@@ -93,27 +91,5 @@ struct VideoSubtitlesComposer {
         exportSession?.exportAsynchronously(completionHandler: {
             completion(videoURL)
         })
-    }
-    
-    private func videoAssetOrientation(assetTrack: AVAssetTrack) -> (orientation: UIImageOrientation, isPortrait: Bool) {
-        let videoTransform = assetTrack.preferredTransform
-        var videoAssetOrientation = UIImageOrientation.up
-        var isVideoAssetPortrait = false
-        if (videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0) {
-            videoAssetOrientation = .right
-            isVideoAssetPortrait = true
-        }
-        if (videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0) {
-            videoAssetOrientation = .left
-            isVideoAssetPortrait = true
-        }
-        if (videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0) {
-            videoAssetOrientation =  .up
-        }
-        if (videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {
-            videoAssetOrientation = .down
-        }
-        
-        return (videoAssetOrientation, isVideoAssetPortrait)
     }
 }

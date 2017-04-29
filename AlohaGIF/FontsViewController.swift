@@ -8,9 +8,26 @@
 
 import UIKit
 
-class FontsViewController: DynamicSubtitlesModifyingViewController {
+protocol ScrollableCollectionViewController: class {
+    var selectedIndexPath: IndexPath? { get set }
+    weak var collectionView: UICollectionView! { get }
+    func scrollToSelectedFontIfNeeded()
+}
+
+extension ScrollableCollectionViewController {
+    //Hack with GCD to make it work
+    func scrollToSelectedFontIfNeeded() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.001) {
+            if let selectedIndexPath = self.selectedIndexPath {
+                self.collectionView.scrollToItem(at: selectedIndexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+            }
+        }
+    }
+}
+
+final class FontsViewController: DynamicSubtitlesModifyingViewController, ScrollableCollectionViewController {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let fontSize: CGFloat = 22.0
         static let fontsNames = [
             "Copperplate-Bold",
@@ -26,13 +43,17 @@ class FontsViewController: DynamicSubtitlesModifyingViewController {
             "Futura-CondensedExtraBold",
             "Futura-Bold"
         ]
-        static let fonts = Constants.fontsNames.flatMap { UIFont.init(name: $0, size: Constants.fontSize) } + [UIFont.boldSystemFont(ofSize: Constants.fontSize)]
+        static let fonts = [UIFont.boldSystemFont(ofSize: Constants.fontSize)] + Constants.fontsNames.flatMap { UIFont(name: $0, size: Constants.fontSize) }
+        static let placeholderText = "Lorem Ipsum"
     }
 
     @IBOutlet weak var collectionView: UICollectionView!
     fileprivate let fonts = Constants.fonts
-    fileprivate(set) var selectedFont = UIFont.boldSystemFont(ofSize: 16.0) {
+    var selectedIndexPath: IndexPath?
+    var selectedFont = UIFont.boldSystemFont(ofSize: 16.0) {
         didSet {
+            Logger.info("User selected font: \(selectedFont.description)")
+            selectedIndexPath = IndexPath(row: fonts.index(of: selectedFont) ?? 0, section: 0)
             handler?.handle(.font(selectedFont))
         }
     }
@@ -43,13 +64,18 @@ class FontsViewController: DynamicSubtitlesModifyingViewController {
         collectionView.delegate = self
         collectionView.indicatorStyle = .white
         (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSize(width: 100, height: 100)
+        scrollToSelectedFontIfNeeded()
     }
 }
 
 extension FontsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! FontCell
-        selectedFont = cell.fontLabel.font
+        guard selectedIndexPath != indexPath else { return }
+        selectedIndexPath = indexPath
+        selectedFont = fonts[indexPath.row]
+        //Why not reloadItems(at:) like in Colors? Looks like estimated size for cell messes this method up.
+
+        collectionView.reloadData()
     }
 }
 
@@ -60,8 +86,11 @@ extension FontsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: FontCell.self), for: indexPath) as! FontCell
-        cell.fontLabel.attributedText = NSAttributedString.init(string: "Lorem ipsum", attributes: DynamicSubtitlesStyle.default.textAttributes)
-        cell.fontLabel.font = fonts[indexPath.row]
+        cell.attributedText = NSAttributedString(string: Constants.placeholderText, attributes: DynamicSubtitlesStyle.default.textAttributes)
+        cell.font = fonts[indexPath.row]
+        if let selectedIndexPath = selectedIndexPath, indexPath == selectedIndexPath {
+            cell.mark(isSelected: true)
+        }
         
         return cell
     }
