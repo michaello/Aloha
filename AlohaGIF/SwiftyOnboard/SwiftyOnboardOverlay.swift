@@ -77,21 +77,6 @@ open class SwiftyOnboardOverlay: UIView {
         pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -170).isActive = true
         pageControl.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
         pageControl.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-        
-        return
-        self.addSubview(continueButton)
-        continueButton.translatesAutoresizingMaskIntoConstraints = false
-        continueButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        continueButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -20).isActive = true
-        continueButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
-        continueButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-        
-        self.addSubview(skipButton)
-        skipButton.translatesAutoresizingMaskIntoConstraints = false
-        skipButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        skipButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
-        skipButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
-        skipButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
     }
     
 }

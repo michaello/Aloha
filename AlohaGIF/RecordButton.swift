@@ -181,9 +181,7 @@ public enum RecordButtonState: Int {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
         gradientLayer.locations = [0.0, 1.0]
-        let topColor = progressColor
-        let bottomColor = progressColor
-        gradientLayer.colors = [topColor?.cgColor, bottomColor?.cgColor]
+        gradientLayer.colors = [progressColor, progressColor]
         return gradientLayer
     }
     

@@ -29,7 +29,7 @@ final class CardOnboardingViewController: UIViewController {
     @IBAction func allowPermissionsButtonAction(sender: UIButton) {
         UserDefaults.standard.userPassedOnboarding()
         permissionController.requestForAllPermissions { permissionSet in
-            DispatchQueue.main.async { [unowned self] in
+            DispatchQueue.main.async {
                 UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.viewController(CameraViewController.self)
             }
         }

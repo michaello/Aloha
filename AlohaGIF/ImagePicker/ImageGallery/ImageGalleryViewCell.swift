@@ -17,12 +17,7 @@ class ImageGalleryViewCell: UICollectionViewCell {
             }
         }
     }
-    
-    var shouldBeMarkedAsMovieWithTooLongDuration: Bool {
-        return false
-//        return duration ?? 0.0 > TimeInterval(maximumMovieLength)
-    }
-    
+        
     override init(frame: CGRect) {
         let videoBarFrame = CGRect(x: 0, y: frame.height - self.videoInfoBarHeight,
                                    width: frame.width, height: self.videoInfoBarHeight)

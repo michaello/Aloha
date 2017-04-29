@@ -39,17 +39,9 @@ extension ImageGalleryView: UICollectionViewDataSource {
           cell.selectedImageView.image = nil
         }
         cell.duration = asset.duration
-        if self.shouldCellBeMarkedAsMovieWithTooLongDuration(cell: cell) {
-            cell.selectedImageView.image = AssetManager.getImage("infoIcon")
-        }
       }
     }
 
     return cell
-  }
-    
-    private func shouldCellBeMarkedAsMovieWithTooLongDuration(cell: ImageGalleryViewCell) -> Bool {
-        return false
-//        return cell.duration ?? 0.0 > TimeInterval(maximumMovieLength)
-    }
+  }    
 }

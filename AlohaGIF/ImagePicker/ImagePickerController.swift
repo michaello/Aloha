@@ -305,13 +305,6 @@ extension ImagePickerController: BottomContainerViewDelegate {
   }
 
   func doneButtonDidPress() {
-    var images: [UIImage]
-    if let preferredImageSize = preferredImageSize {
-      images = AssetManager.resolveAssets(stack.assets, size: preferredImageSize)
-    } else {
-      images = AssetManager.resolveAssets(stack.assets)
-    }
-
     if let selectedAsset = AssetManager.selectedAsset {
       delegate?.doneButtonDidPress(self, asset: selectedAsset)
     }

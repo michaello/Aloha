@@ -216,13 +216,6 @@ extension ImageGalleryView: UICollectionViewDelegate {
   public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = collectionView.cellForItem(at: indexPath)
       as? ImageGalleryViewCell else { return }
-    guard !cell.shouldBeMarkedAsMovieWithTooLongDuration else {
-        delegate?.tooLongMovieSelected()
-        return
-    }
-    if true {
-//    if configuration.allowMultiplePhotoSelection == false {
-      // Clear selected photos array
       for asset in self.selectedStack.assets {
         self.selectedStack.dropAsset(asset)
       }
@@ -237,7 +230,6 @@ extension ImageGalleryView: UICollectionViewDelegate {
           })
         }
       }
-    }
 
     let asset = assets[(indexPath as NSIndexPath).row]
     AssetManager.selectedAsset = asset
