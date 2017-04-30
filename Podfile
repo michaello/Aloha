@@ -8,4 +8,5 @@ target 'AlohaGIF' do
 	pod 'Permission/Microphone'
 	pod 'SwiftyBeaver'
 	pod 'FLAnimatedImage'
+	pod 'Popover', :git => 'https://github.com/michaello/Popover'
 end

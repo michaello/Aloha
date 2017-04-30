@@ -80,7 +80,7 @@ public enum RecordButtonState: Int {
     }
     
     
-    fileprivate func drawButton() {
+    open func drawButton() {
         
         self.backgroundColor = UIColor.clear
         let layer = self.layer
@@ -116,6 +116,7 @@ public enum RecordButtonState: Int {
         progressLayer.lineWidth = 4.0
         progressLayer.strokeStart = 0.0
         progressLayer.strokeEnd = 0.0
+        progressColor = .white
         gradientMaskLayer.mask = progressLayer
         layer.insertSublayer(gradientMaskLayer, at: 0)
         addSpinner()
@@ -221,6 +222,18 @@ public enum RecordButtonState: Int {
     */
     open func setProgress(_ newProgress: CGFloat) {
         progressLayer.strokeEnd = newProgress
+    }
+    
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        translatesAutoresizingMaskIntoConstraints = false
+        guard let superview = superview, constraints.isEmpty else { return }
+        centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 70.0).isActive = true
+        widthAnchor.constraint(equalToConstant: 70.0).isActive = true
+        superview.layoutIfNeeded()
+        drawButton()
     }
     
     private func addSpinner() {

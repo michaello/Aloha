@@ -26,5 +26,5 @@ final class OverlayView: UIView {
         }
         
         return super.hitTest(point, with: event)
-    }
+    }    
 }

@@ -23,6 +23,7 @@ class GIFPreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupConstraints()
         guard let gifURL = gifURL, let gifData = try? Data(contentsOf: gifURL) else { return }
         gifImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifData)
         ALLoadingView.manager.coverContent()
@@ -48,6 +49,17 @@ class GIFPreviewViewController: UIViewController {
         if let gif = gifData {
             Logger.info("User tapped on Messenger share.")
             FBSDKMessengerSharer.shareAnimatedGIF(gif, with: FBSDKMessengerShareOptions())
+        }
+    }
+    
+    private func setupConstraints() {
+        let isSmallerThan47InchDisplay = UIScreen.main.nativeBounds.height < 1334.0
+        if isSmallerThan47InchDisplay {
+            let newGifImageViewHeightConstraint = NSLayoutConstraint(item: gifImageViewHeightConstraint.firstItem, attribute: gifImageViewHeightConstraint.firstAttribute, relatedBy: gifImageViewHeightConstraint.relation, toItem: gifImageViewHeightConstraint.secondItem, attribute: gifImageViewHeightConstraint.secondAttribute, multiplier: 0.55, constant: 0.0)
+            gifImageViewHeightConstraint.isActive = false
+            gifImageViewHeightConstraint = newGifImageViewHeightConstraint
+            gifImageViewHeightConstraint.isActive = true
+            modalContainerView.layoutIfNeeded()
         }
     }
     

@@ -85,10 +85,9 @@ open class BottomContainerView: UIView {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-//    backgroundColor = configuration.backgroundColor
-//    let effectView = CustomBlurRadiusView()
-//    effectView.frame = bounds
-//    insertSubview(effectView, at: 0)
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    effectView.frame = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 200.0)
+    insertSubview(effectView, at: 0)
 
     stackView.accessibilityLabel = "Image stack"
     stackView.isHidden = true

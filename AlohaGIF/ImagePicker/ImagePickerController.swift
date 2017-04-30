@@ -32,7 +32,6 @@ open class ImagePickerController: UIViewController {
 
   open lazy var bottomContainer: BottomContainerView = { [unowned self] in
     let view = BottomContainerView(configuration: self.configuration)
-    view.backgroundColor = self.configuration.bottomContainerColor
     view.delegate = self
 
     return view

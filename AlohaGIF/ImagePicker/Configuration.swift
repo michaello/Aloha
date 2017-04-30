@@ -15,7 +15,7 @@ public struct Configuration {
   // MARK: Fonts
 
   public var numberLabelFont = UIFont.systemFont(ofSize: 19, weight: UIFontWeightBold)
-  public var doneButton = UIFont.systemFont(ofSize: 19, weight: UIFontWeightMedium)
+  public var doneButton = UIFont.systemFont(ofSize: 35, weight: UIFontWeightMedium)
   public var flashButton = UIFont.systemFont(ofSize: 12, weight: UIFontWeightMedium)
   public var noImagesFont = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)
   public var noCameraFont = UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium)

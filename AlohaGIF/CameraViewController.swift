@@ -23,14 +23,19 @@ final class CameraViewController: UIViewController {
     @IBOutlet private weak var previewView: PreviewView!
     @IBOutlet private weak var bottomCameraView: UIView!
     @IBOutlet private weak var videosButton: UIButton!
-    fileprivate var recordButton: RecordButton!
+    @IBOutlet fileprivate weak var recordButton: RecordButton!
+    @IBOutlet fileprivate var popoverView: PopoverView!
+    
     private var effectView: CustomBlurRadiusView!
     
+    var isRecordingLongEnoughToProcess: Bool {
+        return recording.end() > Constants.recordButtonMinimumRecordingTime
+    }
     private var recordButtonTimer: Timer!
     private var recordButtonProgress: CGFloat = 0.0
     private var isRecording = false
-    private var recording = Recording()
     private var cameraType = CameraType.front
+    private var recording = Recording()
     
     fileprivate let speechController = SpeechController()
     fileprivate let assetController = AssetController()
@@ -38,6 +43,7 @@ final class CameraViewController: UIViewController {
 
     
     private struct Constants {
+        static let recordButtonMinimumRecordingTime = 1.0
         static let recordButtonIntervalIncrementTime = 0.1
         static let allPossibleCameras: [(cameraType: AVCaptureDeviceType, position: AVCaptureDevicePosition)] = [
 (AVCaptureDeviceType.builtInDualCamera, AVCaptureDevicePosition.back),
@@ -83,7 +89,7 @@ final class CameraViewController: UIViewController {
         recordButtonProgress = recordButtonProgress + (CGFloat(Constants.recordButtonIntervalIncrementTime) / maximumMovieLength)
         recordButton.setProgress(recordButtonProgress)
         if recordButtonProgress >= 1.0 {
-            stopRecording()
+            stopRecordingAction()
         }
     }
     
@@ -123,7 +129,7 @@ final class CameraViewController: UIViewController {
             }
     }
     
-    @objc private func startRecording() {
+    @IBAction func startRecordingAction() {
         recording.start()
         isRecording = true
         Logger.verbose("Started recording. \(Date())")
@@ -134,7 +140,7 @@ final class CameraViewController: UIViewController {
         movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
     }
     
-    @objc private func stopRecording() {
+    @IBAction func stopRecordingAction() {
         guard isRecording else { return }
         isRecording = false
         Logger.verbose("Ended recording. Recording time: \(recording.end()) seconds")
@@ -144,14 +150,21 @@ final class CameraViewController: UIViewController {
     }
     
     private func recordButtonStopRecording() {
+        reactRecordButtonOnEndedRecording()
         recordButtonTimer.invalidate()
         recordButtonProgress = 0.0
         recordButton.buttonState = .idle
-        recordButton.startLoading()
+    }
+    
+    private func reactRecordButtonOnEndedRecording() {
+        if isRecordingLongEnoughToProcess {
+            recordButton.startLoading()
+        } else {
+            popoverView.show(from: recordButton)
+        }
     }
     
     private func setupLayout() {
-        setupRecordButton()
         setupVideosButton()
         effectView = CustomBlurRadiusView()
         effectView.frame = bottomCameraView.bounds
@@ -237,23 +250,11 @@ final class CameraViewController: UIViewController {
     private func setupVideosButton() {
         videosButton.setTitleColor(.themeColor, for: [])
     }
-    
-    private func setupRecordButton() {
-        recordButton = RecordButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
-        recordButton.progressColor = .white
-        recordButton.center = CGPoint(x: bottomCameraView.center.x - (recordButton.frame.width / 4), y: bottomCameraView.frame.height / 2)
-        bottomCameraView.addSubview(recordButton)
-        setupRecordButtonActions()
-    }
-    
-    private func setupRecordButtonActions() {
-        recordButton.addTarget(self, action: #selector(CameraViewController.startRecording), for: .touchDown)
-        recordButton.addTarget(self, action: #selector(CameraViewController.stopRecording), for: UIControlEvents.touchUpInside)
-    }
 }
 
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+        guard isRecordingLongEnoughToProcess else { return }
         let asset = AVURLAsset(url: outputFileURL)
         performSpeechDetection(from: asset)
     }
@@ -269,7 +270,6 @@ extension CameraViewController: ImagePickerDelegate {
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {}
 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
-        recordButton.startLoading()
         imagePicker.dismiss(animated: true) {
             self.assetController.AVAssetPromise(from: asset)
                 .then { [unowned self] videoAsset in
@@ -292,22 +292,24 @@ extension CameraViewController: ImagePickerDelegate {
     
     private func presentVideoEditorViewController(videoToEdit video: AVAsset) {
         guard let videoPath = (video as? AVURLAsset)?.url.path else { return }
+        recordButton.startLoading()
         let videoEditorController = UIVideoEditorController()
         videoEditorController.videoMaximumDuration = TimeInterval(maximumMovieLength)
         videoEditorController.videoQuality = .typeMedium
         videoEditorController.delegate = self
         videoEditorController.videoPath = videoPath
-        present(videoEditorController, animated: true, completion: nil)
+        present(videoEditorController, animated: true) { [unowned self] in
+            self.recordButton.stopLoading()
+        }
     }
 }
 
 extension CameraViewController: UINavigationControllerDelegate, UIVideoEditorControllerDelegate {
     func videoEditorController(_ editor: UIVideoEditorController, didSaveEditedVideoToPath editedVideoPath: String) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) { 
-            editor.dismiss(animated: true) {
-                let asset = AVURLAsset(url: URL(fileURLWithPath: editedVideoPath))
-                self.performSpeechDetection(from: asset)
-            }
+        recordButton.startLoading()
+        editor.dismiss(animated: true) {
+            let asset = AVURLAsset(url: URL(fileURLWithPath: editedVideoPath))
+            self.performSpeechDetection(from: asset)
         }
     }
 }

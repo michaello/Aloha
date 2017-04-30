@@ -86,25 +86,24 @@ final class DynamicSubtitlesComposer {
             offsetY = 0.0
         }
         
+        //TODO: Refactor it, big pile of mess
         var designatedY: CGFloat
-        var shouldMoveSubtitlesToNextLine = false
+        var designatedX: CGFloat = 0.0
         let wholeTextContent = speechArray.reduce("") { $0 + " " + $1.content }
         let estimatedNumberOfLines = round(textRect(for: wholeTextContent).width / size.width) + 1.0
         let multiplierForNewlineWithSomeSpace: CGFloat = 1.2
         
         if isRenderingVideo {
-            designatedY = (textRect(for: wholeTextContent).height * (estimatedNumberOfLines - 1.0) * multiplierForNewlineWithSomeSpace) - -offsetY
+            designatedY = (textRect(for: wholeTextContent).height * (estimatedNumberOfLines - 1.0) * multiplierForNewlineWithSomeSpace) + offsetY
         } else {
             designatedY = size.height - (textRect(for: wholeTextContent).height * estimatedNumberOfLines * multiplierForNewlineWithSomeSpace) + offsetY
         }
-        var designatedX: CGFloat = 0.0
         let layers = textArray.enumerated().map { index, text -> CATextLayer in
             let textLayer = self.textLayer(text: text)
             let currentSize = textRect(for: text)
-            var currentOrigin = index == 0 ? CGPoint(x: 0.0 - offsetX, y: size.height) : CGPoint(x: textLayersSizes[index - 1], y: size.height / 2)
+            var currentOrigin = index == 0 ? CGPoint(x: 0.0 - offsetX, y: size.height / 2) : CGPoint(x: textLayersSizes[index - 1], y: size.height / 2)
             //New line if needed
             if currentOrigin.x + currentSize.width > size.width {
-                shouldMoveSubtitlesToNextLine = true
                 if isRenderingVideo {
                     designatedY = designatedY + (-currentSize.height * multiplierForNewlineWithSomeSpace)
                 } else {
@@ -118,15 +117,11 @@ final class DynamicSubtitlesComposer {
                 textLayer.frame = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
                 textLayer.frame = textLayer.frame.offsetBy(dx: -offsetX, dy: offsetY)
             } else {
-                if shouldMoveSubtitlesToNextLine {
-                    textLayer.frame = CGRect(origin: currentOrigin, size: currentSize)
-                } else {
-                    let foo = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
-                    let y = foo.origin.y
-                    let ay = y - foo.size.height / 2
-                    designatedY = ay
-                    textLayer.frame = CGRect(origin: CGPoint(x: currentOrigin.x, y: ay), size: currentSize)
-                }
+                let centerFrame = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
+                let centerHeight = centerFrame.size.height
+                var offset = -centerFrame.origin.y + centerHeight
+                offset = isRenderingVideo ? -offset : offset
+                textLayer.frame = CGRect(origin: currentOrigin, size: currentSize).offsetBy(dx: 0.0, dy: offset)
             }
             textLayersArray.append(textLayer)
             let space = currentSize.width / CGFloat((text as String).characters.count)

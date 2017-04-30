@@ -90,7 +90,6 @@ final class VideoPreviewViewController: UIViewController {
     
     func addDynamicSubtitlesViewAndApplySubtitles(frame: CGRect) {
         dynamicSubtitlesView = OverlayView(frame: view.frame)
-        dynamicSubtitlesView.frame = dynamicSubtitlesView.frame
         dynamicSubtitlesView.videoToolbarView = movieToolbarContainerView
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove))
         dynamicSubtitlesView.addGestureRecognizer(panRecognizer)
@@ -209,11 +208,18 @@ final class VideoPreviewViewController: UIViewController {
 }
 
 extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
-    func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle) {
+    func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle, modification: DynamicSubtitlesModification) {
+        if case .effect = modification {
+            dynamicSubtitlesView.frame = view.frame
+        }
         presentDynamicSubtitlesOverlay(dynamicSubtitlesStyle)
     }
     
     func dynamicSubtitlesVideoForRendering() -> DynamicSubtitlesVideo {
         return dynamicSubtitlesVideo
+    }
+    
+    func dynamicSubtitlesDidModifyEffect() {
+    
     }
 }

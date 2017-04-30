@@ -32,5 +32,6 @@ struct SpeechController {
             .then { url in
                 Promise<URL>.retry(count: 3, delay: 0.5) { self.speechRecognizer.detectSpeechPromise(from: url) }
             }
+            .addTimeout(20.0)
     }
 }

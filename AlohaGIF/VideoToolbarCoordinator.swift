@@ -13,7 +13,7 @@ let muteNotification = NSNotification.Name("muteNotification")
 let unmuteNotification = NSNotification.Name("unmuteNotification")
 
 protocol VideoToolbarCoordinatorDelegate: class {
-    func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle)
+    func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle, modification: DynamicSubtitlesModification)
     func dynamicSubtitlesVideoForRendering() -> DynamicSubtitlesVideo
 }
 
@@ -27,11 +27,7 @@ final class VideoToolbarCoordinator {
             navigationController = videoToolbarViewController?.navigationController
         }
     }
-    var dynamicSubtitlesStyle = DynamicSubtitlesStyle.default {
-        didSet {
-            delegate?.dynamicSubtitlesStyleDidChange(dynamicSubtitlesStyle)
-        }
-    }
+    var dynamicSubtitlesStyle = DynamicSubtitlesStyle.default
     fileprivate let selectedVideo: AVAsset
     fileprivate var isInVideoOptionMenu = false
     fileprivate var animator = VideoToolbarAnimator()
@@ -130,5 +126,6 @@ extension VideoToolbarCoordinator: ModifiedDynamicSubtitlesHandler {
         case .font(let font):
             dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: font, color: dynamicSubtitlesStyle.color)
         }
+        delegate?.dynamicSubtitlesStyleDidChange(dynamicSubtitlesStyle, modification: modification)
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="srQ-Fn-L0i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LRg-AH-2wt">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -158,12 +158,25 @@
                                                     <action selector="changeCameraAction:" destination="LRg-AH-2wt" eventType="touchUpInside" id="Ir6-Kz-CVE"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvn-Ss-b0P" customClass="RecordButton" customModule="AlohaGIF" customModuleProvider="target">
+                                                <rect key="frame" x="172" y="10" width="70" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="FxC-bQ-R5s"/>
+                                                    <constraint firstAttribute="height" constant="70" id="fQH-gm-WME"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="startRecordingAction" destination="LRg-AH-2wt" eventType="touchDown" id="fAv-z4-uk7"/>
+                                                    <action selector="stopRecordingAction" destination="LRg-AH-2wt" eventType="touchUpInside" id="tjJ-eR-0Wa"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="RMf-aw-GJe"/>
                                             <constraint firstItem="X0L-t8-2a0" firstAttribute="leading" secondItem="W3C-ab-4wh" secondAttribute="leading" constant="20" id="SXn-uR-jXO"/>
+                                            <constraint firstItem="Uvn-Ss-b0P" firstAttribute="centerX" secondItem="W3C-ab-4wh" secondAttribute="centerX" id="U5P-r9-nJc"/>
                                             <constraint firstItem="X0L-t8-2a0" firstAttribute="centerY" secondItem="W3C-ab-4wh" secondAttribute="centerY" id="cTL-xc-3ea"/>
+                                            <constraint firstItem="Uvn-Ss-b0P" firstAttribute="centerY" secondItem="W3C-ab-4wh" secondAttribute="centerY" id="egH-OL-A4U"/>
                                             <constraint firstAttribute="trailing" secondItem="8e8-Em-qKP" secondAttribute="trailing" constant="20" id="xAb-vV-I5p"/>
                                             <constraint firstItem="8e8-Em-qKP" firstAttribute="centerY" secondItem="W3C-ab-4wh" secondAttribute="centerY" id="zQY-fy-Nrd"/>
                                         </constraints>
@@ -187,11 +200,44 @@
                     </view>
                     <connections>
                         <outlet property="bottomCameraView" destination="W3C-ab-4wh" id="9Bd-XN-rMS"/>
+                        <outlet property="popoverView" destination="dTQ-Ew-uTz" id="Ynf-9g-9Ri"/>
                         <outlet property="previewView" destination="pHt-S4-vVB" id="tfO-rk-A49"/>
+                        <outlet property="recordButton" destination="Uvn-Ss-b0P" id="gP8-Cn-CeR"/>
                         <outlet property="videosButton" destination="X0L-t8-2a0" id="egy-iU-dNn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1z-Rm-kfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="dTQ-Ew-uTz" customClass="PopoverView" customModule="AlohaGIF" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="180" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWF-Bd-hJq">
+                            <rect key="frame" x="8" y="16" width="164" height="21"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold the record button a little bit longer and say something! 🐻" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXC-r8-Jth">
+                            <rect key="frame" x="16" y="53" width="148" height="51"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="JWF-Bd-hJq" firstAttribute="top" secondItem="dTQ-Ew-uTz" secondAttribute="top" constant="16" id="MFI-LE-4O9"/>
+                        <constraint firstItem="wXC-r8-Jth" firstAttribute="leading" secondItem="dTQ-Ew-uTz" secondAttribute="leading" constant="16" id="ehD-me-omQ"/>
+                        <constraint firstAttribute="trailing" secondItem="JWF-Bd-hJq" secondAttribute="trailing" constant="8" id="hYV-sQ-xOs"/>
+                        <constraint firstItem="JWF-Bd-hJq" firstAttribute="leading" secondItem="dTQ-Ew-uTz" secondAttribute="leading" constant="8" id="lnd-Sh-Yqm"/>
+                        <constraint firstItem="wXC-r8-Jth" firstAttribute="top" secondItem="JWF-Bd-hJq" secondAttribute="bottom" constant="16" id="w8C-Sl-STr"/>
+                        <constraint firstAttribute="trailing" secondItem="wXC-r8-Jth" secondAttribute="trailing" constant="16" id="wqZ-FW-qcb"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="subtitleLabel" destination="wXC-r8-Jth" id="A8Q-xg-7ua"/>
+                        <outlet property="titleLabel" destination="JWF-Bd-hJq" id="1I0-Um-XzV"/>
+                    </connections>
+                </view>
             </objects>
             <point key="canvasLocation" x="869.60000000000002" y="32.833583208395808"/>
         </scene>
@@ -291,13 +337,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19q-kv-TLy">
-                                <rect key="frame" x="31" y="74" width="352" height="588"/>
+                                <rect key="frame" x="31" y="70" width="352" height="596"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PreviewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="oFe-c4-aoq">
                                         <rect key="frame" x="0.0" y="0.0" width="352" height="56"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G6V-p0-WZV" customClass="FLAnimatedImageView">
-                                        <rect key="frame" x="0.0" y="56" width="352" height="353"/>
+                                        <rect key="frame" x="0.0" y="56" width="352" height="357.33333333333331"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyY-br-AmE">
                                         <rect key="frame" x="8" y="15" width="34" height="34"/>
@@ -311,7 +358,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-UZ-L4r">
-                                        <rect key="frame" x="131" y="9" width="91" height="39.666666666666671"/>
+                                        <rect key="frame" x="131" y="8.3333333333333286" width="91" height="39.666666666666671"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Aloha">
                                                 <attributes>
@@ -348,17 +395,17 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hfl-NM-Cdz">
-                                <rect key="frame" x="32" y="503" width="350" height="122"/>
+                                <rect key="frame" x="32" y="503.33333333333337" width="350" height="122.00000000000011"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZrE-ax-xlQ">
-                                        <rect key="frame" x="62" y="0.0" width="226" height="53"/>
+                                        <rect key="frame" x="62" y="0.0" width="226" height="53.000000000000057"/>
                                         <state key="normal" image="ShareButton"/>
                                         <connections>
                                             <action selector="shareButtonAction:" destination="orx-3D-Mad" eventType="touchUpInside" id="ASR-88-7js"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuA-7j-K1I">
-                                        <rect key="frame" x="62" y="69" width="226" height="53"/>
+                                        <rect key="frame" x="62" y="69.000000000000057" width="226" height="53"/>
                                         <state key="normal" image="MessengerButton"/>
                                         <connections>
                                             <action selector="messengerButtonAction:" destination="orx-3D-Mad" eventType="touchUpInside" id="35c-TZ-gCx"/>
@@ -375,7 +422,7 @@
                             <constraint firstItem="19q-kv-TLy" firstAttribute="centerY" secondItem="8xd-V2-JAj" secondAttribute="centerY" id="QTm-2x-hi7"/>
                             <constraint firstAttribute="trailing" secondItem="hfl-NM-Cdz" secondAttribute="trailing" constant="32" id="XiN-Pu-W1H"/>
                             <constraint firstItem="19q-kv-TLy" firstAttribute="width" secondItem="8xd-V2-JAj" secondAttribute="width" multiplier="0.85" id="evS-xQ-Sqf"/>
-                            <constraint firstItem="19q-kv-TLy" firstAttribute="height" secondItem="8xd-V2-JAj" secondAttribute="height" multiplier="0.8" id="qdt-II-My3"/>
+                            <constraint firstItem="19q-kv-TLy" firstAttribute="height" secondItem="8xd-V2-JAj" secondAttribute="height" multiplier="0.81" id="qdt-II-My3"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -488,10 +535,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1c-Z2-YLm">
-                                        <rect key="frame" x="21" y="329" width="310" height="73"/>
+                                        <rect key="frame" x="18" y="327.66666666666663" width="316" height="74.333333333333371"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="M1c-Z2-YLm" secondAttribute="height" multiplier="604:142" id="BTg-bI-AvG"/>
-                                            <constraint firstAttribute="height" constant="73" id="aF8-Dt-dtb"/>
                                         </constraints>
                                         <state key="normal" image="Button"/>
                                         <connections>
@@ -507,6 +553,7 @@
                                     <constraint firstItem="9pr-Q1-ghf" firstAttribute="top" secondItem="5Px-Kn-nmW" secondAttribute="bottom" constant="9" id="iZp-CR-hDd"/>
                                     <constraint firstItem="M1c-Z2-YLm" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="jDp-K9-RlS"/>
                                     <constraint firstItem="5Px-Kn-nmW" firstAttribute="centerX" secondItem="ciZ-jp-Lpg" secondAttribute="centerX" id="nin-yD-gC0"/>
+                                    <constraint firstItem="M1c-Z2-YLm" firstAttribute="width" secondItem="ciZ-jp-Lpg" secondAttribute="width" multiplier="0.9" id="pej-Gu-Eu4"/>
                                     <constraint firstAttribute="height" constant="370" id="vqI-cG-tZi"/>
                                     <constraint firstItem="5Px-Kn-nmW" firstAttribute="top" secondItem="ciZ-jp-Lpg" secondAttribute="top" constant="16" id="yNq-9z-7d8"/>
                                 </constraints>
@@ -593,10 +640,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QCk-1y-Cp8">
-                                <rect key="frame" x="16" y="257.66666666666669" width="382" height="220.66666666666663"/>
+                                <rect key="frame" x="16" y="258" width="382" height="220"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ed-KL-Ppp">
-                                        <rect key="frame" x="0.0" y="96" width="183" height="29"/>
+                                        <rect key="frame" x="0.0" y="95.666666666666686" width="183" height="29"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <state key="normal" title="One word after another"/>
                                         <connections>
@@ -604,7 +651,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cQL-om-YL2">
-                                        <rect key="frame" x="199" y="96" width="183" height="29"/>
+                                        <rect key="frame" x="199" y="95.666666666666686" width="183" height="29"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <state key="normal" title="One word on screen"/>
                                         <connections>
