@@ -210,7 +210,7 @@ final class VideoPreviewViewController: UIViewController {
 extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
     func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle, modification: DynamicSubtitlesModification) {
         if case .effect = modification {
-            dynamicSubtitlesView.frame = view.frame
+            revertToInitialDynamicSubtitlesViewPosition()
         }
         presentDynamicSubtitlesOverlay(dynamicSubtitlesStyle)
     }
@@ -219,7 +219,9 @@ extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
         return dynamicSubtitlesVideo
     }
     
-    func dynamicSubtitlesDidModifyEffect() {
-    
+    private func revertToInitialDynamicSubtitlesViewPosition() {
+        dynamicSubtitlesView.frame = view.frame
+        aOffsetX = 0.0
+        aOffsetY = 0.0
     }
 }
