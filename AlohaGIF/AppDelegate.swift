@@ -32,9 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupLogging() {
         let console = ConsoleDestination()
         SwiftyBeaver.addDestination(console)
-        let platform = SBPlatformDestination(appID: "AOBNLa",
-                                             appSecret: "Pfrrne3jiDXbFhnRqsvjK7krUmahg3hq",
-                                             encryptionKey: "y5wkyx3waMg9rlhKm8zxztydhssrp4ai")
+        setupPlatformLogging()
+    }
+    
+    private func setupPlatformLogging() {
+        guard let swiftyBeaverTokens = SwiftyBeaverTokens(dictionary: PropertyList.swiftyBeaverTokensPropertyList) else { return }
+        let platform = SBPlatformDestination(appID: swiftyBeaverTokens.appID,
+                                             appSecret: swiftyBeaverTokens.appSecret,
+                                             encryptionKey: swiftyBeaverTokens.encryptionKey)
         SwiftyBeaver.addDestination(platform)
     }
 }
