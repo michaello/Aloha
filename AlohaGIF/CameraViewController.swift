@@ -254,7 +254,10 @@ final class CameraViewController: UIViewController {
 
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-        guard isRecordingLongEnoughToProcess else { return }
+        guard isRecordingLongEnoughToProcess else {
+            Logger.verbose("Recording too short to perform speech detection. Aborting.")
+            return
+        }
         let asset = AVURLAsset(url: outputFileURL)
         performSpeechDetection(from: asset)
     }

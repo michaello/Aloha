@@ -218,7 +218,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold the record button a little bit longer and say something! 🐻" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXC-r8-Jth">
-                            <rect key="frame" x="16" y="53" width="148" height="51"/>
+                            <rect key="frame" x="16" y="52.999999999999993" width="148" height="50.333333333333321"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -358,7 +358,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-UZ-L4r">
-                                        <rect key="frame" x="131" y="8.3333333333333286" width="91" height="39.666666666666671"/>
+                                        <rect key="frame" x="131.33333333333334" y="8.6666666666666714" width="91" height="39.666666666666657"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Aloha">
                                                 <attributes>
@@ -452,7 +452,7 @@
                                 <rect key="frame" x="31" y="594" width="352" height="370"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
-                                        <rect key="frame" x="131" y="16" width="91" height="40"/>
+                                        <rect key="frame" x="131.33333333333334" y="16" width="91" height="39.666666666666629"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Aloha">
                                                 <attributes>
@@ -466,7 +466,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-Q1-ghf">
-                                        <rect key="frame" x="35" y="65" width="282" height="184"/>
+                                        <rect key="frame" x="35" y="64.666666666666629" width="282" height="184"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">We need to ask you for permissions:
@@ -817,7 +817,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="gxv-Ll-QE7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="boj-lb-Nef">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="boj-lb-Nef">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
