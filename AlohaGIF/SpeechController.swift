@@ -11,6 +11,12 @@ import AVFoundation
 
 struct SpeechController {
     
+    private enum Constants {
+        static let detectSpeechRetryCount = 3
+        static let detectSpeechTimeout = 20.0
+        static let detectSpeechDelay = 0.5
+    }
+    
     private let audioExtractor = AudioExtractor()
     private let speechRecognizer = SpeechRecognizer()
     private let videoSubtitlesComposer = VideoSubtitlesComposer()
@@ -21,7 +27,8 @@ struct SpeechController {
                 completion($0)
             }
             .catch { error in
-        }
+                Logger.error("Creating video with dynamic subtitles has failed, error: \(error.localizedDescription)")
+            }
     }
     
     func detectSpeechPromise(from asset: AVAsset) -> Promise<[SpeechModel]> {
@@ -30,8 +37,8 @@ struct SpeechController {
                 self.audioExtractor.writeAudioPromise(with: asset, to: url)
             }
             .then { url in
-                Promise<URL>.retry(count: 3, delay: 0.5) { self.speechRecognizer.detectSpeechPromise(from: url) }
+                Promise<URL>.retry(count: Constants.detectSpeechRetryCount, delay: Constants.detectSpeechDelay) { self.speechRecognizer.detectSpeechPromise(from: url) }
             }
-            .addTimeout(20.0)
+            .addTimeout(Constants.detectSpeechTimeout)
     }
 }

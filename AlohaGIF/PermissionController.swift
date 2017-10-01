@@ -10,7 +10,7 @@ import Permission
 
 struct PermissionController {
     
-    private struct Constants {
+    private enum Constants {
         static let permissions: [Permission] = [.camera, .microphone, .speechRecognizer]
     }
     
@@ -20,7 +20,7 @@ struct PermissionController {
         }
     }
     
-    private func permissionPromises() -> [Promise<PermissionStatus>] {
+    private func permissionPromises() -> [Promise<PermissionStatus>] {        
         return Constants.permissions.map { permission in
             Promise<(PermissionStatus)>(work: { fulfill, _ in
                 permission.request { status in

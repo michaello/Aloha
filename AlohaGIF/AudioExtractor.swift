@@ -6,14 +6,17 @@
 //  Copyright © 2017 Michal Pyrka. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 
 struct AudioExtractor {
     
+    private enum Constants {
+        static let audioNameAndExtension = "audio.m4a"
+    }
+    
     func temporaryAudioFromVideoURL() -> Promise<URL> {
         return Promise<URL>(work: { fulfill, reject in
-            let audioFromVideoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("audio.m4a")
+            let audioFromVideoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(Constants.audioNameAndExtension)
             
             if FileManager.default.fileExists(atPath: audioFromVideoURL.path) {
                 do {

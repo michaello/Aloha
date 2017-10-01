@@ -6,11 +6,19 @@
 //  Copyright © 2017 Michal Pyrka. All rights reserved.
 //
 
-import Foundation
+import Speech
 
 struct SpeechModel {
     
     let duration: TimeInterval
     let timestamp: TimeInterval
     let content: String
+}
+
+extension SpeechModel {
+    init(segment: SFTranscriptionSegment) {
+        self.duration = segment.duration
+        self.timestamp = segment.timestamp
+        self.content = segment.substring
+    }
 }

@@ -25,7 +25,7 @@ final class SpeechRecognizer {
                     reject(recognizerError)
                 }
                 if let bestTranscription = result?.bestTranscription {
-                    let speechModelArray = self.transform(result: bestTranscription)
+                    let speechModelArray = self.speechModels(from: bestTranscription)
                     Logger.debug("Successfully detected speech. Words count: \(speechModelArray.count)")
                     fulfill(speechModelArray)
                 }
@@ -33,12 +33,8 @@ final class SpeechRecognizer {
         })
     }
     
-    private func transform(result: SFTranscription) -> [SpeechModel] {
-        return result.segments
-            .flatMap { $0 }
-            .map { SpeechModel(duration: $0.duration, timestamp: $0.timestamp, content: $0.substring)
-            }
-            .flatMap { $0 }
+    private func speechModels(from result: SFTranscription) -> [SpeechModel] {
+        return result.segments.map(SpeechModel.init)
     }
     
     private func request(url: URL) -> SFSpeechURLRecognitionRequest {
