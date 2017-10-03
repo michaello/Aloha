@@ -187,10 +187,10 @@ final class VideoPreviewViewController: UIViewController {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.muteSound), name: muteNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.muteSound), name: .muteNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.pausePreviewWhenInBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.resumePreviewWhenInForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.unmuteSound), name: unmuteNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.unmuteSound), name: .unmuteNotification, object: nil)
     }
     
     @objc private func pausePreviewWhenInBackground() {

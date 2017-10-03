@@ -17,8 +17,6 @@ struct AnimationModel {
     }
 }
 
-var shouldAlwaysShowSubtitles = false
-
 struct AnimationsComposer {
     
     var startTime = 0.0

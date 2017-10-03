@@ -6,7 +6,6 @@
 //  Copyright © 2017 Michal Pyrka. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 
 struct SpeechController {

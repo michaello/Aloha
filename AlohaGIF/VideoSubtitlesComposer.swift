@@ -6,7 +6,6 @@
 //  Copyright © 2017 Michal Pyrka. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 
 enum VideoCompositionError: Error {
@@ -16,7 +15,14 @@ enum VideoCompositionError: Error {
 
 struct VideoSubtitlesComposer {
     
-    let exportQuality = AVAssetExportPresetHighestQuality
+    private enum Constants {
+        static let exportQuality = AVAssetExportPresetHighestQuality
+        static let exportedVideoTitle = "finalVideo"
+        static let exportedVideoExtension = ".mov"
+        static let compositionFrameDuration = CMTime(value: 1, timescale: 30)
+    }
+    
+    private let dynamicSubtitlesComposer = DynamicSubtitlesComposer()
     
     func composeVideoWithDynamicSubtitlesPromise(dynamicSubtitlesVideo: DynamicSubtitlesVideo) -> Promise<URL> {
         return Promise<URL>(work: { fulfill, reject in
@@ -51,28 +57,11 @@ struct VideoSubtitlesComposer {
                 return
             }
             
-            let mainInstruction = AVMutableVideoCompositionInstruction()
-            mainInstruction.timeRange = assetDuration
-            let videoLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
-            videoLayerInstruction.setTransform(video.preferredTransform, at: kCMTimeZero)
-            videoLayerInstruction.setOpacity(0.0, at: asset.duration)
-            mainInstruction.layerInstructions = [videoLayerInstruction]
-            let mainCompositionInst = AVMutableVideoComposition()
-            
-            var naturalSize = CGSize.zero
-            if video.videoAssetOrientation.isPortrait {
-                naturalSize = CGSize(width: video.naturalSize.height, height: video.naturalSize.width)
-            } else {
-                naturalSize = video.naturalSize
-            }
-            
-            mainCompositionInst.renderSize = CGSize(width: naturalSize.width, height: naturalSize.height)
-            mainCompositionInst.instructions = [mainInstruction]
-            mainCompositionInst.frameDuration = CMTime(value: 1, timescale: 30)
-            let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainCompositionInst)
-            DynamicSubtitlesComposer().applyDynamicSubtitles(to: dynamicSubtitlesContext, speechArray: dynamicSubtitlesVideo.speechArray, dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, size: naturalSize)
+            let mainComposition = self.mainComposition(videoAsset: asset, videoTrack: videoTrack)
+            let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainComposition)
+            self.dynamicSubtitlesComposer.applyDynamicSubtitles(to: dynamicSubtitlesContext, speechArray: dynamicSubtitlesVideo.speechArray, dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, size: self.naturalSize(for: videoTrack))
             //TODO: name collision?
-            self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainCompositionInst) { url in
+            self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainComposition) { url in
                 DispatchQueue.main.async {
                     Logger.debug("Successfully exported video with dynamic subtitles.")
                     fulfill(url)
@@ -81,9 +70,41 @@ struct VideoSubtitlesComposer {
         })
     }
     
+    private func mainComposition(videoAsset: AVAsset, videoTrack: AVMutableCompositionTrack) -> AVMutableVideoComposition {
+        let compositionInstruction = self.compositionInstruction(videoAsset: videoAsset, videoTrack: videoTrack)
+        let mainComposition = AVMutableVideoComposition()
+        
+        mainComposition.renderSize = naturalSize(for: videoTrack)
+        mainComposition.instructions = [compositionInstruction]
+        mainComposition.frameDuration = Constants.compositionFrameDuration
+        
+        return mainComposition
+    }
+    
+    private func compositionInstruction(videoAsset: AVAsset, videoTrack: AVMutableCompositionTrack) -> AVMutableVideoCompositionInstruction {
+        let instruction = AVMutableVideoCompositionInstruction()
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
+        let videoLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
+        videoLayerInstruction.setOpacity(0.0, at: videoAsset.duration)
+        instruction.layerInstructions = [videoLayerInstruction]
+        if let video = videoAsset.tracks(withMediaType: AVMediaTypeVideo).first {
+            videoLayerInstruction.setTransform(video.preferredTransform, at: kCMTimeZero)
+        }
+        
+        return instruction
+    }
+    
+    private func naturalSize(for video: AVAssetTrack) -> CGSize {
+        if video.videoAssetOrientation.isPortrait {
+            return CGSize(width: video.naturalSize.height, height: video.naturalSize.width)
+        } else {
+            return video.naturalSize
+        }
+    }
+    
     private func beginExportSession(composition: AVMutableComposition, mainCompositionWithInstructions: AVMutableVideoComposition, completion: @escaping (URL) -> ()) {
-        let videoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("finalVideo\(arc4random() % 100000).mov")
-        let exportSession = AVAssetExportSession(asset: composition, presetName: self.exportQuality)
+        let videoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(Constants.exportedVideoTitle)\(arc4random() % 100000)\(Constants.exportedVideoExtension)")
+        let exportSession = AVAssetExportSession(asset: composition, presetName: Constants.exportQuality)
         exportSession?.outputURL = videoURL
         exportSession?.outputFileType = AVFileTypeQuickTimeMovie
         exportSession?.videoComposition = mainCompositionWithInstructions

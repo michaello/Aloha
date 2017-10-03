@@ -9,10 +9,12 @@
 import AVFoundation
 import UIKit
 
+//TODO: Clear global flags
 var isRenderingVideo = false
 var aScale: CGFloat = 1.0
 var aOffsetX: CGFloat = 0.0
 var aOffsetY: CGFloat = 0.0
+var shouldAlwaysShowSubtitles = false
 
 enum DynamicSubtitlesType {
     case oneAfterAnother
@@ -142,10 +144,10 @@ final class DynamicSubtitlesComposer {
     }
     
     private func centerFrameForTextLayer(textLayerSize: CGSize, movieSize: CGSize) -> CGRect {
-        let halfWidth = movieSize.width / 2
-        let halfHeight = movieSize.height / 2
-        let halfTextWidth = textLayerSize.width / 2
-        let halfTextHeight = textLayerSize.height / 2
+        let halfWidth = movieSize.width / 2.0
+        let halfHeight = movieSize.height / 2.0
+        let halfTextWidth = textLayerSize.width / 2.0
+        let halfTextHeight = textLayerSize.height / 2.0
 
         return CGRect(origin: CGPoint(x: halfWidth - halfTextWidth, y: halfHeight - halfTextHeight), size: textLayerSize)
     }

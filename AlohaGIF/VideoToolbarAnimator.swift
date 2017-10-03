@@ -29,7 +29,7 @@ final class VideoToolbarAnimator {
     private var collapsedOffset: CGFloat = 0.0
     
     func animateHidden() {
-        UIView.animate(withDuration: Constants.oneEightyRotationTime ) {
+        UIView.animate(withDuration: Constants.oneEightyRotationTime) {
             self.arrowButton?.transform = CGAffineTransform(rotationAngle: CGFloat(0.999) * CGFloat(Double.pi))
         }
         move(toUp: false)

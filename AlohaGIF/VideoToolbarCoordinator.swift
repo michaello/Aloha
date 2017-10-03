@@ -9,9 +9,6 @@
 import UIKit
 import AVFoundation
 
-let muteNotification = NSNotification.Name("muteNotification")
-let unmuteNotification = NSNotification.Name("unmuteNotification")
-
 protocol VideoToolbarCoordinatorDelegate: class {
     func dynamicSubtitlesStyleDidChange(_ dynamicSubtitlesStyle: DynamicSubtitlesStyle, modification: DynamicSubtitlesModification)
     func dynamicSubtitlesVideoForRendering() -> DynamicSubtitlesVideo
@@ -112,7 +109,7 @@ extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
     
     //NotificationCenter is meh, but...
     private func muteSoundInVideoPreview() {
-        NotificationCenter.default.post(name: muteNotification, object: nil)
+        NotificationCenter.default.post(name: .muteNotification, object: nil)
     }
 }
 
@@ -128,4 +125,10 @@ extension VideoToolbarCoordinator: ModifiedDynamicSubtitlesHandler {
         }
         delegate?.dynamicSubtitlesStyleDidChange(dynamicSubtitlesStyle, modification: modification)
     }
+}
+
+extension Notification.Name {
+    
+    static let muteNotification = NSNotification.Name("muteNotification")
+    static let unmuteNotification = NSNotification.Name("unmuteNotification")
 }

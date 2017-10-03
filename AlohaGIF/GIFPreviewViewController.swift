@@ -64,7 +64,7 @@ class GIFPreviewViewController: UIViewController {
     }
     
     private func completeGifProcess() {
-        NotificationCenter.default.post(name: unmuteNotification, object: nil)
+        NotificationCenter.default.post(name: .unmuteNotification, object: nil)
         clearTemporaryFilesFolder()
     }
     
