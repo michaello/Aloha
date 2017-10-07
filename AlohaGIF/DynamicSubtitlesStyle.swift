@@ -9,15 +9,20 @@
 import UIKit
 
 struct DynamicSubtitlesStyle {
-    static let `default` = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
+    
+    private enum Constants {
+        static let fontMultiplierForOneAfterAnotherStyle: CGFloat = 24.0
+        static let fontMultiplierForOneWordOnlyStyle: CGFloat = 48.0
+        static let multiplierForRenderingVideo: CGFloat = 1.5
+    }
+    
     let effect: DynamicSubtitlesType
     let font: UIFont
     let color: UIColor
     
     func font(forRenderingVideo logicValue: Bool) -> UIFont {
-        var multiplier = effect == .oneAfterAnother ? 6.0 : 12.0
-        multiplier = logicValue ? (multiplier * 1.5) : (multiplier / Double(aScale))
-        let fontSize: CGFloat = 4.0 * CGFloat(multiplier)
+        var fontSize = effect == .oneAfterAnother ? Constants.fontMultiplierForOneAfterAnotherStyle : Constants.fontMultiplierForOneWordOnlyStyle
+        fontSize = logicValue ? (fontSize * Constants.multiplierForRenderingVideo) : (fontSize / aScale)
         
         return font.withSize(fontSize)
     }
@@ -30,4 +35,8 @@ struct DynamicSubtitlesStyle {
             NSForegroundColorAttributeName : color
         ]
     }
+}
+
+extension DynamicSubtitlesStyle {
+    static let `default` = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		901054E01F893BC800892C1B /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054DF1F893BC800892C1B /* NotificationNameExtension.swift */; };
+		901054E21F893CD300892C1B /* RegiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E11F893CD300892C1B /* RegiftExtension.swift */; };
 		9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */; };
 		9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E31EACAED300A817A9 /* EffectsViewController.swift */; };
 		9040E75B1EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040E7571EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift */; };
@@ -105,6 +107,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		901054DF1F893BC800892C1B /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		901054E11F893CD300892C1B /* RegiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegiftExtension.swift; sourceTree = "<group>"; };
 		9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarViewController.swift; sourceTree = "<group>"; };
 		9013E2E31EACAED300A817A9 /* EffectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsViewController.swift; sourceTree = "<group>"; };
 		9040E7571EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetImageGeneratorTimePoints.swift; sourceTree = "<group>"; };
@@ -366,6 +370,8 @@
 				905E047E1EB21EF300FC8A30 /* UserDefaultsExtension.swift */,
 				905E04801EB25A3D00FC8A30 /* AVAssetTrackExtension.swift */,
 				905E04851EB2627F00FC8A30 /* ALLoadingViewExtension.swift */,
+				901054DF1F893BC800892C1B /* NotificationNameExtension.swift */,
+				901054E11F893CD300892C1B /* RegiftExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -708,6 +714,7 @@
 				9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */,
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */,
+				901054E01F893BC800892C1B /* NotificationNameExtension.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
 				90483ED11F80179B0011A8B9 /* SwiftyBeaverTokens.swift in Sources */,
 				906C0DD61EAEA42E00A8555D /* DynamicSubtitlesStyle.swift in Sources */,
@@ -761,6 +768,7 @@
 				904F80C61EA534A5008574CE /* UIAlertControllerExtension.swift in Sources */,
 				906C0DDA1EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift in Sources */,
 				9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */,
+				901054E21F893CD300892C1B /* RegiftExtension.swift in Sources */,
 				90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */,
 				904F80A51EA4B9E3008574CE /* ImageStack.swift in Sources */,
 				9040E75B1EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift in Sources */,

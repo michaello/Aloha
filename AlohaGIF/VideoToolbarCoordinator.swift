@@ -50,23 +50,8 @@ final class VideoToolbarCoordinator {
             return
         }
         isInVideoOptionMenu = false
-        collectSelectedVideoOptionForDynamicSubtitles()
         videoToolbarViewController?.navigationController?.popViewControllerWithFadeAnimation()
         animator.animateGoingBackToMain()
-    }
-    
-    //TODO: Remove it
-    fileprivate func collectSelectedVideoOptionForDynamicSubtitles() {
-        guard let viewController = navigationController?.topViewController else { return }
-        switch viewController {
-        case let vc as EffectsViewController:
-            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: vc.selectedEffect, font: dynamicSubtitlesStyle.font, color: dynamicSubtitlesStyle.color)
-        case let vc as FontsViewController:
-            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: vc.selectedFont, color: dynamicSubtitlesStyle.color)
-        case let vc as ColorsViewController:
-            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: dynamicSubtitlesStyle.font, color: vc.selectedColor)
-        default: ()
-        }
     }
 }
 
@@ -90,21 +75,20 @@ extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
         presentRenderingLoadingView()
         muteSoundInVideoPreview()
         let speechController = SpeechController()
-        speechController.createVideoWithDynamicSubtitles(from: dynamicSubtitlesVideo, completion: { url in
+        speechController.createVideoWithDynamicSubtitles(from: dynamicSubtitlesVideo, completion: { [unowned self] url in
             self.createGif(from: url)
         })
     }
     
     private func createGif(from URL: URL) {
-        let frameCount = Int(Double(selectedVideo.duration.seconds) * 15.0)
-        Regift.createGIFFromSource(URL, frameCount: frameCount, delayTime: 0.08333, completion: { url in
+        Regift.createGif(from: URL, videoDurationInSeconds: selectedVideo.duration.seconds) { url in
             DispatchQueue.main.async {
                 guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController else { return }
                     let previewViewController = UIStoryboard.viewController(GIFPreviewViewController.self)
                     previewViewController.gifURL = url
                     presentedViewController.present(previewViewController, animated: true, completion: nil)
             }
-        })
+        }
     }
     
     //NotificationCenter is meh, but...
@@ -115,20 +99,17 @@ extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
 
 extension VideoToolbarCoordinator: ModifiedDynamicSubtitlesHandler {
     func handle(_ modification: DynamicSubtitlesModification) {
-        switch modification {
-        case .effect(let dynamicSubtitlesType):
-            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesType, font: dynamicSubtitlesStyle.font, color: dynamicSubtitlesStyle.color)
-        case .color(let color):
-            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: dynamicSubtitlesStyle.font, color: color)
-        case .font(let font):
-            dynamicSubtitlesStyle = DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: font, color: dynamicSubtitlesStyle.color)
-        }
+        dynamicSubtitlesStyle = {
+            switch modification {
+            case .effect(let dynamicSubtitlesType):
+                return DynamicSubtitlesStyle(effect: dynamicSubtitlesType, font: dynamicSubtitlesStyle.font, color: dynamicSubtitlesStyle.color)
+            case .color(let color):
+                return DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: dynamicSubtitlesStyle.font, color: color)
+            case .font(let font):
+                return DynamicSubtitlesStyle(effect: dynamicSubtitlesStyle.effect, font: font, color: dynamicSubtitlesStyle.color)
+            }
+        }()
+
         delegate?.dynamicSubtitlesStyleDidChange(dynamicSubtitlesStyle, modification: modification)
     }
-}
-
-extension Notification.Name {
-    
-    static let muteNotification = NSNotification.Name("muteNotification")
-    static let unmuteNotification = NSNotification.Name("unmuteNotification")
 }

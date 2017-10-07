@@ -191,6 +191,7 @@ final class CameraViewController: UIViewController {
             session.commitConfiguration()
             DispatchQueue.main.async {
                 self.previewView.videoPreviewLayer.connection.videoOrientation = .portrait
+                self.previewView.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
             }
         }
     }
@@ -212,7 +213,6 @@ final class CameraViewController: UIViewController {
     }
     
     private func configureSession() {
-        previewView.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         addVideoInput(type: cameraType)
         addAudioInput()
 

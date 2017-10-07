@@ -36,7 +36,7 @@ final class VideoToolbarAnimator {
     }
     
     func animateVisible() {
-        UIView.animate(withDuration: Constants.oneEightyRotationTime ) {
+        UIView.animate(withDuration: Constants.oneEightyRotationTime) {
             self.arrowButton?.transform = .identity
         }
         move(toUp: true)
