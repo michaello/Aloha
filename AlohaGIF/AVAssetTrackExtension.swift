@@ -14,18 +14,18 @@ extension AVAssetTrack {
         let videoTransform = preferredTransform
         var videoAssetOrientation = UIImageOrientation.up
         var isVideoAssetPortrait = false
-        if (videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0) {
+        if (videoTransform.a == 0.0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0.0) {
             videoAssetOrientation = .right
             isVideoAssetPortrait = true
         }
-        if (videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0) {
+        if (videoTransform.a == 0.0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0.0) {
             videoAssetOrientation = .left
             isVideoAssetPortrait = true
         }
-        if (videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0) {
+        if (videoTransform.a == 1.0 && videoTransform.b == 0.0 && videoTransform.c == 0.0 && videoTransform.d == 1.0) {
             videoAssetOrientation =  .up
         }
-        if (videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {
+        if (videoTransform.a == -1.0 && videoTransform.b == 0.0 && videoTransform.c == 0.0 && videoTransform.d == -1.0) {
             videoAssetOrientation = .down
         }
         

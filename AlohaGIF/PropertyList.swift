@@ -22,18 +22,22 @@ struct PropertyList {
     }
     
     static var swiftyBeaverTokensPropertyList: [String: Any]? {
-        if let fileUrl = Bundle.main.url(forResource: Constants.swiftyBeaverTokensPlistName, withExtension: Constants.plistExtension), let data = try? Data(contentsOf: fileUrl), let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] {
-            return result
-        } else {
-            return nil
-        }
+        return propertyList(forResource: Constants.swiftyBeaverTokensPlistName, withExtension: Constants.plistExtension) as? [String: Any]
     }
     
     static func randomText(type: ListType) -> String {
-        if let fileUrl = Bundle.main.url(forResource: type.rawValue, withExtension: Constants.plistExtension), let data = try? Data(contentsOf: fileUrl), let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String] {
-            return result?.randomItem ?? Constants.defaultRandomText
+        if let randomTextsArray = propertyList(forResource: type.rawValue, withExtension: Constants.plistExtension) as? [String] {
+            return randomTextsArray.randomItem
         } else {
-            return ""
+            return Constants.defaultRandomText
+        }
+    }
+    
+    private static func propertyList(forResource resource: String, withExtension extensionString: String) -> Any? {
+        if let fileUrl = Bundle.main.url(forResource: resource, withExtension: extensionString), let data = try? Data(contentsOf: fileUrl), let propertyListRaw = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) {
+            return propertyListRaw
+        } else {
+            return nil
         }
     }
 }

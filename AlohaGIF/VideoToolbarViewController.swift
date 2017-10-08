@@ -19,11 +19,11 @@ protocol VideoToolbarViewControllerDelegate: class {
     func willEnterToVideoOptionMenu(videoOptionMenu: VideoOptionMenu)
 }
 
-class VideoToolbarViewController: UIViewController {
+final class VideoToolbarViewController: UIViewController {
 
     @IBOutlet weak var stackView: UIStackView!
-    var isCollapsed = false
     weak var delegate: VideoToolbarViewControllerDelegate?
+    var isCollapsed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

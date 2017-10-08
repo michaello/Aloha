@@ -15,8 +15,8 @@ final class VideoPreviewViewController: UIViewController {
         static let loopCountPath = "loopCount"
     }
     
-    @IBOutlet fileprivate weak var arrowButton: UIButton!
-    @IBOutlet private weak var movieToolbarBackgrounContainerView: CustomBlurRadiusView!
+    @IBOutlet private weak var arrowButton: UIButton!
+    @IBOutlet private weak var movieToolbarBackgroundContainerView: UIVisualEffectView!
     @IBOutlet private weak var movieToolbarContainerView: UIView!
     @IBOutlet private weak var playerView: UIView!
     
@@ -51,7 +51,6 @@ final class VideoPreviewViewController: UIViewController {
             player.isMuted = false
             player.play()
         }
-        movieToolbarBackgrounContainerView.setToCustomBlurRadius()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,7 +66,7 @@ final class VideoPreviewViewController: UIViewController {
         view.subviews.flatMap { $0 as? UIButton }.forEach {
             $0.touchAreaEdgeInsets = UIEdgeInsets(top: -20, left: -20, bottom: -10, right: -20)
         }
-        videoToolbarCoordinator.passViewsToAnimate(arrowButton: arrowButton, movieToolbarBackgroundContainerView: movieToolbarBackgrounContainerView, movieToolbarContainerView: movieToolbarContainerView)
+        videoToolbarCoordinator.passViewsToAnimate(arrowButton: arrowButton, movieToolbarBackgroundContainerView: movieToolbarBackgroundContainerView, movieToolbarContainerView: movieToolbarContainerView)
         playerLayer.frame = CGRect(origin: .zero, size: playerView.frame.size)
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         playerView.layer.addSublayer(playerLayer)
@@ -104,7 +103,7 @@ final class VideoPreviewViewController: UIViewController {
         player.remove(playerItem)
         playerLooper.disableLooping()
         dynamicSubtitlesView.isHidden = true
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     @objc private func muteSound() {
@@ -151,7 +150,7 @@ final class VideoPreviewViewController: UIViewController {
     @IBAction func debugAction(_ sender: UIButton) {
         player.remove(playerItem)
         playerLooper.disableLooping()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     //TODO: For debug purposes only to check whether dynamic subtitles on video have correct position like in preview
@@ -162,7 +161,7 @@ final class VideoPreviewViewController: UIViewController {
         if let speechArray = speechArray {
             videoPreviewViewController.speechArray = speechArray
         }
-        present(videoPreviewViewController, animated: true, completion: nil)
+        present(videoPreviewViewController, animated: true)
     }
     
     fileprivate func presentDynamicSubtitlesOverlay(_ dynamicSubtitlesStyle:DynamicSubtitlesStyle, shouldPresentSubtitlesFromBeginning: Bool = false) {

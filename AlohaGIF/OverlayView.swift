@@ -19,12 +19,12 @@ final class OverlayView: UIView {
             allPossibleViewsWithButtons.append(videoToolbarView)
         }
         allPossibleViewsWithButtons.forEach {
-            viewsPassingHitTest.append($0.hitTest(self.convert(point, to: $0), with: event))
+            viewsPassingHitTest.append($0.hitTest(convert(point, to: $0), with: event))
         }
         if let view = viewsPassingHitTest.flatMap({ $0 }).first {
             return view
+        } else {
+            return super.hitTest(point, with: event)
         }
-        
-        return super.hitTest(point, with: event)
     }    
 }

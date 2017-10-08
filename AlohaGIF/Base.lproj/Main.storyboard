@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LRg-AH-2wt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LRg-AH-2wt">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="LeckerliOne-Regular.otf">
+            <string>LeckerliOne</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Onboarding View Controller-->
         <scene sceneID="8la-hW-PTM">
@@ -131,10 +136,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHt-S4-vVB" customClass="PreviewView" customModule="AlohaGIF" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-ab-4wh">
-                                        <rect key="frame" x="0.0" y="646" width="414" height="90"/>
+                                        <rect key="frame" x="0.0" y="626" width="414" height="90"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-t8-2a0">
                                                 <rect key="frame" x="20" y="10" width="70" height="70"/>
@@ -254,7 +259,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wf4-Lu-eoh">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBQ-VR-VP4">
@@ -268,13 +273,17 @@
                                     <action selector="closeButtonAction:" destination="euV-on-hrI" eventType="touchUpInside" id="Tsx-8H-7U7"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fx6-TH-SPt" customClass="CustomBlurRadiusView" customModule="AlohaGIF" customModuleProvider="target">
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRA-da-pvd">
                                 <rect key="frame" x="0.0" y="612" width="414" height="128"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.20483732876712329" colorSpace="calibratedWhite"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jPd-wB-0dU">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="IHc-fs-ZnS"/>
+                                    <constraint firstAttribute="height" constant="128" id="Uxs-JM-dge"/>
                                 </constraints>
-                            </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <containerView opaque="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLW-a0-8Fi">
                                 <rect key="frame" x="0.0" y="612" width="414" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -296,15 +305,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Fx6-TH-SPt" secondAttribute="trailing" id="1P5-yL-7Wo"/>
                             <constraint firstItem="GTS-XK-hiz" firstAttribute="top" secondItem="TLW-a0-8Fi" secondAttribute="top" constant="12" id="BGu-rW-bHX"/>
                             <constraint firstAttribute="trailing" secondItem="TLW-a0-8Fi" secondAttribute="trailing" id="FR6-dT-7bT"/>
+                            <constraint firstAttribute="bottom" secondItem="mRA-da-pvd" secondAttribute="bottom" constant="-4" id="GuI-8k-pj0"/>
                             <constraint firstAttribute="trailing" secondItem="Wf4-Lu-eoh" secondAttribute="trailing" id="HDt-V5-OV8"/>
                             <constraint firstItem="nBQ-VR-VP4" firstAttribute="leading" secondItem="Czy-dq-Q4Q" secondAttribute="leadingMargin" constant="-8" id="He7-Cg-T37"/>
                             <constraint firstItem="nBQ-VR-VP4" firstAttribute="top" secondItem="YEa-UW-0Mf" secondAttribute="bottom" constant="8" id="O4b-wY-0SX"/>
-                            <constraint firstItem="Fx6-TH-SPt" firstAttribute="leading" secondItem="Czy-dq-Q4Q" secondAttribute="leading" id="Oe7-vh-Dfn"/>
-                            <constraint firstAttribute="bottom" secondItem="Fx6-TH-SPt" secondAttribute="bottom" constant="-4" id="OtJ-LG-SCg"/>
                             <constraint firstItem="L2Y-uc-6b3" firstAttribute="top" secondItem="TLW-a0-8Fi" secondAttribute="bottom" constant="-4" id="TgC-pk-jcW"/>
+                            <constraint firstAttribute="trailing" secondItem="mRA-da-pvd" secondAttribute="trailing" id="VbZ-pS-u1j"/>
+                            <constraint firstItem="mRA-da-pvd" firstAttribute="leading" secondItem="Czy-dq-Q4Q" secondAttribute="leading" id="Vmd-Gm-Ohp"/>
                             <constraint firstItem="TLW-a0-8Fi" firstAttribute="leading" secondItem="Czy-dq-Q4Q" secondAttribute="leading" id="VzK-da-krS"/>
                             <constraint firstItem="GTS-XK-hiz" firstAttribute="width" secondItem="GTS-XK-hiz" secondAttribute="height" multiplier="21:11" id="XJs-hD-6VK"/>
                             <constraint firstItem="GTS-XK-hiz" firstAttribute="leading" secondItem="TLW-a0-8Fi" secondAttribute="leading" constant="8" id="aJd-Jq-JTL"/>
@@ -315,7 +324,7 @@
                     </view>
                     <connections>
                         <outlet property="arrowButton" destination="GTS-XK-hiz" id="hsh-lc-Jss"/>
-                        <outlet property="movieToolbarBackgrounContainerView" destination="Fx6-TH-SPt" id="Fqg-ZN-zOs"/>
+                        <outlet property="movieToolbarBackgroundContainerView" destination="mRA-da-pvd" id="naW-AK-XTv"/>
                         <outlet property="movieToolbarContainerView" destination="TLW-a0-8Fi" id="bo0-uP-ERT"/>
                         <outlet property="playerView" destination="Wf4-Lu-eoh" id="Ak3-Ct-MUC"/>
                     </connections>
@@ -357,18 +366,10 @@
                                             <action selector="closeButtonAction:" destination="orx-3D-Mad" eventType="touchUpInside" id="6xF-lv-kAl"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-UZ-L4r">
-                                        <rect key="frame" x="131.33333333333334" y="8.6666666666666714" width="91" height="39.666666666666657"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Aloha">
-                                                <attributes>
-                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="33" name="LeckerliOne"/>
-                                                    <font key="NSOriginalFont" size="20" name="LeckerliOne"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aloha" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-UZ-L4r">
+                                        <rect key="frame" x="134.66666666666666" y="9" width="84" height="38.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="LeckerliOne" family="LeckerliOne" pointSize="33"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -451,22 +452,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-jp-Lpg" customClass="CardView" customModule="AlohaGIF" customModuleProvider="target">
                                 <rect key="frame" x="31" y="594" width="352" height="370"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
-                                        <rect key="frame" x="131.33333333333334" y="16" width="91" height="39.666666666666629"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Aloha">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.99215686274509807" green="0.49803921568627452" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="33" name="LeckerliOne"/>
-                                                    <font key="NSOriginalFont" size="20" name="LeckerliOne"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aloha" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
+                                        <rect key="frame" x="134.66666666666666" y="16" width="84" height="39.666666666666629"/>
+                                        <fontDescription key="fontDescription" name="LeckerliOne" family="LeckerliOne" pointSize="33"/>
+                                        <color key="textColor" red="0.99215686274509807" green="0.49803921568627452" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-Q1-ghf">
-                                        <rect key="frame" x="35" y="64.666666666666629" width="282" height="184"/>
+                                        <rect key="frame" x="35" y="64.666666666666629" width="282" height="167.33333333333337"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">We need to ask you for permissions:
@@ -763,13 +756,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPU-DO-ZbM">
-                                                    <rect key="frame" x="4" y="15" width="42" height="21"/>
+                                                    <rect key="frame" x="4" y="18" width="42" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vV9-nU-Ofe">
-                                                    <rect key="frame" x="8" y="31" width="34" height="3"/>
+                                                    <rect key="frame" x="8" y="39" width="34" height="3"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="3" id="Ybd-QI-vES"/>
@@ -778,13 +771,13 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="bPU-DO-ZbM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RAz-g2-Js8" secondAttribute="top" constant="4" id="8uB-Mt-6bM"/>
+                                            <constraint firstItem="bPU-DO-ZbM" firstAttribute="top" secondItem="RAz-g2-Js8" secondAttribute="top" constant="18" id="8uB-Mt-6bM"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="vV9-nU-Ofe" secondAttribute="bottom" constant="8" id="93K-Z4-Sfn"/>
                                             <constraint firstItem="vV9-nU-Ofe" firstAttribute="centerX" secondItem="RAz-g2-Js8" secondAttribute="centerX" id="Fks-aK-4um"/>
                                             <constraint firstAttribute="trailing" secondItem="bPU-DO-ZbM" secondAttribute="trailing" constant="4" id="Jyp-hD-wtx"/>
                                             <constraint firstItem="vV9-nU-Ofe" firstAttribute="width" secondItem="bPU-DO-ZbM" secondAttribute="width" multiplier="0.8" id="fQu-f2-Or2"/>
                                             <constraint firstItem="bPU-DO-ZbM" firstAttribute="leading" secondItem="RAz-g2-Js8" secondAttribute="leading" constant="4" id="g5K-w6-CRA"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bPU-DO-ZbM" secondAttribute="bottom" constant="4" id="gxQ-RF-s2b"/>
+                                            <constraint firstAttribute="bottom" secondItem="bPU-DO-ZbM" secondAttribute="bottom" constant="18" id="gxQ-RF-s2b"/>
                                             <constraint firstItem="bPU-DO-ZbM" firstAttribute="centerY" secondItem="RAz-g2-Js8" secondAttribute="centerY" id="gzu-bG-qUy"/>
                                         </constraints>
                                         <connections>
@@ -818,7 +811,6 @@
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="boj-lb-Nef">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

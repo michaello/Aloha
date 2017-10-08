@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		901054E01F893BC800892C1B /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054DF1F893BC800892C1B /* NotificationNameExtension.swift */; };
 		901054E21F893CD300892C1B /* RegiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E11F893CD300892C1B /* RegiftExtension.swift */; };
+		901054E41F8A47DB00892C1B /* UIVideoEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */; };
+		901054E61F8A4EDD00892C1B /* ImagePickerControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E51F8A4EDD00892C1B /* ImagePickerControllerExtension.swift */; };
 		9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */; };
 		9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E31EACAED300A817A9 /* EffectsViewController.swift */; };
 		9040E75B1EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040E7571EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift */; };
@@ -83,7 +85,6 @@
 		906C0DDA1EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */; };
 		906D9E351EA8185500181EC2 /* ALLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E341EA8185500181EC2 /* ALLoadingView.swift */; };
 		906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E361EA827DB00181EC2 /* OverlayView.swift */; };
-		9084C8881EABAAC300B60BCF /* CustomBlurRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */; };
 		9084C88A1EABAD0D00B60BCF /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C8891EABAD0D00B60BCF /* Recording.swift */; };
 		9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9084C88C1EABAF0F00B60BCF /* AssetController.swift */; };
 		90A072BE1EB10F51007704A8 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A072BD1EB10F51007704A8 /* FBSDKMessengerShareKit.framework */; };
@@ -95,7 +96,7 @@
 		90CD57E81EAD1875007B1D6E /* VideoToolbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */; };
 		90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */; };
 		90CD57EC1EAD2DF0007B1D6E /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */; };
-		90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */; };
+		90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModification.swift */; };
 		90D6B73A1EA40E94002B26EE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6B7391EA40E94002B26EE /* PreviewView.swift */; };
 		90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C641EACBD6C0055A390 /* ColorCell.swift */; };
 		90DE8C671EACBF8E0055A390 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */; };
@@ -109,6 +110,8 @@
 /* Begin PBXFileReference section */
 		901054DF1F893BC800892C1B /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		901054E11F893CD300892C1B /* RegiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegiftExtension.swift; sourceTree = "<group>"; };
+		901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVideoEditorController.swift; sourceTree = "<group>"; };
+		901054E51F8A4EDD00892C1B /* ImagePickerControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerControllerExtension.swift; sourceTree = "<group>"; };
 		9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarViewController.swift; sourceTree = "<group>"; };
 		9013E2E31EACAED300A817A9 /* EffectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsViewController.swift; sourceTree = "<group>"; };
 		9040E7571EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetImageGeneratorTimePoints.swift; sourceTree = "<group>"; };
@@ -188,7 +191,6 @@
 		906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesVideo.swift; sourceTree = "<group>"; };
 		906D9E341EA8185500181EC2 /* ALLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALLoadingView.swift; sourceTree = "<group>"; };
 		906D9E361EA827DB00181EC2 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
-		9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBlurRadiusView.swift; sourceTree = "<group>"; };
 		9084C8891EABAD0D00B60BCF /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		9084C88C1EABAF0F00B60BCF /* AssetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetController.swift; sourceTree = "<group>"; };
 		90A072BD1EB10F51007704A8 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
@@ -200,7 +202,7 @@
 		90CD57E71EAD1875007B1D6E /* VideoToolbarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarCoordinator.swift; sourceTree = "<group>"; };
 		90CD57E91EAD23F6007B1D6E /* VideoToolbarAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarAnimator.swift; sourceTree = "<group>"; };
 		90CD57EB1EAD2DF0007B1D6E /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
-		90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesModifyingViewController.swift; sourceTree = "<group>"; };
+		90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesModification.swift; sourceTree = "<group>"; };
 		90D6B7391EA40E94002B26EE /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		90DE8C641EACBD6C0055A390 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
@@ -338,7 +340,6 @@
 				9013E2E31EACAED300A817A9 /* EffectsViewController.swift */,
 				90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */,
 				90DE8C681EACCC3C0055A390 /* FontsViewController.swift */,
-				90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift */,
 				906C0DD71EAEA5C200A8555D /* DebugViewController.swift */,
 				90A072BF1EB12E92007704A8 /* GIFPreviewViewController.swift */,
 			);
@@ -350,7 +351,6 @@
 			children = (
 				9041D36A1EA37427007E134B /* CardView.swift */,
 				906D9E361EA827DB00181EC2 /* OverlayView.swift */,
-				9084C8871EABAAC300B60BCF /* CustomBlurRadiusView.swift */,
 				90DE8C641EACBD6C0055A390 /* ColorCell.swift */,
 				90CD57DF1EACCF60007B1D6E /* FontCell.swift */,
 				90F850C01EB601E300FE7AEC /* PopoverView.swift */,
@@ -372,6 +372,8 @@
 				905E04851EB2627F00FC8A30 /* ALLoadingViewExtension.swift */,
 				901054DF1F893BC800892C1B /* NotificationNameExtension.swift */,
 				901054E11F893CD300892C1B /* RegiftExtension.swift */,
+				901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */,
+				901054E51F8A4EDD00892C1B /* ImagePickerControllerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -506,6 +508,7 @@
 				906C0DD51EAEA42E00A8555D /* DynamicSubtitlesStyle.swift */,
 				906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */,
 				90F850C21EB6048D00FE7AEC /* PropertyList.swift */,
+				90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModification.swift */,
 				90483ED01F80179B0011A8B9 /* SwiftyBeaverTokens.swift */,
 			);
 			name = Models;
@@ -582,7 +585,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Michal Pyrka";
 				TargetAttributes = {
 					9041D3321EA24CF9007E134B = {
@@ -709,16 +712,16 @@
 				904F80AE1EA4B9E3008574CE /* ImageGalleryViewCell.swift in Sources */,
 				9040E75D1EAFF7A10099B08C /* Regift.swift in Sources */,
 				904B860F1EA4012700540D3A /* RecordButton.swift in Sources */,
-				9084C8881EABAAC300B60BCF /* CustomBlurRadiusView.swift in Sources */,
 				90661E8B1EA626E5009E81D3 /* DynamicSubtitlesComposer.swift in Sources */,
 				9041D37B1EA3DBCB007E134B /* PermissionController.swift in Sources */,
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */,
 				901054E01F893BC800892C1B /* NotificationNameExtension.swift in Sources */,
+				901054E41F8A47DB00892C1B /* UIVideoEditorController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
 				90483ED11F80179B0011A8B9 /* SwiftyBeaverTokens.swift in Sources */,
 				906C0DD61EAEA42E00A8555D /* DynamicSubtitlesStyle.swift in Sources */,
-				90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModifyingViewController.swift in Sources */,
+				90CD57EE1EAD454D007B1D6E /* DynamicSubtitlesModification.swift in Sources */,
 				906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */,
 				90661E931EA678CE009E81D3 /* Logger.swift in Sources */,
 				90CD57EA1EAD23F6007B1D6E /* VideoToolbarAnimator.swift in Sources */,
@@ -744,6 +747,7 @@
 				90CD57E81EAD1875007B1D6E /* VideoToolbarCoordinator.swift in Sources */,
 				90DE8C691EACCC3C0055A390 /* FontsViewController.swift in Sources */,
 				9041D3781EA3D596007E134B /* Promise+Extras.swift in Sources */,
+				901054E61F8A4EDD00892C1B /* ImagePickerControllerExtension.swift in Sources */,
 				90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */,
 				9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */,
 				905E047F1EB21EF300FC8A30 /* UserDefaultsExtension.swift in Sources */,
@@ -814,7 +818,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -822,7 +828,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -864,7 +874,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -872,7 +884,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

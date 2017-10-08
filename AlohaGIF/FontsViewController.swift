@@ -53,8 +53,10 @@ final class FontsViewController: DynamicSubtitlesModifyingViewController, Scroll
     var selectedFont = UIFont.boldSystemFont(ofSize: 16.0) {
         didSet {
             Logger.info("User selected font: \(selectedFont.description)")
-            selectedIndexPath = IndexPath(row: fonts.index(of: selectedFont) ?? 0, section: 0)
-            handler?.handle(.font(selectedFont))
+            if let selectedFontIndex = fonts.index(of: selectedFont) {
+                selectedIndexPath = IndexPath(row: selectedFontIndex, section: 0)
+                handler?.handle(.font(selectedFont))
+            }
         }
     }
     
@@ -63,7 +65,7 @@ final class FontsViewController: DynamicSubtitlesModifyingViewController, Scroll
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.indicatorStyle = .white
-        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSize(width: 100, height: 100)
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
         scrollToSelectedFontIfNeeded()
     }
 }

@@ -24,7 +24,6 @@ extension UserDefaults {
             return object(forKey: key)
         } set {
             set(newValue, forKey: key)
-            synchronize()
         }
     }
 }

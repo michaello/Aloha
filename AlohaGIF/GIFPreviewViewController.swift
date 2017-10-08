@@ -13,10 +13,6 @@ import FBSDKMessengerShareKit
 class GIFPreviewViewController: UIViewController {
 
     var gifURL: URL?
-    private var gifData: Data? {
-        guard let gifURL = gifURL else { return nil }
-        return try? Data(contentsOf: gifURL)
-    }
     @IBOutlet private weak var modalContainerView: UIView!
     @IBOutlet private weak var gifImageView: FLAnimatedImageView!
     @IBOutlet private weak var gifImageViewHeightConstraint: NSLayoutConstraint!
@@ -24,7 +20,7 @@ class GIFPreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConstraints()
-        guard let gifURL = gifURL, let gifData = try? Data(contentsOf: gifURL) else { return }
+        guard let gifData = gifData() else { return }
         gifImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifData)
         ALLoadingView.manager.coverContent()
         Logger.info("User is looking at GIF preview.")
@@ -38,15 +34,15 @@ class GIFPreviewViewController: UIViewController {
     }
     
     @IBAction func shareButtonAction(_ sender: UIButton) {
-        if let gif = gifData {
+        if let gif = gifData() {
             Logger.info("User tapped on default iOS share.")
             let activityViewController = UIActivityViewController(activityItems: [gif], applicationActivities: nil)
-            present(activityViewController, animated: true, completion: nil)
+            present(activityViewController, animated: true)
         }
     }
     
     @IBAction func messengerButtonAction(_ sender: UIButton) {
-        if let gif = gifData {
+        if let gif = gifData() {
             Logger.info("User tapped on Messenger share.")
             FBSDKMessengerSharer.shareAnimatedGIF(gif, with: FBSDKMessengerShareOptions())
         }
@@ -75,6 +71,14 @@ class GIFPreviewViewController: UIViewController {
             try filePaths.forEach { try FileManager.default.removeItem(atPath: temp + $0) }
         } catch {
             Logger.error("Could not clear temporary files folder. Reason: \(error.localizedDescription)")
+        }
+    }
+    
+    private func gifData() -> Data? {
+        if let gifURL = gifURL {
+            return try? Data(contentsOf: gifURL)
+        } else {
+            return nil
         }
     }
 }

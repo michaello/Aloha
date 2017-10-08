@@ -9,6 +9,11 @@
 import UIKit
 
 final class CardView: UIView {
+    
+    private enum Constants {
+        static let cornerRadius: CGFloat = 8.0
+        static let shadowOpacity: Float = 0.3
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,6 +22,12 @@ final class CardView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func setupLayout() {
+        backgroundColor = .white
+        layer.cornerRadius = Constants.cornerRadius
+        setupShadow()
     }
     
     private func setupShadow() {
@@ -29,13 +40,7 @@ final class CardView: UIView {
         path.addLine(to: CGPoint(x: xOffset, y: yOffset))
         path.close()
         layer.shadowPath = path.cgPath
-        layer.shadowOpacity = 0.3
+        layer.shadowOpacity = Constants.shadowOpacity
         layer.shadowColor = UIColor.black.cgColor
-    }
-    
-    func setupLayout() {
-        backgroundColor = .white
-        layer.cornerRadius = 8.0
-        setupShadow()
     }
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2017 Michal Pyrka. All rights reserved.
 //
 
-import Foundation
-
 extension ALLoadingView {
     static func show() {
         ALLoadingView.manager.blurredBackground = true

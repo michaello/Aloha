@@ -15,22 +15,6 @@ fileprivate struct OnboardingModel {
 
 final class OnboardingViewController: UIViewController {
     
-    fileprivate var cardOnboardingViewController: CardOnboardingViewController {
-        return childViewControllers.first as! CardOnboardingViewController
-    }
-    fileprivate var initialPoint: CGPoint?
-    fileprivate var centerPoint: CGPoint?
-    fileprivate var lastOnboardingPosition: Double?
-    fileprivate var index = 0
-    
-    @IBOutlet fileprivate weak var swiftyOnboard: SwiftyOnboard! {
-        didSet {
-            swiftyOnboard.style = .light
-            swiftyOnboard.delegate = self
-            swiftyOnboard.dataSource = self
-        }
-    }
-    
     fileprivate struct Constants {
         static let onboardingModels: [OnboardingModel?] = [
             OnboardingModel(text: "Create GIFs easily. Just record a short video or pick one from your Photos.", image: #imageLiteral(resourceName: "OnboardingScreen1")),
@@ -38,12 +22,28 @@ final class OnboardingViewController: UIViewController {
             OnboardingModel(text: "Export, save it or send to your friends! 🎉", image: #imageLiteral(resourceName: "OnboardingScreen3")),
             nil
         ]
+        static let initialCenterPointYOffset: CGFloat = -100.0
     }
+    
+    fileprivate var cardOnboardingViewController: CardOnboardingViewController {
+        return childViewControllers.first as! CardOnboardingViewController
+    }
+    @IBOutlet fileprivate weak var swiftyOnboard: SwiftyOnboard! {
+        didSet {
+            swiftyOnboard.style = .light
+            swiftyOnboard.delegate = self
+            swiftyOnboard.dataSource = self
+        }
+    }
+    fileprivate var initialPoint: CGPoint?
+    fileprivate var centerPoint: CGPoint?
+    fileprivate var lastOnboardingPosition: Double?
+    fileprivate var index = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         swiftyOnboard.cardOnboardingView = cardOnboardingViewController.view
-        centerPoint = CGPoint(x: view.center.x, y: view.center.y - 100)
+        centerPoint = CGPoint(x: view.center.x, y: view.center.y + Constants.initialCenterPointYOffset)
     }
 }
 
@@ -75,10 +75,16 @@ extension OnboardingViewController: SwiftyOnboardDelegate {
     }
     
     private func moveCardToCenterIfNeeded(basedOnPosition position: Double) {
-        guard let lastOnboardingPosition = lastOnboardingPosition, position.isInPermissionsRange else { return }
-        let diff = initialPoint!.y - centerPoint!.y
-        let acc = diff * CGFloat(position - Double.permissionsPosition)
-        let yChange = lastOnboardingPosition < position ? initialPoint!.y : centerPoint!.y + (cardOnboardingViewController.cardView.frame.size.height / 2) - acc
+        guard let lastOnboardingPosition = lastOnboardingPosition, let initialPoint = initialPoint, let centerPoint = centerPoint, position.isInPermissionsRange else { return }
+        let differenceBetweenInitialAndCenterPoint = initialPoint.y - centerPoint.y
+        let acc = differenceBetweenInitialAndCenterPoint * CGFloat(position - Double.permissionsPosition)
+        let yChange: CGFloat = {
+            if lastOnboardingPosition < position {
+                return initialPoint.y
+            } else {
+                return centerPoint.y + (cardOnboardingViewController.cardView.frame.size.height / 2.0) - acc
+            }
+        }()
         cardOnboardingViewController.cardView.frame.origin = CGPoint(x: cardOnboardingViewController.cardView.frame.origin.x, y: yChange)
     }
     

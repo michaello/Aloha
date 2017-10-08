@@ -86,7 +86,7 @@ extension VideoToolbarCoordinator: VideoToolbarViewControllerDelegate {
                 guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController else { return }
                     let previewViewController = UIStoryboard.viewController(GIFPreviewViewController.self)
                     previewViewController.gifURL = url
-                    presentedViewController.present(previewViewController, animated: true, completion: nil)
+                    presentedViewController.present(previewViewController, animated: true)
             }
         }
     }

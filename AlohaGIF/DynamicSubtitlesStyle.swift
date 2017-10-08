@@ -38,5 +38,5 @@ struct DynamicSubtitlesStyle {
 }
 
 extension DynamicSubtitlesStyle {
-    static let `default` = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: UIFont.boldSystemFont(ofSize: 16.0), color: .white)
+    static let `default` = DynamicSubtitlesStyle(effect: DynamicSubtitlesType.oneAfterAnother, font: .boldSystemFont(ofSize: 16.0), color: .white)
 }

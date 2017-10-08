@@ -10,8 +10,8 @@ import UIKit
 
 final class CardOnboardingViewController: UIViewController {
 
-    @IBOutlet weak var cardView: CardView!
-    @IBOutlet weak var permissionsLabel: UILabel! {
+    @IBOutlet private(set) weak var cardView: CardView!
+    @IBOutlet private(set) weak var permissionsLabel: UILabel! {
         didSet { permissionsLabel.text = Constants.onboardingText }
     }
     @IBOutlet private weak var allowPermissionsButton: UIButton!

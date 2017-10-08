@@ -1,5 +1,5 @@
 //
-//  DynamicSubtitlesModifyingViewController.swift
+//  DynamicSubtitlesModification.swift
 //  AlohaGIF
 //
 //  Created by Michal Pyrka on 23/04/2017.
@@ -14,6 +14,3 @@ enum DynamicSubtitlesModification {
     case font(UIFont)
 }
 
-class DynamicSubtitlesModifyingViewController: UIViewController {
-    weak var handler: ModifiedDynamicSubtitlesHandler?
-}

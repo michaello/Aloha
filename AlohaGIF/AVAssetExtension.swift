@@ -8,6 +8,10 @@
 
 import AVFoundation
 
+enum AVAssetWriteError: Error {
+    case unknown
+}
+
 extension AVAsset {
     func writeAudioTrack(to url: URL, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
         do {
@@ -20,8 +24,7 @@ extension AVAsset {
     
     private func write(to url: URL, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
         guard let exportSession = AVAssetExportSession(asset: self, presetName: AVAssetExportPresetAppleM4A) else {
-            let error = NSError(domain: "domain", code: 0, userInfo: nil)
-            failure(error)
+            failure(AVAssetWriteError.unknown)
             
             return
         }
@@ -34,8 +37,7 @@ extension AVAsset {
             case .completed:
                 success()
             case .unknown, .failed, .cancelled:
-                let error = NSError(domain: "domain", code: 0, userInfo: nil)
-                failure(error)
+                failure(AVAssetWriteError.unknown)
             default: ()
             }
         }

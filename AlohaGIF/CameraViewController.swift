@@ -26,7 +26,7 @@ final class CameraViewController: UIViewController {
     @IBOutlet fileprivate weak var recordButton: RecordButton!
     @IBOutlet fileprivate var popoverView: PopoverView!
     
-    private var effectView: CustomBlurRadiusView!
+    private var effectView: UIVisualEffectView!
     
     var isRecordingLongEnoughToProcess: Bool {
         return recording.end() > Constants.recordButtonMinimumRecordingTime
@@ -73,7 +73,6 @@ final class CameraViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        effectView.setToCustomBlurRadius()
         //TODO: Fix to avoid crash between commitConfiguration and startRunning
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
             self.session.startRunning()
@@ -99,34 +98,9 @@ final class CameraViewController: UIViewController {
             self.addVideoInput(type: self.cameraType)
         }
     }
-
-    @IBAction func videosButtonAction(_ sender: UIButton) {
-        var config = Configuration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-        
-        let imagePicker = ImagePickerController()
-        imagePicker.view.backgroundColor = .clear
-        imagePicker.modalPresentationStyle = .overCurrentContext
-        
-        imagePicker.configuration = config
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
-    }
     
-    fileprivate func performSpeechDetection(from asset: AVAsset) {
-        speechController.detectSpeechPromise(from: asset)
-            .then { [unowned self] speechArray in
-                DispatchQueue.main.async {
-                    self.presentVideoPreviewViewController(with: asset, speechArray: speechArray)
-                }
-            }
-            .catch { _ in
-                DispatchQueue.main.async { UIAlertController.showSpeechNotDetectedAlert() }
-            }
-            .always {
-                DispatchQueue.main.async { self.recordButton.stopLoading() }
-            }
+    @IBAction func videosButtonAction(_ sender: UIButton) {
+        present(ImagePickerController.defaultController(delegate: self), animated: true)
     }
     
     @IBAction func startRecordingAction() {
@@ -149,6 +123,21 @@ final class CameraViewController: UIViewController {
         movieFileOutput.stopRecording()
     }
     
+    fileprivate func performSpeechDetection(from asset: AVAsset) {
+        speechController.detectSpeechPromise(from: asset)
+            .then { [unowned self] speechArray in
+                DispatchQueue.main.async {
+                    self.presentVideoPreviewViewController(with: asset, speechArray: speechArray)
+                }
+            }
+            .catch { _ in
+                DispatchQueue.main.async { UIAlertController.show(.speechNotDetected) }
+            }
+            .always {
+                DispatchQueue.main.async { self.recordButton.stopLoading() }
+        }
+    }
+    
     private func recordButtonStopRecording() {
         reactRecordButtonOnEndedRecording()
         recordButtonTimer.invalidate()
@@ -166,7 +155,7 @@ final class CameraViewController: UIViewController {
     
     private func setupLayout() {
         setupVideosButton()
-        effectView = CustomBlurRadiusView()
+        effectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         effectView.frame = bottomCameraView.bounds
         bottomCameraView.insertSubview(effectView, at: 0)
     }
@@ -266,22 +255,22 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 extension CameraViewController: ImagePickerDelegate {
     func tooLongMovieSelected() {
         Logger.info("User tapped movie that is too long.")
-        UIAlertController.showTooLongVideoAlert()
+        UIAlertController.show(.tooLongVideo(limit: Int(maximumMovieLength)))
     }
-    
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {}
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {}
 
     func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset) {
         imagePicker.dismiss(animated: true) {
             self.assetController.AVAssetPromise(from: asset)
-                .then { [unowned self] videoAsset in
-                    DispatchQueue.main.async {
-                        self.presentVideoEditorViewController(videoToEdit: videoAsset)
-                    }
+            .then { [unowned self] videoAsset in
+                DispatchQueue.main.async {
+                    self.presentVideoEditorViewController(videoToEdit: videoAsset)
+                }
             }
         }
     }
+    
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {}
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {}
     
     fileprivate func presentVideoPreviewViewController(with asset: AVAsset?, speechArray: [SpeechModel]? = nil) {
         guard let asset = asset else { return }
@@ -290,17 +279,13 @@ extension CameraViewController: ImagePickerDelegate {
         if let speechArray = speechArray {
             videoPreviewViewController.speechArray = speechArray
         }
-        present(videoPreviewViewController, animated: true, completion: nil)
+        present(videoPreviewViewController, animated: true)
     }
     
     private func presentVideoEditorViewController(videoToEdit video: AVAsset) {
         guard let videoPath = (video as? AVURLAsset)?.url.path else { return }
         recordButton.startLoading()
-        let videoEditorController = UIVideoEditorController()
-        videoEditorController.videoMaximumDuration = TimeInterval(maximumMovieLength)
-        videoEditorController.videoQuality = .typeMedium
-        videoEditorController.delegate = self
-        videoEditorController.videoPath = videoPath
+        let videoEditorController = UIVideoEditorController.defaultController(maximumDuration: TimeInterval(maximumMovieLength), delegate: self, videoPath: videoPath)
         present(videoEditorController, animated: true) { [unowned self] in
             self.recordButton.stopLoading()
         }

@@ -24,7 +24,7 @@ public enum RecordButtonState: Int {
     }
     open var progressColor: UIColor!  = .red {
         didSet {
-            gradientMaskLayer.colors = [UIColor.themeColor.cgColor, UIColor(colorLiteralRed: 250.0/255.0, green: 188.0/255.0, blue: 81.0/255.0, alpha: 1.0).cgColor]
+            gradientMaskLayer.colors = [UIColor.themeColor.cgColor, UIColor(red: 250.0/255.0, green: 188.0/255.0, blue: 81.0/255.0, alpha: 1.0).cgColor]
         }
     }
     
@@ -104,8 +104,8 @@ public enum RecordButtonState: Int {
         circleBorder.cornerRadius = self.frame.size.width / 2
         layer.insertSublayer(circleBorder, at: 0)
         
-        let startAngle: CGFloat = CGFloat(M_PI) + CGFloat(M_PI_2)
-        let endAngle: CGFloat = CGFloat(M_PI) * 3 + CGFloat(M_PI_2)
+        let startAngle: CGFloat = CGFloat.pi + CGFloat.pi / 2.0
+        let endAngle: CGFloat = CGFloat.pi * 3.0 + CGFloat.pi / 2.0
         let centerPoint: CGPoint = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
         gradientMaskLayer = self.gradientMask()
         progressLayer = CAShapeLayer()
