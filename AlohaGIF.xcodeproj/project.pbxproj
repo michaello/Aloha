@@ -11,6 +11,7 @@
 		901054E21F893CD300892C1B /* RegiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E11F893CD300892C1B /* RegiftExtension.swift */; };
 		901054E41F8A47DB00892C1B /* UIVideoEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */; };
 		901054E61F8A4EDD00892C1B /* ImagePickerControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E51F8A4EDD00892C1B /* ImagePickerControllerExtension.swift */; };
+		901330681F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901330671F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift */; };
 		9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */; };
 		9013E2E41EACAED300A817A9 /* EffectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013E2E31EACAED300A817A9 /* EffectsViewController.swift */; };
 		9040E75B1EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040E7571EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift */; };
@@ -112,6 +113,7 @@
 		901054E11F893CD300892C1B /* RegiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegiftExtension.swift; sourceTree = "<group>"; };
 		901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVideoEditorController.swift; sourceTree = "<group>"; };
 		901054E51F8A4EDD00892C1B /* ImagePickerControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerControllerExtension.swift; sourceTree = "<group>"; };
+		901330671F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesModifyingViewController.swift; sourceTree = "<group>"; };
 		9013E2E11EAC015800A817A9 /* VideoToolbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoToolbarViewController.swift; sourceTree = "<group>"; };
 		9013E2E31EACAED300A817A9 /* EffectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsViewController.swift; sourceTree = "<group>"; };
 		9040E7571EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetImageGeneratorTimePoints.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				90DE8C681EACCC3C0055A390 /* FontsViewController.swift */,
 				906C0DD71EAEA5C200A8555D /* DebugViewController.swift */,
 				90A072BF1EB12E92007704A8 /* GIFPreviewViewController.swift */,
+				901330671F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */,
 				9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */,
 				905E047F1EB21EF300FC8A30 /* UserDefaultsExtension.swift in Sources */,
+				901330681F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift in Sources */,
 				905E04861EB2627F00FC8A30 /* ALLoadingViewExtension.swift in Sources */,
 				9041D3571EA27255007E134B /* OnboardingViewController.swift in Sources */,
 				90CD57E41EACEB86007B1D6E /* UINavigationControllerExtension.swift in Sources */,
