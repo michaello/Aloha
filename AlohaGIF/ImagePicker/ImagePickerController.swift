@@ -4,9 +4,9 @@ import Photos
 
 @objc public protocol ImagePickerDelegate: class {
 
-  func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+  @objc optional func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+  @objc optional func cancelButtonDidPress(_ imagePicker: ImagePickerController)
   func doneButtonDidPress(_ imagePicker: ImagePickerController, asset: PHAsset)
-  func cancelButtonDidPress(_ imagePicker: ImagePickerController)
   func tooLongMovieSelected()
 }
 
@@ -311,7 +311,7 @@ extension ImagePickerController: BottomContainerViewDelegate {
 
   func cancelButtonDidPress() {
     dismiss(animated: true, completion: nil)
-    delegate?.cancelButtonDidPress(self)
+    delegate?.cancelButtonDidPress?(self)
   }
 
   func imageStackViewDidPress() {
@@ -322,7 +322,7 @@ extension ImagePickerController: BottomContainerViewDelegate {
         images = AssetManager.resolveAssets(stack.assets)
     }
 
-    delegate?.wrapperDidPress(self, images: images)
+    delegate?.wrapperDidPress?(self, images: images)
   }
 }
 

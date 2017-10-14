@@ -12,7 +12,7 @@ struct DynamicSubtitlesStyle {
     
     private enum Constants {
         static let fontMultiplierForOneAfterAnotherStyle: CGFloat = 24.0
-        static let fontMultiplierForOneWordOnlyStyle: CGFloat = 48.0
+        static let fontMultiplierForOneWordOnlyStyle: CGFloat = 32.0
         static let multiplierForRenderingVideo: CGFloat = 1.5
     }
     

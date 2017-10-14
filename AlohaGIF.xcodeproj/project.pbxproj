@@ -42,6 +42,8 @@
 		90483ED11F80179B0011A8B9 /* SwiftyBeaverTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90483ED01F80179B0011A8B9 /* SwiftyBeaverTokens.swift */; };
 		904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B860B1EA3F8C400540D3A /* CameraViewController.swift */; };
 		904B860F1EA4012700540D3A /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B860E1EA4012700540D3A /* RecordButton.swift */; };
+		904F3B2F1F9153A6007E9627 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F3B2E1F9153A6007E9627 /* UIDeviceExtension.swift */; };
+		904F3B311F916634007E9627 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F3B301F916634007E9627 /* CameraController.swift */; };
 		904F80A21EA4B9E3008574CE /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F808B1EA4B9E3008574CE /* AssetManager.swift */; };
 		904F80A31EA4B9E3008574CE /* BottomContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F808D1EA4B9E3008574CE /* BottomContainerView.swift */; };
 		904F80A41EA4B9E3008574CE /* ButtonPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F808E1EA4B9E3008574CE /* ButtonPicker.swift */; };
@@ -82,7 +84,6 @@
 		90661E911EA67626009E81D3 /* AnimationsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E901EA67626009E81D3 /* AnimationsComposer.swift */; };
 		90661E931EA678CE009E81D3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90661E921EA678CE009E81D3 /* Logger.swift */; };
 		906C0DD61EAEA42E00A8555D /* DynamicSubtitlesStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD51EAEA42E00A8555D /* DynamicSubtitlesStyle.swift */; };
-		906C0DD81EAEA5C200A8555D /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD71EAEA5C200A8555D /* DebugViewController.swift */; };
 		906C0DDA1EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */; };
 		906D9E351EA8185500181EC2 /* ALLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E341EA8185500181EC2 /* ALLoadingView.swift */; };
 		906D9E371EA827DB00181EC2 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D9E361EA827DB00181EC2 /* OverlayView.swift */; };
@@ -149,6 +150,8 @@
 		90483ED01F80179B0011A8B9 /* SwiftyBeaverTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyBeaverTokens.swift; sourceTree = "<group>"; };
 		904B860B1EA3F8C400540D3A /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		904B860E1EA4012700540D3A /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		904F3B2E1F9153A6007E9627 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		904F3B301F916634007E9627 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		904F808B1EA4B9E3008574CE /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		904F808D1EA4B9E3008574CE /* BottomContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomContainerView.swift; sourceTree = "<group>"; };
 		904F808E1EA4B9E3008574CE /* ButtonPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonPicker.swift; sourceTree = "<group>"; };
@@ -189,7 +192,6 @@
 		90661E901EA67626009E81D3 /* AnimationsComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationsComposer.swift; sourceTree = "<group>"; };
 		90661E921EA678CE009E81D3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		906C0DD51EAEA42E00A8555D /* DynamicSubtitlesStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesStyle.swift; sourceTree = "<group>"; };
-		906C0DD71EAEA5C200A8555D /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		906C0DD91EAEB4EB00A8555D /* DynamicSubtitlesVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesVideo.swift; sourceTree = "<group>"; };
 		906D9E341EA8185500181EC2 /* ALLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALLoadingView.swift; sourceTree = "<group>"; };
 		906D9E361EA827DB00181EC2 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
@@ -342,7 +344,6 @@
 				9013E2E31EACAED300A817A9 /* EffectsViewController.swift */,
 				90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */,
 				90DE8C681EACCC3C0055A390 /* FontsViewController.swift */,
-				906C0DD71EAEA5C200A8555D /* DebugViewController.swift */,
 				90A072BF1EB12E92007704A8 /* GIFPreviewViewController.swift */,
 				901330671F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift */,
 			);
@@ -377,6 +378,7 @@
 				901054E11F893CD300892C1B /* RegiftExtension.swift */,
 				901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */,
 				901054E51F8A4EDD00892C1B /* ImagePickerControllerExtension.swift */,
+				904F3B2E1F9153A6007E9627 /* UIDeviceExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -513,6 +515,7 @@
 				90F850C21EB6048D00FE7AEC /* PropertyList.swift */,
 				90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModification.swift */,
 				90483ED01F80179B0011A8B9 /* SwiftyBeaverTokens.swift */,
+				904F3B301F916634007E9627 /* CameraController.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				904F3B311F916634007E9627 /* CameraController.swift in Sources */,
 				9041D35F1EA2864B007E134B /* CHIBasePageControl.swift in Sources */,
 				90661E721EA553A6009E81D3 /* VideoPreviewViewController.swift in Sources */,
 				9041D3531EA2720D007E134B /* SwiftyOnboard.swift in Sources */,
@@ -753,6 +757,7 @@
 				901054E61F8A4EDD00892C1B /* ImagePickerControllerExtension.swift in Sources */,
 				90661E771EA56140009E81D3 /* SpeechRecognizer.swift in Sources */,
 				9013E2E21EAC015800A817A9 /* VideoToolbarViewController.swift in Sources */,
+				904F3B2F1F9153A6007E9627 /* UIDeviceExtension.swift in Sources */,
 				905E047F1EB21EF300FC8A30 /* UserDefaultsExtension.swift in Sources */,
 				901330681F8EB7040011F971 /* DynamicSubtitlesModifyingViewController.swift in Sources */,
 				905E04861EB2627F00FC8A30 /* ALLoadingViewExtension.swift in Sources */,
@@ -781,7 +786,6 @@
 				904F80A51EA4B9E3008574CE /* ImageStack.swift in Sources */,
 				9040E75B1EAFF7A10099B08C /* AVAssetImageGeneratorTimePoints.swift in Sources */,
 				90661E7B1EA60FBB009E81D3 /* AudioExtractor.swift in Sources */,
-				906C0DD81EAEA5C200A8555D /* DebugViewController.swift in Sources */,
 				90F850C11EB601E300FE7AEC /* PopoverView.swift in Sources */,
 				90CD57E61EACF206007B1D6E /* UIStoryboardExtension.swift in Sources */,
 				904F80AB1EA4B9E3008574CE /* Helper.swift in Sources */,

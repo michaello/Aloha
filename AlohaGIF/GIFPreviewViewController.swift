@@ -19,7 +19,7 @@ class GIFPreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupConstraints()
+        setupConstraintsIfNeeded()
         guard let gifData = gifData() else { return }
         gifImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifData)
         ALLoadingView.manager.coverContent()
@@ -48,15 +48,14 @@ class GIFPreviewViewController: UIViewController {
         }
     }
     
-    private func setupConstraints() {
+    private func setupConstraintsIfNeeded() {
         let isSmallerThan47InchDisplay = UIScreen.main.nativeBounds.height < 1334.0
-        if isSmallerThan47InchDisplay {
-            let newGifImageViewHeightConstraint = NSLayoutConstraint(item: gifImageViewHeightConstraint.firstItem, attribute: gifImageViewHeightConstraint.firstAttribute, relatedBy: gifImageViewHeightConstraint.relation, toItem: gifImageViewHeightConstraint.secondItem, attribute: gifImageViewHeightConstraint.secondAttribute, multiplier: 0.55, constant: 0.0)
-            gifImageViewHeightConstraint.isActive = false
-            gifImageViewHeightConstraint = newGifImageViewHeightConstraint
-            gifImageViewHeightConstraint.isActive = true
-            modalContainerView.layoutIfNeeded()
-        }
+        guard isSmallerThan47InchDisplay else { return }
+        let newGifImageViewHeightConstraint = NSLayoutConstraint(item: gifImageViewHeightConstraint.firstItem, attribute: gifImageViewHeightConstraint.firstAttribute, relatedBy: gifImageViewHeightConstraint.relation, toItem: gifImageViewHeightConstraint.secondItem, attribute: gifImageViewHeightConstraint.secondAttribute, multiplier: 0.55, constant: 0.0)
+        gifImageViewHeightConstraint.isActive = false
+        gifImageViewHeightConstraint = newGifImageViewHeightConstraint
+        gifImageViewHeightConstraint.isActive = true
+        modalContainerView.layoutIfNeeded()
     }
     
     private func completeGifProcess() {
