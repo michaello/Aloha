@@ -18,9 +18,9 @@ final class EffectsViewController: DynamicSubtitlesModifyingViewController {
         static let highlightViewYOffset: CGFloat = -30.0
     }
     
-    @IBOutlet weak var oneAfterAnotherButton: UIButton!
-    @IBOutlet weak var oneWordOnlyButton: UIButton!
-    @IBOutlet weak var selectedEffectHighlightView: UIView!
+    @IBOutlet private weak var oneAfterAnotherButton: UIButton!
+    @IBOutlet private weak var oneWordOnlyButton: UIButton!
+    @IBOutlet private weak var selectedEffectHighlightView: UIView!
     var selectedEffect: DynamicSubtitlesType = .oneAfterAnother {
         didSet {
             handler?.handle(.effect(selectedEffect))

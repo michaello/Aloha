@@ -10,10 +10,10 @@ import AVFoundation
 import UIKit
 
 //TODO: Clear global flags
-var isRenderingVideo = false
 var aScale: CGFloat = 1.0
-var aOffsetX: CGFloat = 0.0
-var aOffsetY: CGFloat = 0.0
+var xOffset: CGFloat = 0.0
+var yOffset: CGFloat = 0.0
+var isRenderingVideo = false
 var shouldAlwaysShowSubtitles = false
 
 enum DynamicSubtitlesType {
@@ -81,8 +81,8 @@ final class DynamicSubtitlesComposer {
         let offsetX: CGFloat
         let offsetY: CGFloat
         if case .videoComposition = dynamicSubtitlesContext {
-            offsetX = aOffsetX
-            offsetY = aOffsetY
+            offsetX = xOffset
+            offsetY = yOffset
         } else {
             offsetX = 0.0
             offsetY = 0.0

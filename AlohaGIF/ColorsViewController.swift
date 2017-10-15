@@ -55,14 +55,8 @@ extension ColorsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ColorCell.self), for: indexPath) as! ColorCell
-        cell.color = colors[indexPath.row]
-        cell.layer.borderColor = UIColor.white.cgColor
-        cell.layer.cornerRadius = cell.frame.width / 2.0
-        if let selectedIndexPath = selectedIndexPath, indexPath == selectedIndexPath {
-            cell.layer.borderWidth = 2.0
-        } else {
-            cell.layer.borderWidth = 0.0
-        }
+        cell.backgroundColor = colors[indexPath.row]
+        cell.isMarked = indexPath == selectedIndexPath
         
         return cell
     }
