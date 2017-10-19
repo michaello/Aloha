@@ -24,7 +24,7 @@ final class VideoPreviewViewController: UIViewController {
     var selectedVideo: AVAsset!
     var speechArray = [SpeechModel]()
     fileprivate lazy var videoToolbarCoordinator: VideoToolbarCoordinator = VideoToolbarCoordinator(selectedVideo: self.selectedVideo)
-    private let dynamicSubtitlesComposer = DynamicSubtitlesComposer()
+    private var dynamicSubtitlesComposer: DynamicSubtitlesComposer?
     
     private let player = AVQueuePlayer()
     private lazy var playerLayer = AVPlayerLayer(player: self.player)
@@ -70,12 +70,12 @@ final class VideoPreviewViewController: UIViewController {
     func addDynamicSubtitlesViewAndApplySubtitles() {
         let subtitlesView = OverlayView(frame: view.frame)
         subtitlesView.videoToolbarView = movieToolbarContainerView
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove))
-        subtitlesView.addGestureRecognizer(panRecognizer)
+        subtitlesView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(VideoPreviewViewController.dynamicSubtitlesViewDidMove)))
         subtitlesInitialPointCenter = subtitlesView.center
         view.addSubview(subtitlesView)
         dynamicSubtitlesView = subtitlesView
-        dynamicSubtitlesComposer.applyDynamicSubtitles(to: DynamicSubtitlesContext.view(subtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: self.dynamicSubtitlesStyle, size: subtitlesView.bounds.size)
+        dynamicSubtitlesComposer = DynamicSubtitlesComposer(dynamicSubtitlesStyle: dynamicSubtitlesStyle, dynamicSubtitlesContext: DynamicSubtitlesContext.view(subtitlesView))
+        dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: speechArray, size: subtitlesView.bounds.size)
     }
     
     
@@ -147,7 +147,8 @@ final class VideoPreviewViewController: UIViewController {
             self.dynamicSubtitlesStyle = dynamicSubtitlesStyle
         dynamicSubtitlesView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         let startTime = shouldPresentSubtitlesFromBeginning ? 0.0 : currentTimeOfPreviewMovie()
-        dynamicSubtitlesComposer.applyDynamicSubtitles(to: DynamicSubtitlesContext.view(dynamicSubtitlesView), speechArray: speechArray, dynamicSubtitlesStyle: dynamicSubtitlesStyle, size: dynamicSubtitlesView.bounds.size, startTime: startTime)
+        dynamicSubtitlesComposer = DynamicSubtitlesComposer(dynamicSubtitlesStyle: dynamicSubtitlesStyle, dynamicSubtitlesContext: DynamicSubtitlesContext.view(dynamicSubtitlesView))
+        dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: speechArray, size: dynamicSubtitlesView.bounds.size, startTime: startTime)
     }
     
     private func setupButtons() {

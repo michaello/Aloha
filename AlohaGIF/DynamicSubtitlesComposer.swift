@@ -21,50 +21,29 @@ enum DynamicSubtitlesType {
     case oneWordOnly
 }
 
-enum AnimationDestination {
-    case preview
-    case movie
-}
-
-enum DynamicSubtitlesContext {
-    case view(UIView)
-    case videoComposition(AVMutableVideoComposition)
-    
-    var destination: AnimationDestination {
-        switch self {
-        case .view:
-            return .preview
-        default:
-            return .movie
-        }
-    }
-}
-
-
 final class DynamicSubtitlesComposer {
     
-    private var animationsComposer = AnimationsComposer()
-    private var dynamicSubtitlesStyle = DynamicSubtitlesStyle.default
+    private enum Constants {
+        static let multiplierForNewlineWithSomeSpace: CGFloat = 1.2
+    }
     
-    func applyDynamicSubtitles(to dynamicSubtitlesContext: DynamicSubtitlesContext, speechArray: [SpeechModel?], dynamicSubtitlesStyle: DynamicSubtitlesStyle? = nil, size: CGSize, startTime: Double = 0.0) {
-        Logger.debug("Will begin applying dynamic subtitles to movie...")
-        if let style = dynamicSubtitlesStyle {
-            self.dynamicSubtitlesStyle = style
-        }
-        if case .videoComposition = dynamicSubtitlesContext {
-            isRenderingVideo = true
-        } else {
-            isRenderingVideo = false
-        }
+    private var animationsComposer = AnimationsComposer()
+    private let dynamicSubtitlesStyle: DynamicSubtitlesStyle
+    private let dynamicSubtitlesContext: DynamicSubtitlesContext
+    
+    init(dynamicSubtitlesStyle: DynamicSubtitlesStyle = DynamicSubtitlesStyle.default, dynamicSubtitlesContext: DynamicSubtitlesContext) {
+        self.dynamicSubtitlesStyle = dynamicSubtitlesStyle
+        self.dynamicSubtitlesContext = dynamicSubtitlesContext
+    }
+    
+    func applyDynamicSubtitles(speechArray: [SpeechModel], size: CGSize, startTime: Double = 0.0) {
+        isRenderingVideo = dynamicSubtitlesContext.destination == .movie
         let overlayLayer = self.overlayLayer(size: size)
-        let array = speechArray.flatMap { $0 }
-        let textLayers = self.textLayers(speechArray: array, size: size, dynamicSubtitlesContext: dynamicSubtitlesContext)
-        textLayers.forEach { overlayLayer.addSublayer($0) }
-        applyAnimations(animationDestination: dynamicSubtitlesContext.destination, textLayersArray: textLayers, speechModelArray: array, dynamicSubtitlesType: self.dynamicSubtitlesStyle.effect, startTime: startTime)
+        let textLayers = self.textLayers(speechArray: speechArray, size: size, dynamicSubtitlesContext: dynamicSubtitlesContext)
+        textLayers.forEach(overlayLayer.addSublayer)
+        applyAnimations(animationDestination: dynamicSubtitlesContext.destination, textLayersArray: textLayers, speechModelArray: speechArray, dynamicSubtitlesType: self.dynamicSubtitlesStyle.effect, startTime: startTime)
         
-        let layers = parentAndVideoLayer(size: size)
-        let parentLayer = layers.0
-        let videoLayer = layers.1
+        let (parentLayer, videoLayer) = parentAndVideoLayer(size: size)
         parentLayer.addSublayer(overlayLayer)
         switch dynamicSubtitlesContext {
         case .view(let view):
@@ -75,63 +54,56 @@ final class DynamicSubtitlesComposer {
     }
     
     func textLayers(speechArray: [SpeechModel], size: CGSize, dynamicSubtitlesContext: DynamicSubtitlesContext) -> [CATextLayer] {
-        let textArray = speechArray.map { $0.content }
-        var textLayersArray = [CATextLayer]()
         var textLayersSizes = [CGFloat]()
-        let offsetX: CGFloat
-        let offsetY: CGFloat
-        if case .videoComposition = dynamicSubtitlesContext {
-            offsetX = xOffset
-            offsetY = yOffset
-        } else {
-            offsetX = 0.0
-            offsetY = 0.0
-        }
-        
-        //TODO: Refactor it, big pile of mess
-        var designatedY: CGFloat
-        var designatedX: CGFloat = 0.0
-        let wholeTextContent = speechArray.reduce("") { $0 + " " + $1.content }
-        let estimatedNumberOfLines = round(textRect(for: wholeTextContent).width / size.width) + 1.0
-        let multiplierForNewlineWithSomeSpace: CGFloat = 1.2
-        
-        if isRenderingVideo {
-            designatedY = (textRect(for: wholeTextContent).height * (estimatedNumberOfLines - 1.0) * multiplierForNewlineWithSomeSpace) + offsetY
-        } else {
-            designatedY = size.height - (textRect(for: wholeTextContent).height * estimatedNumberOfLines * multiplierForNewlineWithSomeSpace) + offsetY
-        }
-        let layers = textArray.enumerated().map { index, text -> CATextLayer in
+        let offsetX = dynamicSubtitlesContext.destination == .movie ? xOffset : 0.0
+        let offsetY = dynamicSubtitlesContext.destination == .movie ? yOffset : 0.0
+        var designatedY = initialYPositionForTextLayers(speechArray: speechArray, size: size, dynamicSubtitlesContext: dynamicSubtitlesContext)
+        return speechArray.map({ $0.content }).enumerated().map { index, text -> CATextLayer in
             let textLayer = self.textLayer(text: text)
             let currentSize = textRect(for: text)
-            var currentOrigin = index == 0 ? CGPoint(x: 0.0 - offsetX, y: size.height / 2) : CGPoint(x: textLayersSizes[index - 1], y: size.height / 2)
-            //New line if needed
-            if currentOrigin.x + currentSize.width > size.width {
-                if isRenderingVideo {
-                    designatedY = designatedY + (-currentSize.height * multiplierForNewlineWithSomeSpace)
-                } else {
-                    designatedY = designatedY - (-currentSize.height * multiplierForNewlineWithSomeSpace)
-                }
-                designatedX = 0.0
-                currentOrigin.x = designatedX
+            let xPosition = index == 0 ? (0.0 - offsetX) : textLayersSizes[index - 1]
+            var currentOrigin = CGPoint(x: xPosition, y: size.height / 2.0)
+            let isRequiringNewlineBreak = currentOrigin.x + currentSize.width > size.width
+            currentOrigin.x = isRequiringNewlineBreak ? 0.0 : xPosition
+            if isRequiringNewlineBreak {
+                let heightWithSomeSpace = (-currentSize.height * Constants.multiplierForNewlineWithSomeSpace)
+                let reversedHeightIfVideoRender = heightWithSomeSpace * (isRenderingVideo ? 1 : -1)
+                designatedY = designatedY + reversedHeightIfVideoRender
             }
             currentOrigin.y = designatedY
-            if case .oneWordOnly = dynamicSubtitlesStyle.effect {
-                textLayer.frame = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
-                textLayer.frame = textLayer.frame.offsetBy(dx: -offsetX, dy: offsetY)
-            } else {
-                let centerFrame = centerFrameForTextLayer(textLayerSize: currentSize, movieSize: size)
-                let centerHeight = centerFrame.size.height
-                var offset = -centerFrame.origin.y + centerHeight
-                offset = isRenderingVideo ? -offset : offset
-                textLayer.frame = CGRect(origin: currentOrigin, size: currentSize).offsetBy(dx: 0.0, dy: offset)
-            }
-            textLayersArray.append(textLayer)
+            textLayer.frame = textLayerFrame(for: text, origin: currentOrigin, size: size, customOffsetPoint: CGPoint(x: offsetX, y: offsetY))
             let space = currentSize.width / CGFloat((text as String).characters.count)
             textLayersSizes.append(currentOrigin.x + currentSize.width + space)
-            
             return textLayer
         }
-        return layers
+    }
+    
+    private func textLayerFrame(for text: String, origin: CGPoint, size: CGSize, customOffsetPoint: CGPoint) -> CGRect {
+        let textTect = textRect(for: text)
+        switch dynamicSubtitlesStyle.effect {
+        case .oneWordOnly:
+            return centerFrameForTextLayer(textLayerSize: textTect, movieSize: size).offsetBy(dx: -customOffsetPoint.x, dy: customOffsetPoint.y)
+        case .oneAfterAnother:
+            let centerFrame = centerFrameForTextLayer(textLayerSize: textTect, movieSize: size)
+            let centerHeight = centerFrame.size.height
+            var offset = -centerFrame.origin.y + centerHeight
+            offset = isRenderingVideo ? -offset : offset
+            return CGRect(origin: origin, size: textTect).offsetBy(dx: 0.0, dy: offset)
+        }
+    }
+    
+    private func initialYPositionForTextLayers(speechArray: [SpeechModel], size: CGSize, dynamicSubtitlesContext: DynamicSubtitlesContext) -> CGFloat {
+        let offsetY = dynamicSubtitlesContext != .view(UIView()) ? xOffset : 0.0
+        let wholeTextContent = speechArray.asSentence
+        let estimatedNumberOfLines = round(textRect(for: wholeTextContent).width / size.width) + 1.0
+        let textRectHeight = textRect(for: wholeTextContent).height
+        
+        switch dynamicSubtitlesContext {
+        case .videoComposition:
+            return (textRectHeight * (estimatedNumberOfLines - 1.0) * Constants.multiplierForNewlineWithSomeSpace) + offsetY
+        case .view:
+            return size.height - (textRectHeight * estimatedNumberOfLines * Constants.multiplierForNewlineWithSomeSpace) + offsetY
+        }
     }
     
     private func applyAnimations(animationDestination: AnimationDestination, textLayersArray: [CATextLayer], speechModelArray: [SpeechModel], dynamicSubtitlesType: DynamicSubtitlesType, startTime: Double) {
@@ -182,5 +154,12 @@ final class DynamicSubtitlesComposer {
         layer.masksToBounds = false
         
         return layer
+    }
+}
+
+extension Array where Element == SpeechModel {
+    
+    var asSentence: String {
+        return reduce("") { $0 + " " + $1.content }
     }
 }

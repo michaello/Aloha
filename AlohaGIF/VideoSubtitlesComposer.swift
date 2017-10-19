@@ -13,7 +13,7 @@ enum VideoCompositionError: Error {
     case noVideo
 }
 
-struct VideoSubtitlesComposer {
+final class VideoSubtitlesComposer {
     
     private enum Constants {
         static let exportQuality = AVAssetExportPresetHighestQuality
@@ -22,7 +22,7 @@ struct VideoSubtitlesComposer {
         static let compositionFrameDuration = CMTime(value: 1, timescale: 30)
     }
     
-    private let dynamicSubtitlesComposer = DynamicSubtitlesComposer()
+    private var dynamicSubtitlesComposer: DynamicSubtitlesComposer?
     
     func composeVideoWithDynamicSubtitlesPromise(dynamicSubtitlesVideo: DynamicSubtitlesVideo) -> Promise<URL> {
         return Promise<URL>(work: { fulfill, reject in
@@ -59,7 +59,8 @@ struct VideoSubtitlesComposer {
             
             let mainComposition = self.mainComposition(videoAsset: asset, videoTrack: videoTrack)
             let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainComposition)
-            self.dynamicSubtitlesComposer.applyDynamicSubtitles(to: dynamicSubtitlesContext, speechArray: dynamicSubtitlesVideo.speechArray, dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, size: self.naturalSize(for: videoTrack))
+            self.dynamicSubtitlesComposer = DynamicSubtitlesComposer(dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, dynamicSubtitlesContext: dynamicSubtitlesContext)
+            self.dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: dynamicSubtitlesVideo.speechArray, size: self.naturalSize(for: videoTrack))
             //TODO: name collision?
             self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainComposition) { url in
                 DispatchQueue.main.async {

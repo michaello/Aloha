@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		900AD3DF1F954B61006E0195 /* DynamicSubtitlesContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AD3DE1F954B61006E0195 /* DynamicSubtitlesContext.swift */; };
 		901054E01F893BC800892C1B /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054DF1F893BC800892C1B /* NotificationNameExtension.swift */; };
 		901054E21F893CD300892C1B /* RegiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E11F893CD300892C1B /* RegiftExtension.swift */; };
 		901054E41F8A47DB00892C1B /* UIVideoEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */; };
@@ -110,6 +111,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		900AD3DE1F954B61006E0195 /* DynamicSubtitlesContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSubtitlesContext.swift; sourceTree = "<group>"; };
 		901054DF1F893BC800892C1B /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		901054E11F893CD300892C1B /* RegiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegiftExtension.swift; sourceTree = "<group>"; };
 		901054E31F8A47DB00892C1B /* UIVideoEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVideoEditorController.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				90CD57ED1EAD454D007B1D6E /* DynamicSubtitlesModification.swift */,
 				90483ED01F80179B0011A8B9 /* SwiftyBeaverTokens.swift */,
 				904F3B301F916634007E9627 /* CameraController.swift */,
+				900AD3DE1F954B61006E0195 /* DynamicSubtitlesContext.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				9041D3631EA29F52007E134B /* CardOnboardingViewController.swift in Sources */,
 				905E04811EB25A3D00FC8A30 /* AVAssetTrackExtension.swift in Sources */,
 				904F80AD1EA4B9E3008574CE /* ImageGalleryView.swift in Sources */,
+				900AD3DF1F954B61006E0195 /* DynamicSubtitlesContext.swift in Sources */,
 				904F80A41EA4B9E3008574CE /* ButtonPicker.swift in Sources */,
 				904F80B31EA4B9E3008574CE /* TopView.swift in Sources */,
 				904F80A31EA4B9E3008574CE /* BottomContainerView.swift in Sources */,
