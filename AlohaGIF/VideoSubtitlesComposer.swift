@@ -56,11 +56,10 @@ final class VideoSubtitlesComposer {
                 reject(VideoCompositionError.noVideo)
                 return
             }
-            
-            let mainComposition = self.mainComposition(videoAsset: asset, videoTrack: videoTrack)
+            let mainComposition = self.mainComposition(videoAsset: asset, videoTrack: videoTrack, video: video)
             let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainComposition)
             self.dynamicSubtitlesComposer = DynamicSubtitlesComposer(dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, dynamicSubtitlesContext: dynamicSubtitlesContext)
-            self.dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: dynamicSubtitlesVideo.speechArray, size: self.naturalSize(for: videoTrack))
+            self.dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: dynamicSubtitlesVideo.speechArray, size: self.naturalSize(for: video))
             self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainComposition) { url in
                 DispatchQueue.main.async {
                     Logger.debug("Successfully exported video with dynamic subtitles.")
@@ -70,11 +69,11 @@ final class VideoSubtitlesComposer {
         })
     }
     
-    private func mainComposition(videoAsset: AVAsset, videoTrack: AVMutableCompositionTrack) -> AVMutableVideoComposition {
+    private func mainComposition(videoAsset: AVAsset, videoTrack: AVMutableCompositionTrack, video: AVAssetTrack) -> AVMutableVideoComposition {
         let compositionInstruction = self.compositionInstruction(videoAsset: videoAsset, videoTrack: videoTrack)
         let mainComposition = AVMutableVideoComposition()
         
-        mainComposition.renderSize = naturalSize(for: videoTrack)
+        mainComposition.renderSize = naturalSize(for: video)
         mainComposition.instructions = [compositionInstruction]
         mainComposition.frameDuration = Constants.compositionFrameDuration
         
