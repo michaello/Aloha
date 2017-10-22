@@ -12,7 +12,8 @@ import AVFoundation
 final class VideoPreviewViewController: UIViewController {
     
     private struct Constants {
-        static let loopCountPath = "loopCount"
+        static let loopCountKeyPath = #keyPath(AVPlayerLooper.loopCount)
+        static let isReadyForDisplayKeyPath = #keyPath(AVPlayerLayer.isReadyForDisplay)
         static let increasedTouchInsets = UIEdgeInsets(top: -20.0, left: -20.0, bottom: -10.0, right: -20.0)
     }
     
@@ -30,7 +31,8 @@ final class VideoPreviewViewController: UIViewController {
     private lazy var playerLayer = AVPlayerLayer(player: self.player)
     private lazy var playerItem = AVPlayerItem(asset: self.selectedVideo)
     private lazy var playerLooper = AVPlayerLooper(player: self.player, templateItem: self.playerItem, timeRange: self.loopingDurationTimeRange())
-    private var observerContext = 0
+    private var loopContext = 0
+    private var isReadyContext = 0
     
     var dynamicSubtitlesStyle: DynamicSubtitlesStyle = .default
     fileprivate var dynamicSubtitlesView: OverlayView?
@@ -55,16 +57,28 @@ final class VideoPreviewViewController: UIViewController {
         super.viewDidLoad()
         addObservers()
         setupVideoToolbarCoordinator()
-        setupPlayer()
         setupButtons()
+        setupPlayer()
         
         guard shouldShowOverlayText else { return }
-        //TODO: Refactor
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            self?.setupVideoScale()
-            self?.addDynamicSubtitlesViewAndApplySubtitles()
-            self?.wasAlreadyPlayed = true
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if context == &loopContext {
+            guard let newValue = change?[.newKey] as? Int else { return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context) }
+            Logger.verbose("Replayed movie \(selectedVideo.description). Count: \(newValue)")
+            presentDynamicSubtitlesOverlay(dynamicSubtitlesStyle, shouldPresentSubtitlesFromBeginning: true)
+        } else if context == &isReadyContext {
+            playerLayer.removeObserver(self, forKeyPath: Constants.isReadyForDisplayKeyPath)
+            prepareForSubtitlesPresentation()
+        } else {
+            return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navigationController = segue.destination as? UINavigationController, let videoToolbarViewController = navigationController.topViewController as? VideoToolbarViewController else { return }
+        videoToolbarCoordinator.videoToolbarViewController = videoToolbarViewController
     }
     
     func addDynamicSubtitlesViewAndApplySubtitles() {
@@ -77,7 +91,6 @@ final class VideoPreviewViewController: UIViewController {
         dynamicSubtitlesComposer = DynamicSubtitlesComposer(dynamicSubtitlesStyle: dynamicSubtitlesStyle, dynamicSubtitlesContext: DynamicSubtitlesContext.view(subtitlesView))
         dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: speechArray, size: subtitlesView.bounds.size)
     }
-    
     
     @IBAction func closeButtonAction(_ sender: UIButton) {
         player.remove(playerItem)
@@ -98,8 +111,8 @@ final class VideoPreviewViewController: UIViewController {
         guard let subtitlesInitialPointCenter = subtitlesInitialPointCenter, let dynamicSubtitlesView = dynamicSubtitlesView else { return }
         switch sender.state {
         case .began, .changed:
-            xOffset = -(-subtitlesInitialPointCenter.x + dynamicSubtitlesView.center.x) * aScale
-            yOffset = -(-subtitlesInitialPointCenter.y + dynamicSubtitlesView.center.y) * aScale
+            SharedVariables.xOffset = -(-subtitlesInitialPointCenter.x + dynamicSubtitlesView.center.x) * SharedVariables.videoScale
+            SharedVariables.yOffset = -(-subtitlesInitialPointCenter.y + dynamicSubtitlesView.center.y) * SharedVariables.videoScale
             
             let center = dynamicSubtitlesView.center
             let translation = sender.translation(in: dynamicSubtitlesView)
@@ -107,17 +120,6 @@ final class VideoPreviewViewController: UIViewController {
             sender.setTranslation(.zero, in: dynamicSubtitlesView)
         default: ()
         }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &observerContext, let newValue = change?[.newKey] as? Int else { return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context) }
-        Logger.verbose("Replayed movie \(selectedVideo.description). Count: \(newValue)")
-        presentDynamicSubtitlesOverlay(dynamicSubtitlesStyle, shouldPresentSubtitlesFromBeginning: true)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationController = segue.destination as? UINavigationController, let videoToolbarViewController = navigationController.topViewController as? VideoToolbarViewController else { return }
-        videoToolbarCoordinator.videoToolbarViewController = videoToolbarViewController
     }
     
     @IBAction func exportAction(_ sender: UIButton) {
@@ -151,11 +153,15 @@ final class VideoPreviewViewController: UIViewController {
         dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: speechArray, size: dynamicSubtitlesView.bounds.size, startTime: startTime)
     }
     
+    private func prepareForSubtitlesPresentation() {
+        setupVideoScale()
+        addDynamicSubtitlesViewAndApplySubtitles()
+        wasAlreadyPlayed = true
+    }
+    
     private func setupButtons() {
         arrowButton.addTarget(videoToolbarCoordinator, action: #selector(VideoToolbarCoordinator.arrowButtonAction(_:)), for: .touchUpInside)
-        view.subviews.flatMap { $0 as? UIButton }.forEach {
-            $0.touchAreaEdgeInsets = Constants.increasedTouchInsets
-        }
+        view.subviews.forEach { ($0 as? UIButton)?.touchAreaEdgeInsets = Constants.increasedTouchInsets }
     }
     
     private func setupPlayer() {
@@ -163,7 +169,8 @@ final class VideoPreviewViewController: UIViewController {
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         playerView.layer.addSublayer(playerLayer)
         player.play()
-        playerLooper.addObserver(self, forKeyPath: Constants.loopCountPath, options: [.new, .old], context: &observerContext)
+        playerLooper.addObserver(self, forKeyPath: Constants.loopCountKeyPath, options: [.new, .old], context: &loopContext)
+        playerLayer.addObserver(self, forKeyPath: Constants.isReadyForDisplayKeyPath, options: [.new, .old], context: &isReadyContext)
     }
     
     private func setupVideoToolbarCoordinator() {
@@ -193,9 +200,9 @@ final class VideoPreviewViewController: UIViewController {
         guard let videoTrack = selectedVideo.tracks(withMediaType: AVMediaTypeVideo).first else { return }
         let videoSize = videoTrack.naturalSize
         if videoTrack.videoAssetOrientation.isPortrait {
-            aScale = videoSize.width / playerLayer.videoRect.height
+            SharedVariables.videoScale = videoSize.width / playerLayer.videoRect.height
         } else {
-            aScale = videoSize.height / playerLayer.videoRect.height
+            SharedVariables.videoScale = videoSize.height / playerLayer.videoRect.height
         }
     }
     
@@ -230,7 +237,7 @@ final class VideoPreviewViewController: UIViewController {
     }
     
     deinit {
-        playerLooper.removeObserver(self, forKeyPath: Constants.loopCountPath, context: &observerContext)
+        playerLooper.removeObserver(self, forKeyPath: Constants.loopCountKeyPath)
     }
 }
 
@@ -248,7 +255,7 @@ extension VideoPreviewViewController: VideoToolbarCoordinatorDelegate {
     
     private func revertToInitialDynamicSubtitlesViewPosition() {
         dynamicSubtitlesView?.frame = view.frame
-        xOffset = 0.0
-        yOffset = 0.0
+        SharedVariables.xOffset = 0.0
+        SharedVariables.yOffset = 0.0
     }
 }

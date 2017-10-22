@@ -104,6 +104,7 @@
 		90DE8C651EACBD6C0055A390 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C641EACBD6C0055A390 /* ColorCell.swift */; };
 		90DE8C671EACBF8E0055A390 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */; };
 		90DE8C691EACCC3C0055A390 /* FontsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DE8C681EACCC3C0055A390 /* FontsViewController.swift */; };
+		90E20A9D1F9CBFDC00394D12 /* SharedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E20A9C1F9CBFDC00394D12 /* SharedVariables.swift */; };
 		90F850BF1EB6011F00FE7AEC /* ShortRecordingNoticeTexts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90F850BE1EB6011F00FE7AEC /* ShortRecordingNoticeTexts.plist */; };
 		90F850C11EB601E300FE7AEC /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F850C01EB601E300FE7AEC /* PopoverView.swift */; };
 		90F850C31EB6048D00FE7AEC /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F850C21EB6048D00FE7AEC /* PropertyList.swift */; };
@@ -213,6 +214,7 @@
 		90DE8C641EACBD6C0055A390 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		90DE8C661EACBF8E0055A390 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		90DE8C681EACCC3C0055A390 /* FontsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsViewController.swift; sourceTree = "<group>"; };
+		90E20A9C1F9CBFDC00394D12 /* SharedVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedVariables.swift; sourceTree = "<group>"; };
 		90F850BE1EB6011F00FE7AEC /* ShortRecordingNoticeTexts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ShortRecordingNoticeTexts.plist; sourceTree = "<group>"; };
 		90F850C01EB601E300FE7AEC /* PopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		90F850C21EB6048D00FE7AEC /* PropertyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				90483ECE1F8016B10011A8B9 /* SwiftyBeaverTokens.plist */,
 				905E04831EB2617B00FC8A30 /* LoadingTexts.plist */,
 				90F850BE1EB6011F00FE7AEC /* ShortRecordingNoticeTexts.plist */,
+				90E20A9C1F9CBFDC00394D12 /* SharedVariables.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -727,6 +730,7 @@
 				904B860C1EA3F8C400540D3A /* CameraViewController.swift in Sources */,
 				9084C88D1EABAF0F00B60BCF /* AssetController.swift in Sources */,
 				901054E01F893BC800892C1B /* NotificationNameExtension.swift in Sources */,
+				90E20A9D1F9CBFDC00394D12 /* SharedVariables.swift in Sources */,
 				901054E41F8A47DB00892C1B /* UIVideoEditorController.swift in Sources */,
 				9041D3791EA3D596007E134B /* Promise.swift in Sources */,
 				90483ED11F80179B0011A8B9 /* SwiftyBeaverTokens.swift in Sources */,

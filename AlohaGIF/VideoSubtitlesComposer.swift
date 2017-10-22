@@ -61,7 +61,6 @@ final class VideoSubtitlesComposer {
             let dynamicSubtitlesContext = DynamicSubtitlesContext.videoComposition(mainComposition)
             self.dynamicSubtitlesComposer = DynamicSubtitlesComposer(dynamicSubtitlesStyle: dynamicSubtitlesVideo.dynamicSubtitlesStyle, dynamicSubtitlesContext: dynamicSubtitlesContext)
             self.dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: dynamicSubtitlesVideo.speechArray, size: self.naturalSize(for: videoTrack))
-            //TODO: name collision?
             self.beginExportSession(composition: mixComposition, mainCompositionWithInstructions: mainComposition) { url in
                 DispatchQueue.main.async {
                     Logger.debug("Successfully exported video with dynamic subtitles.")
@@ -104,7 +103,7 @@ final class VideoSubtitlesComposer {
     }
     
     private func beginExportSession(composition: AVMutableComposition, mainCompositionWithInstructions: AVMutableVideoComposition, completion: @escaping (URL) -> ()) {
-        let videoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(Constants.exportedVideoTitle)\(arc4random() % 100000)\(Constants.exportedVideoExtension)")
+        let videoURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(Constants.exportedVideoTitle)\(UUID().uuidString)\(Constants.exportedVideoExtension)")
         let exportSession = AVAssetExportSession(asset: composition, presetName: Constants.exportQuality)
         exportSession?.outputURL = videoURL
         exportSession?.outputFileType = AVFileTypeQuickTimeMovie

@@ -22,7 +22,7 @@ struct DynamicSubtitlesStyle {
     
     func font(forRenderingVideo logicValue: Bool) -> UIFont {
         var fontSize = effect == .oneAfterAnother ? Constants.fontMultiplierForOneAfterAnotherStyle : Constants.fontMultiplierForOneWordOnlyStyle
-        fontSize = logicValue ? (fontSize * Constants.multiplierForRenderingVideo) : (fontSize / aScale)
+        fontSize = logicValue ? (fontSize * Constants.multiplierForRenderingVideo) : (fontSize / SharedVariables.videoScale)
         
         return font.withSize(fontSize)
     }
@@ -31,7 +31,7 @@ struct DynamicSubtitlesStyle {
         return [
             NSStrokeWidthAttributeName : -2.0,
             NSStrokeColorAttributeName : UIColor.black,
-            NSFontAttributeName : font(forRenderingVideo: isRenderingVideo),
+            NSFontAttributeName : font(forRenderingVideo: SharedVariables.isRenderingVideo),
             NSForegroundColorAttributeName : color
         ]
     }

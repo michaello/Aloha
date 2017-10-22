@@ -9,13 +9,6 @@
 import AVFoundation
 import UIKit
 
-//TODO: Clear global flags
-var aScale: CGFloat = 1.0
-var xOffset: CGFloat = 0.0
-var yOffset: CGFloat = 0.0
-var isRenderingVideo = false
-var shouldAlwaysShowSubtitles = false
-
 enum DynamicSubtitlesType {
     case oneAfterAnother
     case oneWordOnly
@@ -37,7 +30,7 @@ final class DynamicSubtitlesComposer {
     }
     
     func applyDynamicSubtitles(speechArray: [SpeechModel], size: CGSize, startTime: Double = 0.0) {
-        isRenderingVideo = dynamicSubtitlesContext.destination == .movie
+        SharedVariables.isRenderingVideo = dynamicSubtitlesContext.destination == .movie
         let overlayLayer = self.overlayLayer(size: size)
         let textLayers = self.textLayers(speechArray: speechArray, size: size, dynamicSubtitlesContext: dynamicSubtitlesContext)
         textLayers.forEach(overlayLayer.addSublayer)
@@ -55,11 +48,11 @@ final class DynamicSubtitlesComposer {
     
     func textLayers(speechArray: [SpeechModel], size: CGSize, dynamicSubtitlesContext: DynamicSubtitlesContext) -> [CATextLayer] {
         var textLayersSizes = [CGFloat]()
-        let offsetX = dynamicSubtitlesContext.destination == .movie ? xOffset : 0.0
-        let offsetY = dynamicSubtitlesContext.destination == .movie ? yOffset : 0.0
+        let offsetX = dynamicSubtitlesContext.destination == .movie ? SharedVariables.xOffset : 0.0
+        let offsetY = dynamicSubtitlesContext.destination == .movie ? SharedVariables.yOffset : 0.0
         var designatedY = initialYPositionForTextLayers(speechArray: speechArray, size: size, dynamicSubtitlesContext: dynamicSubtitlesContext)
-        return speechArray.map({ $0.content }).enumerated().map { index, text -> CATextLayer in
-            let textLayer = self.textLayer(text: text)
+        let enumeratedSpeechToText = speechArray.map({ $0.content }).enumerated()
+        return enumeratedSpeechToText.map { index, text -> CATextLayer in
             let currentSize = textRect(for: text)
             let xPosition = index == 0 ? (0.0 - offsetX) : textLayersSizes[index - 1]
             var currentOrigin = CGPoint(x: xPosition, y: size.height / 2.0)
@@ -67,35 +60,36 @@ final class DynamicSubtitlesComposer {
             currentOrigin.x = isRequiringNewlineBreak ? 0.0 : xPosition
             if isRequiringNewlineBreak {
                 let heightWithSomeSpace = (-currentSize.height * Constants.multiplierForNewlineWithSomeSpace)
-                let reversedHeightIfVideoRender = heightWithSomeSpace * (isRenderingVideo ? 1 : -1)
+                let reversedHeightIfVideoRender = heightWithSomeSpace * (SharedVariables.isRenderingVideo ? 1 : -1)
                 designatedY = designatedY + reversedHeightIfVideoRender
             }
             currentOrigin.y = designatedY
-            textLayer.frame = textLayerFrame(for: text, origin: currentOrigin, size: size, customOffsetPoint: CGPoint(x: offsetX, y: offsetY))
-            let space = currentSize.width / CGFloat((text as String).characters.count)
+            let space = currentSize.width / CGFloat(text.characters.count)
             textLayersSizes.append(currentOrigin.x + currentSize.width + space)
-            return textLayer
+            let finalTextLayerFrame = textLayerFrame(for: text, origin: currentOrigin, size: size, customOffsetPoint: CGPoint(x: offsetX, y: offsetY))
+            return self.textLayer(text: text, frame: finalTextLayerFrame)
         }
     }
     
     private func textLayerFrame(for text: String, origin: CGPoint, size: CGSize, customOffsetPoint: CGPoint) -> CGRect {
-        let textTect = textRect(for: text)
+        let textRect = self.textRect(for: text)
         switch dynamicSubtitlesStyle.effect {
         case .oneWordOnly:
-            return centerFrameForTextLayer(textLayerSize: textTect, movieSize: size).offsetBy(dx: -customOffsetPoint.x, dy: customOffsetPoint.y)
+            return centerFrameForTextLayer(textLayerSize: textRect, movieSize: size).offsetBy(dx: -customOffsetPoint.x, dy: customOffsetPoint.y)
         case .oneAfterAnother:
-            let centerFrame = centerFrameForTextLayer(textLayerSize: textTect, movieSize: size)
+            let centerFrame = centerFrameForTextLayer(textLayerSize: textRect, movieSize: size)
             let centerHeight = centerFrame.size.height
             var offset = -centerFrame.origin.y + centerHeight
-            offset = isRenderingVideo ? -offset : offset
-            return CGRect(origin: origin, size: textTect).offsetBy(dx: 0.0, dy: offset)
+            offset = SharedVariables.isRenderingVideo ? -offset : offset
+            return CGRect(origin: origin, size: textRect).offsetBy(dx: 0.0, dy: offset)
         }
     }
     
     private func initialYPositionForTextLayers(speechArray: [SpeechModel], size: CGSize, dynamicSubtitlesContext: DynamicSubtitlesContext) -> CGFloat {
-        let offsetY = dynamicSubtitlesContext != .view(UIView()) ? xOffset : 0.0
+        let offsetY = dynamicSubtitlesContext != .view(UIView()) ? SharedVariables.xOffset : 0.0
         let wholeTextContent = speechArray.asSentence
-        let estimatedNumberOfLines = round(textRect(for: wholeTextContent).width / size.width) + 1.0
+        
+        let estimatedNumberOfLines = (textRect(for: wholeTextContent).width / size.width).rounded(.up)
         let textRectHeight = textRect(for: wholeTextContent).height
         
         switch dynamicSubtitlesContext {
@@ -120,20 +114,22 @@ final class DynamicSubtitlesComposer {
         let halfHeight = movieSize.height / 2.0
         let halfTextWidth = textLayerSize.width / 2.0
         let halfTextHeight = textLayerSize.height / 2.0
+        let centerPoint = CGPoint(x: halfWidth - halfTextWidth, y: halfHeight - halfTextHeight)
 
-        return CGRect(origin: CGPoint(x: halfWidth - halfTextWidth, y: halfHeight - halfTextHeight), size: textLayerSize)
+        return CGRect(origin: centerPoint, size: textLayerSize)
     }
     
     private func textRect(for text: String = "Whatever") -> CGSize {
         return (text as NSString).size(attributes: dynamicSubtitlesStyle.textAttributes)
     }
     
-    private func textLayer(text: String) -> CATextLayer {
+    private func textLayer(text: String, frame: CGRect) -> CATextLayer {
         let textLayer = CATextLayer()
         textLayer.contentsScale = UIScreen.main.scale
-        textLayer.opacity = shouldAlwaysShowSubtitles ? 1.0 : 0.0
+        textLayer.opacity = SharedVariables.shouldAlwaysShowSubtitles ? 1.0 : 0.0
         textLayer.alignmentMode = kCAAlignmentLeft
         textLayer.string = NSAttributedString(string: text, attributes: dynamicSubtitlesStyle.textAttributes)
+        textLayer.frame = frame
         
         return textLayer
     }
