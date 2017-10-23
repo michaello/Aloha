@@ -135,7 +135,7 @@ public struct Regift {
             completion(gift.createGif())
     }
 
-    fileprivate struct Constants {
+    fileprivate enum Constants {
         static let FileName = "regift.gif"
         static let TimeInterval: Int32 = 600
         static let Tolerance = 0.01

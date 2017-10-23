@@ -17,7 +17,7 @@ final class CardOnboardingViewController: UIViewController {
     @IBOutlet private weak var allowPermissionsButton: UIButton!
     private let permissionController = PermissionController()
     
-    private struct Constants {
+    private enum Constants {
         static let onboardingText = "We need to ask you for permissions:\n\n📷 Camera - for recording your short videos.\n\n🎞 Video Library - for choosing short videos from your iPhone.\n\n🎙 Microphone - for recording audio with your videos.\n\n🙊 Speech Recognition - for embedding dynamic subtitles to your GIF!"
     }
     

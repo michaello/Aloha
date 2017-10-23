@@ -11,7 +11,7 @@ import AVFoundation
 
 final class VideoPreviewViewController: UIViewController {
     
-    private struct Constants {
+    private enum Constants {
         static let loopCountKeyPath = #keyPath(AVPlayerLooper.loopCount)
         static let isReadyForDisplayKeyPath = #keyPath(AVPlayerLayer.isReadyForDisplay)
         static let increasedTouchInsets = UIEdgeInsets(top: -20.0, left: -20.0, bottom: -10.0, right: -20.0)
@@ -92,6 +92,17 @@ final class VideoPreviewViewController: UIViewController {
         dynamicSubtitlesComposer?.applyDynamicSubtitles(speechArray: speechArray, size: subtitlesView.bounds.size)
     }
     
+    @IBAction func exportAction(_ sender: UIButton) {
+        ALLoadingView.show()
+        exportVideoToDynamicSubtitlesVideo()
+    }
+    
+    @IBAction func debugAction(_ sender: UIButton) {
+        player.remove(playerItem)
+        playerLooper.disableLooping()
+        dismiss(animated: true)
+    }
+    
     @IBAction func closeButtonAction(_ sender: UIButton) {
         player.remove(playerItem)
         playerLooper.disableLooping()
@@ -122,15 +133,13 @@ final class VideoPreviewViewController: UIViewController {
         }
     }
     
-    @IBAction func exportAction(_ sender: UIButton) {
-        ALLoadingView.show()
-        exportVideoToDynamicSubtitlesVideo()
+    @objc private func pausePreviewWhenInBackground() {
+        player.pause()
     }
     
-    @IBAction func debugAction(_ sender: UIButton) {
-        player.remove(playerItem)
-        playerLooper.disableLooping()
-        dismiss(animated: true)
+    @objc private func resumePreviewWhenInForeground() {
+        playerLayer = AVPlayerLayer(player: player)
+        player.play()
     }
     
     //TODO: For debug purposes only to check whether dynamic subtitles on video have correct position like in preview
@@ -225,15 +234,6 @@ final class VideoPreviewViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.pausePreviewWhenInBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.resumePreviewWhenInForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(VideoPreviewViewController.unmuteSound), name: .unmuteNotification, object: nil)
-    }
-    
-    @objc private func pausePreviewWhenInBackground() {
-        player.pause()
-    }
-
-    @objc private func resumePreviewWhenInForeground() {
-        playerLayer = AVPlayerLayer(player: player)
-        player.play()
     }
     
     deinit {

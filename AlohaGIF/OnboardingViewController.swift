@@ -15,7 +15,7 @@ fileprivate struct OnboardingModel {
 
 final class OnboardingViewController: UIViewController {
     
-    fileprivate struct Constants {
+    fileprivate enum Constants {
         static let onboardingModels: [OnboardingModel?] = [
             OnboardingModel(text: "Create GIFs easily. Just record a short video or pick one from your Photos.", image: #imageLiteral(resourceName: "OnboardingScreen1")),
             OnboardingModel(text: "Worried about losing what you’re saying? 😟Don’t worry, we got this. We will add subtitles for you! 😎", image: #imageLiteral(resourceName: "OnboardingScreen2")),

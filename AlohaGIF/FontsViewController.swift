@@ -27,7 +27,7 @@ extension ScrollableCollectionViewController {
 
 final class FontsViewController: DynamicSubtitlesModifyingViewController, ScrollableCollectionViewController {
     
-    fileprivate struct Constants {
+    fileprivate enum Constants {
         static let fontSize: CGFloat = 22.0
         static let fontsNames = [
             "Copperplate-Bold",

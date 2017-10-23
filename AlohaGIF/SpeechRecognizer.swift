@@ -39,6 +39,7 @@ final class SpeechRecognizer {
     
     private func request(url: URL) -> SFSpeechURLRecognitionRequest {
         let request = SFSpeechURLRecognitionRequest(url: url)
+        request.taskHint = .dictation
         request.shouldReportPartialResults = false
         
         return request

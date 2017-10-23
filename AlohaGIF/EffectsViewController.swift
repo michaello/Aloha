@@ -16,6 +16,7 @@ final class EffectsViewController: DynamicSubtitlesModifyingViewController {
     
     private enum Constants {
         static let highlightViewYOffset: CGFloat = -30.0
+        static let highlightViewHeight: CGFloat = 3.0
     }
     
     @IBOutlet private weak var oneAfterAnotherButton: UIButton!
@@ -32,7 +33,7 @@ final class EffectsViewController: DynamicSubtitlesModifyingViewController {
         selectedEffectHighlightView.backgroundColor = .themeColor
         let effectButton = button(for: selectedEffect)
         let length = effectButton.frame.size.width / 2.0
-        selectedEffectHighlightView.frame = CGRect(x: effectButton.center.x - length / 4.0, y: view.frame.height + Constants.highlightViewYOffset, width: length, height: 3.0)
+        selectedEffectHighlightView.frame = CGRect(x: effectButton.center.x - length / 4.0, y: view.frame.height + Constants.highlightViewYOffset, width: length, height: Constants.highlightViewHeight)
     }
     
     @IBAction func effectButtonAction(_ sender: UIButton) {
@@ -46,7 +47,7 @@ final class EffectsViewController: DynamicSubtitlesModifyingViewController {
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
             let length = sender.frame.size.width / 2.0
-            self.selectedEffectHighlightView.frame = CGRect(x: sender.center.x - length / 4.0, y: self.view.frame.height + Constants.highlightViewYOffset, width: length, height: 3.0)
+            self.selectedEffectHighlightView.frame = CGRect(x: sender.center.x - length / 4.0, y: self.view.frame.height + Constants.highlightViewYOffset, width: length, height: Constants.highlightViewHeight)
         }, completion: nil)
     }
     

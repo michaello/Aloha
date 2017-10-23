@@ -45,18 +45,12 @@ extension AVAsset {
     
     private func audioAsset() throws -> AVAsset {
         let composition = AVMutableComposition()
-        let audioTracks = tracks(withMediaType: AVMediaTypeAudio)
-        
-        for track in audioTracks {
+        tracks(withMediaType: AVMediaTypeAudio).forEach { track in
             let compositionTrack = composition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
-            do {
-                try compositionTrack.insertTimeRange(track.timeRange, of: track, at: track.timeRange.start)
-            } catch {
-                throw error
-            }
+            try? compositionTrack.insertTimeRange(track.timeRange, of: track, at: track.timeRange.start)
             compositionTrack.preferredTransform = track.preferredTransform
         }
-        
+
         return composition
     }
 }

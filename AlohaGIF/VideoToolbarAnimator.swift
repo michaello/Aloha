@@ -10,7 +10,7 @@ import UIKit
 
 final class VideoToolbarAnimator {
     
-    private struct Constants {
+    private enum Constants {
         static let duration = 0.5
         static let oneEightyRotationTime = 0.3
         static let ninetyDegreeRotationTime = 0.25

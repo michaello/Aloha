@@ -9,17 +9,14 @@
 import UIKit
 import AVFoundation
 
-struct AnimationModel {
-    let beginTime: TimeInterval
-    let duration: TimeInterval
-    var finishTime: TimeInterval {
-        return beginTime + duration
-    }
-}
-
 struct AnimationsComposer {
     
-    var startTime = 0.0
+    private enum Constants {
+        static let startTime = 0.0
+        static let showAndHideAnimationDuration: Float = 4.0
+    }
+    
+    var startTime = Constants.startTime
     
     func zeroTimeAnimation(animationDestination: AnimationDestination) -> CFTimeInterval {
         return animationDestination == .preview ? CACurrentMediaTime() : AVCoreAnimationBeginTimeAtZero
@@ -29,33 +26,21 @@ struct AnimationsComposer {
         let animationModels = self.animationModels(speechModelArray: speechModelArray)
         let zippedArraysWithStartTime = zipped(textLayers: textLayers, animationModelArray: animationModels)
         zip(zippedArraysWithStartTime.0, zippedArraysWithStartTime.1).forEach { textLayer, animationModel in
-            let animation = CABasicAnimation(keyPath: "opacity")
-            animation.toValue = 1.0
-            animation.autoreverses = false
-            animation.fillMode = kCAFillModeForwards
+            let animation = opacityAnimation(duration: customDuration ?? animationModel.duration, toValue: 1.0)
             if let customSpeed = customSpeed {
                 animation.speed = customSpeed
             }
-            animation.isRemovedOnCompletion = false
-            animation.duration = customDuration ?? animationModel.duration
-            animation.repeatCount = 1
             animation.beginTime = zeroTimeAnimation(animationDestination: animationDestination) + animationModel.beginTime
             textLayer.add(animation, forKey: "animateOpacity")
         }
     }
     
     func applyShowAndHideAnimation(animationDestination: AnimationDestination, textLayersArrayToApply textLayers: [CATextLayer], speechModelArray: [SpeechModel], lastTextLayerDelegate: CAAnimationDelegate? = nil) {
-        applyRevealAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayers, speechModelArray: speechModelArray, customDuration: 0.0, customSpeed: 4.0)
+        applyRevealAnimation(animationDestination: animationDestination, textLayersArrayToApply: textLayers, speechModelArray: speechModelArray, customDuration: 0.0, customSpeed: Constants.showAndHideAnimationDuration)
         let animationModels = self.animationModels(speechModelArray: speechModelArray)
         zip(textLayers, animationModels).forEach { textLayer, animationModel in
-            let animation = CABasicAnimation(keyPath: "opacity")
-            animation.toValue = 0.0
-            animation.speed = 4.0
-            animation.autoreverses = false
-            animation.fillMode = kCAFillModeForwards
-            animation.isRemovedOnCompletion = false
-            animation.duration = 0.0
-            animation.repeatCount = 1
+            let animation = opacityAnimation()
+            animation.speed = Constants.showAndHideAnimationDuration
             animation.beginTime = zeroTimeAnimation(animationDestination: animationDestination) + CFTimeInterval(animationModel.finishTime)
             textLayer.add(animation, forKey: "animateOpacityFadeOut")
         }
@@ -73,8 +58,8 @@ struct AnimationsComposer {
         }
         guard startTime != 0.0 else { return (textLayers, animationModelArray) }
         let animationModelsAfterStartTime = animationModelArray
-            .sorted { lhs, rhs in lhs.beginTime < rhs.beginTime }
             .filter { $0.beginTime > startTime }
+            .sorted { lhs, rhs in lhs.beginTime < rhs.beginTime }
         let firstAnimationModelAfterStartTime = animationModelsAfterStartTime.first
         guard let first = firstAnimationModelAfterStartTime, let index = animationModelArray.index(where: { $0.beginTime == first.beginTime }), index > 0 else {
             return (textLayers, animationModelArray)
@@ -88,5 +73,17 @@ struct AnimationsComposer {
         }
         
         return (safeTextLayers, safeAnimationArray)
+    }
+    
+    private func opacityAnimation(duration: CFTimeInterval = 0.0, toValue: Float = 0.0) -> CABasicAnimation {
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.autoreverses = false
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        animation.repeatCount = 1
+        animation.toValue = toValue
+        animation.duration = duration
+        
+        return animation
     }
 }

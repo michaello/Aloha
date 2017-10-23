@@ -20,7 +20,6 @@ final class ColorCell: UICollectionViewCell {
         }
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         

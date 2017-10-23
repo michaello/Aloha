@@ -10,17 +10,21 @@ import UIKit
 
 extension UINavigationController {
     func pushViewControllerWithFadeAnimation(_ viewController: UIViewController) {
-            UIView.transition(with: view, duration: 0.4, options: .transitionCrossDissolve, animations: {
-                UIView.performWithoutAnimation {
-                    self.pushViewController(viewController, animated: false)
-                }
-            }, completion: nil)
+        transitionAnimation {
+            self.pushViewController(viewController, animated: false)
+        }
     }
     
     func popViewControllerWithFadeAnimation() {
+        transitionAnimation {
+            self.popViewController(animated: false)
+        }
+    }
+    
+    private func transitionAnimation(animation: @escaping () -> ()) {
         UIView.transition(with: view, duration: 0.4, options: .transitionCrossDissolve, animations: {
             UIView.performWithoutAnimation {
-                self.popViewController(animated: false)
+                animation()
             }
         }, completion: nil)
     }

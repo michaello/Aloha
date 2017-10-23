@@ -367,7 +367,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aloha" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-UZ-L4r">
-                                        <rect key="frame" x="134.66666666666666" y="9" width="84" height="38.666666666666671"/>
+                                        <rect key="frame" x="135" y="9.3333333333333286" width="84" height="38.666666666666671"/>
                                         <fontDescription key="fontDescription" name="LeckerliOne" family="LeckerliOne" pointSize="33"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -453,7 +453,7 @@
                                 <rect key="frame" x="31" y="594" width="352" height="370"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aloha" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Kn-nmW">
-                                        <rect key="frame" x="134.66666666666666" y="16" width="84" height="39.666666666666629"/>
+                                        <rect key="frame" x="135" y="16" width="84" height="39.666666666666629"/>
                                         <fontDescription key="fontDescription" name="LeckerliOne" family="LeckerliOne" pointSize="33"/>
                                         <color key="textColor" red="0.99215686274509807" green="0.49803921568627452" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
