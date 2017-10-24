@@ -36,6 +36,10 @@ I've written this app just for fun, so the code is kinda messy - few globals her
 * [Some sample from Apple](https://developer.apple.com/library/content/samplecode/AVCam/Introduction/Intro.html#//apple_ref/doc/uid/DTS40010112)
 * [SwiftyOnboard](https://github.com/juanpablofernandez/SwiftyOnboard)
 * [CHIPageControl](https://github.com/ChiliLabs/CHIPageControl)
+* [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver)
+* [FLAnimatedImage](https://github.com/Flipboard/FLAnimatedImage)
+* [Permission](https://github.com/delba/Permission)
+* [Popover](https://github.com/corin8823/Popover)
 
 
 ## Tokens
