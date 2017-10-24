@@ -2,7 +2,7 @@
 
 [Website](http://www.alohagif.com)
 
-![GIF with quick demo](https://i.imgur.com/MnAwVgX.gif)
+![GIF with quick demo](Resources/demo.gif)
 
 Funny moments? Want to share it as a GIF, but you are worried that you will lose speech from video? Aloha will scan sound and attach spoken words as subtitles that you can change color, font and style. Have fun!
 
