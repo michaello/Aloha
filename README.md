@@ -12,7 +12,7 @@ I played with the [Clips](https://itunes.apple.com/us/app/clips/id1212699939?mt=
 
 ## Features
 
-* Speech detection in recorded video
+* Speech detection in recorded video(language is based on your phone's locale)
 * Subtitles overlay with one word after another or revealing whole sentence
 * Adjusting subtitles position, font and color
 * Importing recorded videos for speech detection
@@ -48,7 +48,7 @@ I'm using SwiftyBeaver and FB Messenger - you can set your own credentials in ``
 
 ## Contributing
 
-I'm not expecting any contributions, but if you have some interesting idea in mind or just want to point out the bug(there are _plenty_) - just send a pull request.
+I'm not expecting any contributions, but if you have some interesting idea in mind or just want to point out the bug(there are _plenty_) - just send an issue/pull request.
 
 ## License
 
