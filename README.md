@@ -20,7 +20,7 @@ I played with the [Clips](https://itunes.apple.com/us/app/clips/id1212699939?mt=
 * Export to GIF
 * Share via iOS or on Messenger
 
-Keep in mind that most features are far from perfection - text often does not fit, speech detection works only on crystal clear voice, etc.
+Keep in mind that most features are far from perfection - text often does not fit, speech detection works only with crystal clear voice, etc.
 
 ## Code
 
